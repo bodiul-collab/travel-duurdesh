@@ -1,0 +1,8 @@
+{
+  "name": "Travel DuurDesh",
+  "description": "Welcome to Travel DuurDesh: Your trusted platform for global travel, specialized Umrah pilgrimage guidance, flight and hotel comparisons, authentic halal food directories, and smart travel planning tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
