@@ -42,6 +42,38 @@ declare global {
 export function initGoogleTranslate(): void {
   if (typeof window === 'undefined') return;
 
+  // Defensive check to ensure window.fetch is writable and cannot trigger:
+  // "TypeError: Cannot set property fetch of #<Window> which has only a getter"
+  try {
+    if ('fetch' in window) {
+      const orig = window.fetch.bind(window);
+      let active = orig;
+      try {
+        Object.defineProperty(window, 'fetch', {
+          configurable: true,
+          enumerable: true,
+          writable: true,
+          value: orig
+        });
+      } catch {
+        try {
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: () => active,
+            set: (fn) => {
+              active = typeof fn === 'function' ? fn : orig;
+            }
+          });
+        } catch {
+          // ignore if unconfigurable
+        }
+      }
+    }
+  } catch {
+    // ignore
+  }
+
   // Define Google Translate Callback
   window.googleTranslateElementInit = () => {
     try {
@@ -74,9 +106,16 @@ export function initGoogleTranslate(): void {
     const script = document.createElement('script');
     script.id = 'google-translate-script';
     script.type = 'text/javascript';
-    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     script.async = true;
-    document.head.appendChild(script);
+    script.onerror = () => {
+      console.info('Google Translate service unavailable in current network/iframe environment; using client-side translation.');
+    };
+    try {
+      document.head.appendChild(script);
+    } catch (e) {
+      console.warn('Unable to append Google Translate script:', e);
+    }
   }
 }
 

@@ -9,6 +9,58 @@
     <meta property="og:description" content="Welcome to Travel DuurDesh. Discover global travel guides, specialized Umrah pilgrimage guidance, flight and hotel comparisons, authentic halal food, and smart travel tools." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Defensive polyfill for window.fetch to allow property assignment in sandboxed iframes
+      // Prevents "Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter"
+      (function() {
+        try {
+          if (typeof window !== 'undefined' && 'fetch' in window) {
+            var nativeFetch = window.fetch;
+            if (nativeFetch) {
+              var boundFetch = nativeFetch.bind(window);
+              var activeFetch = boundFetch;
+              try {
+                Object.defineProperty(window, 'fetch', {
+                  configurable: true,
+                  enumerable: true,
+                  writable: true,
+                  value: boundFetch
+                });
+              } catch (e1) {
+                try {
+                  Object.defineProperty(window, 'fetch', {
+                    configurable: true,
+                    enumerable: true,
+                    get: function() {
+                      return activeFetch;
+                    },
+                    set: function(newFetch) {
+                      activeFetch = newFetch;
+                    }
+                  });
+                } catch (e2) {
+                  try {
+                    var proto = Object.getPrototypeOf(window);
+                    if (proto) {
+                      Object.defineProperty(proto, 'fetch', {
+                        configurable: true,
+                        enumerable: true,
+                        get: function() {
+                          return activeFetch;
+                        },
+                        set: function(newFetch) {
+                          activeFetch = newFetch;
+                        }
+                      });
+                    }
+                  } catch (e3) {}
+                }
+              }
+            }
+          }
+        } catch (globalErr) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
