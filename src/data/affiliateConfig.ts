@@ -28,9 +28,19 @@ export const AFFILIATE_CONFIG = {
     skyscanner: {
       name: 'Skyscanner',
       category: 'Flights & Travel Search',
-      baseUrl: '#see-flights-partner-placeholder',
-      disclosure: 'Global flight price comparison partner [Placeholder]',
+      baseUrl: 'https://www.aviasales.com/search?marker=737968',
+      disclosure: 'Global flight price comparison partner',
       defaultCommissionNote: 'Compares 1,200+ airlines and travel agents with zero extra fees.'
+    },
+    aviasales: {
+      name: 'Aviasales / Travelpayouts',
+      category: 'Flights & Travel Search',
+      baseUrl: 'https://www.aviasales.com/search?marker=737968',
+      marker: '737968',
+      widgetScriptSrc:
+        'https://tpwdg.com/content?currency=usd&trs=570661&shmarker=737968&show_hotels=true&powered_by=true&locale=en&searchUrl=www.aviasales.com%2Fsearch&primary_override=%2332a8dd&color_button=%2332a8dd&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&no_labels=&plain=true&promo_id=7879&campaign_id=100',
+      disclosure: 'Official flight search & comparison partner (Powered by Aviasales)',
+      defaultCommissionNote: 'Compare 1,000+ airlines and agencies with no added booking fees.'
     },
     viator: {
       name: 'Viator / Tripadvisor',
@@ -59,12 +69,25 @@ export const AFFILIATE_CONFIG = {
       baseUrl: '#see-agoda-partner-placeholder',
       disclosure: 'Specialized Southeast Asia resort and villa partner [Placeholder]',
       defaultCommissionNote: 'VIP member rates and instant cashback points.'
+    },
+    economybookings: {
+      name: 'EconomyBookings',
+      category: 'Car Rental & Airport Transfers',
+      baseUrl: 'https://c10.travelpayouts.com/click?shmarker=737968&promo_id=2020&source_type=link&type=click',
+      marker: '737968',
+      campaignId: '10',
+      promoId: '2082',
+      widgetScriptSrc:
+        'https://tpwdg.com/content?trs=570661&shmarker=737968&locale=en&width=100&height=30&powered_by=true&campaign_id=10&promo_id=2082',
+      disclosure: 'Official car rental search partner (Powered by EconomyBookings / Travelpayouts)',
+      defaultCommissionNote: 'Compare 800+ car rental suppliers across 20,000 locations worldwide.'
     }
   },
   
-  // Category-level fallback affiliate routing (Internal Placeholders)
+  // Category-level fallback affiliate routing
   categoryLinks: {
-    flights: '#see-flights-page-placeholder',
+    flights: 'https://www.aviasales.com/search?marker=737968',
+    carRental: 'https://c10.travelpayouts.com/click?shmarker=737968&promo_id=2020&source_type=link&type=click',
     hotels: '#see-hotels-page-placeholder',
     packages: '#see-packages-page-placeholder',
     experiences: '#see-experiences-page-placeholder'
@@ -72,7 +95,7 @@ export const AFFILIATE_CONFIG = {
 };
 
 /**
- * Builds an internal placeholder partner URL for any destination, deal, or search query.
+ * Builds an affiliate partner URL for any destination, deal, or search query.
  */
 export function buildAffiliateUrl(
   partnerKey: keyof typeof AFFILIATE_CONFIG.partners | string,
@@ -85,5 +108,12 @@ export function buildAffiliateUrl(
     category?: string;
   }
 ): string {
+  if (partnerKey === 'aviasales' || partnerKey === 'skyscanner' || params?.category === 'flights') {
+    const base = 'https://www.aviasales.com/search?marker=737968';
+    if (params?.destination) {
+      return `${base}&destination=${encodeURIComponent(params.destination)}`;
+    }
+    return base;
+  }
   return `#partner-booking-${partnerKey}-placeholder`;
 }

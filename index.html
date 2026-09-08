@@ -10,6 +10,19 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <script>
+      // Defensive error handling to prevent external third-party widgets or cross-origin scripts from throwing uncaught errors
+      window.addEventListener('error', function(event) {
+        if (!event.message || event.message === 'Script error.' || (event.filename && (event.filename.indexOf('tpwdg.com') !== -1 || event.filename.indexOf('translate.google') !== -1))) {
+          event.preventDefault();
+          return true;
+        }
+      });
+      window.addEventListener('unhandledrejection', function(event) {
+        if (!event.reason || !event.reason.message) {
+          event.preventDefault();
+        }
+      });
+
       // Defensive polyfill for window.fetch to allow property assignment in sandboxed iframes
       // Prevents "Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter"
       (function() {

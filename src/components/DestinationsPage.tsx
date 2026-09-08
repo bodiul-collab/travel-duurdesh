@@ -25,6 +25,7 @@ import { UkCountryGuide } from './destinations/UkCountryGuide';
 // City Guides
 import { DubaiTravelGuide } from './destinations/DubaiTravelGuide';
 import { MakkahTravelGuide } from './destinations/MakkahTravelGuide';
+import { AlUlaTravelGuide } from './destinations/AlUlaTravelGuide';
 import { IstanbulTravelGuide } from './destinations/IstanbulTravelGuide';
 import { NewYorkCityGuide } from './destinations/NewYorkCityGuide';
 import { LondonCityGuide } from './destinations/LondonCityGuide';
@@ -39,6 +40,7 @@ export type DestinationKey =
   | 'uk'
   | 'dubai'
   | 'makkah'
+  | 'alula'
   | 'istanbul'
   | 'newyork'
   | 'london'
@@ -76,6 +78,8 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
       setActiveDestination('dubai');
     } else if (hash.includes('makkah') || hash.includes('mecca')) {
       setActiveDestination('makkah');
+    } else if (hash.includes('alula')) {
+      setActiveDestination('alula');
     } else if (hash.includes('istanbul')) {
       setActiveDestination('istanbul');
     } else if (hash.includes('newyork') || hash.includes('nyc')) {
@@ -106,6 +110,7 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
   const cityGuides: { id: DestinationKey; name: string; tag: string; icon: string }[] = [
     { id: 'dubai', name: 'Dubai', tag: 'UAE', icon: '🏙️' },
     { id: 'makkah', name: 'Makkah', tag: 'Saudi Arabia', icon: '🕋' },
+    { id: 'alula', name: 'AlUla', tag: 'Saudi Arabia', icon: '🏜️' },
     { id: 'istanbul', name: 'Istanbul', tag: 'Turkey', icon: '🕌' },
     { id: 'newyork', name: 'New York City', tag: 'USA', icon: '🗽' },
     { id: 'london', name: 'London', tag: 'UK', icon: '🎡' },
@@ -139,7 +144,7 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
                     : 'text-[#5E6B82] hover:text-[#0969E8]'
                 }`}
               >
-                All (12)
+                All (13)
               </button>
               <button
                 onClick={() => setActiveTab('countries')}
@@ -159,7 +164,7 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
                     : 'text-[#5E6B82] hover:text-[#0969E8]'
                 }`}
               >
-                🏙️ City Guides (7)
+                🏙️ City Guides (8)
               </button>
             </div>
           </div>
@@ -242,6 +247,9 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
         )}
         {activeDestination === 'makkah' && (
           <MakkahTravelGuide currency={currency} onNavigate={onNavigate} />
+        )}
+        {activeDestination === 'alula' && (
+          <AlUlaTravelGuide currency={currency} onNavigate={onNavigate} />
         )}
         {activeDestination === 'istanbul' && (
           <IstanbulTravelGuide currency={currency} onNavigate={onNavigate} />

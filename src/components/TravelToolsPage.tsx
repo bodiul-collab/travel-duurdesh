@@ -27,10 +27,18 @@ import {
   Droplets,
   Wind,
   Umbrella,
-  Search
+  Search,
+  Smartphone,
+  Wifi,
+  QrCode,
+  PhoneCall,
+  Car
 } from 'lucide-react';
 import { CURRENCIES } from '../data/travelData';
 import { CurrencyConfig } from '../types';
+import { TravelEsimWidget } from './TravelEsimWidget';
+import { LiveWeatherTool } from './LiveWeatherTool';
+import { CarRentalWidget } from './CarRentalWidget';
 
 interface TravelToolsPageProps {
   currency?: CurrencyConfig;
@@ -292,7 +300,7 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
             </p>
 
             {/* Feature Highlights Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-2">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5">
                 <ArrowRightLeft className="w-5 h-5 text-[#4DA3FF] shrink-0" />
                 <div className="text-xs">
@@ -319,6 +327,13 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
                 <div className="text-xs">
                   <div className="font-bold text-white">Visa Checker</div>
                   <div className="text-white/70 text-[11px]">Nusuk & transit guides</div>
+                </div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5 col-span-2 sm:col-span-1">
+                <Smartphone className="w-5 h-5 text-[#32a8dd] shrink-0" />
+                <div className="text-xs">
+                  <div className="font-bold text-white">Travel eSIM Data</div>
+                  <div className="text-white/70 text-[11px]">Airalo 200+ countries</div>
                 </div>
               </div>
             </div>
@@ -673,100 +688,14 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
         </div>
 
         {/* Explicit Required Placeholder Label */}
-        <div className="max-w-md mx-auto mb-8 text-center py-2 px-4 bg-white rounded-xl border border-dashed border-[#CBD5E1] text-xs font-semibold text-[#64748B]">
+        <div className="max-w-md mx-auto mb-6 text-center py-2 px-4 bg-white rounded-xl border border-dashed border-[#CBD5E1] text-xs font-semibold text-[#64748B]">
           [Insert Weather Tool Here.]
         </div>
 
-        {/* City Selector Buttons */}
-        <div className="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-8">
-          {Object.keys(weatherData).map((key) => (
-            <button
-              key={key}
-              onClick={() => setSelectedCityWeather(key)}
-              className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all cursor-pointer ${
-                selectedCityWeather === key
-                  ? 'bg-[#071B49] text-white shadow-md'
-                  : 'bg-white text-[#5E6B82] border border-[#E2E8F0] hover:border-blue-300'
-              }`}
-            >
-              {weatherData[key].city}
-            </button>
-          ))}
+        {/* Live Interactive Weather & Climate Tool */}
+        <div className="max-w-5xl mx-auto">
+          <LiveWeatherTool />
         </div>
-
-        {/* Weather Card Display */}
-        {(() => {
-          const w = weatherData[selectedCityWeather];
-          return (
-            <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-sm p-6 sm:p-10 max-w-4xl mx-auto space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-100">
-                <div>
-                  <span className="text-xs font-bold text-[#0969E8] uppercase tracking-wider bg-[#EAF2FB] px-3 py-1 rounded-full inline-block mb-1.5">
-                    {w.country}
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#071B49]">
-                    {w.city} Climate Profile
-                  </h3>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-right">
-                    <div className="text-2xl font-black text-[#071B49]">{w.tempDay}</div>
-                    <div className="text-xs text-gray-500">Daytime Average</div>
-                  </div>
-                  <ThermometerSun className="w-10 h-10 text-[#FF8A2A]" />
-                </div>
-              </div>
-
-              {/* Climate Metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="bg-[#F8FAFC] rounded-2xl p-4 border border-gray-100 text-center space-y-1">
-                  <div className="text-[11px] font-bold text-gray-500 uppercase">Condition</div>
-                  <div className="text-xs font-bold text-[#071B49]">{w.condition}</div>
-                </div>
-                <div className="bg-[#F8FAFC] rounded-2xl p-4 border border-gray-100 text-center space-y-1">
-                  <div className="text-[11px] font-bold text-gray-500 uppercase">Night Low</div>
-                  <div className="text-xs font-bold text-[#071B49]">{w.tempNight}</div>
-                </div>
-                <div className="bg-[#F8FAFC] rounded-2xl p-4 border border-gray-100 text-center space-y-1">
-                  <div className="text-[11px] font-bold text-gray-500 uppercase">Humidity</div>
-                  <div className="text-xs font-bold text-[#071B49]">{w.humidity}</div>
-                </div>
-                <div className="bg-[#F8FAFC] rounded-2xl p-4 border border-gray-100 text-center space-y-1">
-                  <div className="text-[11px] font-bold text-gray-500 uppercase">Rainfall</div>
-                  <div className="text-xs font-bold text-[#071B49]">{w.rainfall}</div>
-                </div>
-              </div>
-
-              {/* Best Season & Practical Advice */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                <div className="bg-[#F0FDF4] rounded-2xl p-4 border border-emerald-200 space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-800">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>Best Time to Visit:</span>
-                  </div>
-                  <p className="text-xs text-emerald-700 leading-relaxed">{w.bestSeason}</p>
-                </div>
-
-                <div className="bg-[#FFFBEB] rounded-2xl p-4 border border-amber-200 space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-amber-800">
-                    <AlertTriangle className="w-4 h-4 text-amber-600" />
-                    <span>Heat & Weather Alert:</span>
-                  </div>
-                  <p className="text-xs text-amber-700 leading-relaxed">{w.caution}</p>
-                </div>
-              </div>
-
-              {/* Pilgrim Specific Advice */}
-              <div className="bg-[#EAF2FB] rounded-2xl p-4.5 border border-blue-200 space-y-1.5">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0969E8]">
-                  <Heart className="w-4 h-4 text-[#0969E8]" />
-                  <span>Pilgrim Strategy for {w.city}:</span>
-                </div>
-                <p className="text-xs text-[#1E3A8A] leading-relaxed">{w.pilgrimAdvice}</p>
-              </div>
-            </div>
-          );
-        })()}
       </section>
 
       {/* ============================================================ */}
@@ -908,6 +837,64 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
                 })()}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 5B. Global Travel eSIM & Mobile Data Connectivity (Airalo) */}
+      {/* ============================================================ */}
+      <section id="esim" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Editorial Content */}
+          <div className="lg:col-span-5 space-y-5">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0969E8] bg-[#EAF2FB] px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>International Connectivity</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] tracking-tight font-syncopate">
+              Global Travel eSIM & Mobile Data (Airalo)
+            </h2>
+            <p className="text-sm sm:text-base text-[#5E6B82] leading-relaxed">
+              Never get stranded without navigation, Nusuk app access, or family messaging. Travel DuurDesh partners with Airalo—the world’s leading eSIM provider—to deliver instant prepaid mobile data in over 200 countries and regions.
+            </p>
+
+            <div className="space-y-3 pt-2">
+              <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-gray-200">
+                <QrCode className="w-5 h-5 text-[#0969E8] shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-xs font-bold text-[#071B49]">Activate Instantly via QR Code</h4>
+                  <p className="text-[11px] text-[#5E6B82] mt-0.5">
+                    Buy your eSIM before you travel and install it in seconds using your smartphone camera. Connect to high-speed data the moment your flight touches down.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-gray-200">
+                <Wifi className="w-5 h-5 text-[#21B96F] shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-xs font-bold text-[#071B49]">Dedicated Umrah & Saudi Coverage</h4>
+                  <p className="text-[11px] text-[#5E6B82] mt-0.5">
+                    Seamless 5G/4G connectivity across Makkah, Madinah, and Jeddah on Saudi Arabia’s premier mobile networks (STC / Mobily) with zero airport queue delays.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-gray-200">
+                <PhoneCall className="w-5 h-5 text-[#FF8A2A] shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-xs font-bold text-[#071B49]">Keep Your WhatsApp & Primary SIM Active</h4>
+                  <p className="text-[11px] text-[#5E6B82] mt-0.5">
+                    Dual SIM functionality lets you use Airalo for affordable travel data while keeping your domestic phone number active for two-factor SMS security codes.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Airalo Widget */}
+          <div className="lg:col-span-7">
+            <TravelEsimWidget />
           </div>
         </div>
       </section>

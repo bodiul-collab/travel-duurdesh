@@ -16,6 +16,8 @@ import { TravelInspiration } from './components/TravelInspiration';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { NewsletterCTA } from './components/NewsletterCTA';
 import { Footer } from './components/Footer';
+import { FlightsPage } from './components/FlightsPage';
+import { FlightsSection } from './components/FlightsSection';
 import { HotelsPage } from './components/HotelsPage';
 import { UmrahGuidePage } from './components/UmrahGuidePage';
 import { FoodAndTravelPage } from './components/FoodAndTravelPage';
@@ -229,7 +231,7 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (['home', 'flights', 'hotels', 'umrah', 'food', 'tools', 'destinations', 'contact'].includes(rawHash)) {
         setActivePage(rawHash);
-        if (rawHash === 'hotels' || rawHash === 'umrah' || rawHash === 'food' || rawHash === 'tools' || rawHash === 'home') {
+        if (rawHash === 'flights' || rawHash === 'hotels' || rawHash === 'umrah' || rawHash === 'food' || rawHash === 'tools' || rawHash === 'home') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       }
@@ -266,9 +268,9 @@ export default function App() {
       setActivePage('home');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (pageId === 'flights') {
-      setActivePage('home');
-      setSearchState((prev) => ({ ...prev, tab: 'flights' }));
-      setIsSearchModalOpen(true);
+      window.location.hash = '#flights';
+      setActivePage('flights');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (pageId === 'privacy' || pageId === 'privacy-policy') {
       window.location.hash = '#privacy';
       setActivePage('privacy');
@@ -314,7 +316,13 @@ export default function App() {
       />
 
       <main className="flex-grow">
-        {activePage === 'hotels' ? (
+        {activePage === 'flights' ? (
+          <FlightsPage
+            currency={currencyConfig}
+            onNavigate={handleNavigate}
+            onBookAffiliate={handleTriggerAffiliate}
+          />
+        ) : activePage === 'hotels' ? (
           <HotelsPage
             currency={currencyConfig}
             onNavigate={handleNavigate}
@@ -348,8 +356,8 @@ export default function App() {
             {/* Section 1: Hero Section */}
             <Hero
               selectedLanguage={selectedLanguageCode}
-              onExploreClick={() => scrollToSection('destinations')}
-              onFindTripClick={() => scrollToSection('categories')}
+              onExploreClick={() => handleNavigate('destinations')}
+              onFindTripClick={() => handleNavigate('destinations')}
               onSpecialOfferClick={() => handleNavigate('umrah')}
             />
 
@@ -370,18 +378,22 @@ export default function App() {
                 } else if (category.id === 'cat-tools' || category.id === 'travel-tools') {
                   handleNavigate('tools');
                 } else if (category.id === 'cat-destinations' || category.id === 'destinations') {
-                  scrollToSection('destinations');
+                  handleNavigate('destinations');
                 } else if (category.id === 'cat-hotels') {
                   handleNavigate('hotels');
+                } else if (category.id === 'cat-flights' || category.id === 'flights') {
+                  handleNavigate('flights');
                 } else {
-                  setSearchState({
-                    ...searchState,
-                    tab: 'flights',
-                    toLocation: 'Jeddah (JED)'
-                  });
-                  setIsSearchModalOpen(true);
+                  handleNavigate('flights');
                 }
               }}
+            />
+
+            {/* Dedicated Flights Section with Live Aviasales Partner Integration */}
+            <FlightsSection
+              currency={currencyConfig}
+              onNavigate={handleNavigate}
+              onBookAffiliate={handleTriggerAffiliate}
             />
 
         {/* Section 3: Popular Destinations (8 Specific Global & Pilgrimage Hubs) */}
@@ -426,8 +438,9 @@ export default function App() {
 
         {/* Section 8: Call-to-Action Section */}
         <CallToActionSection
-          onExploreDestinations={() => scrollToSection('destinations')}
-          onSearchFlightsHotels={() => setIsSearchModalOpen(true)}
+          onNavigate={handleNavigate}
+          onExploreDestinations={() => handleNavigate('destinations')}
+          onSearchFlightsHotels={() => handleNavigate('flights')}
         />
 
         {/* Featured Global Deals & Packages */}

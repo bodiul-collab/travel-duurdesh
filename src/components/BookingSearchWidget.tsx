@@ -99,10 +99,22 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
             );
           })}
 
-          <div className="ml-auto hidden md:flex items-center gap-1 text-xs text-[#21B96F] font-semibold bg-[#21B96F]/10 px-3 py-1 rounded-full whitespace-nowrap">
-            <Sparkles className="w-3 h-3" />
-            <span>Price Match Guaranteed</span>
-          </div>
+          {activeTab === 'flights' ? (
+            <a
+              href="https://www.aviasales.com/search?marker=737968"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto hidden sm:flex items-center gap-1.5 text-xs text-[#0969E8] font-bold bg-[#EAF2FB] hover:bg-[#d8e9fc] px-3 py-1.5 rounded-full whitespace-nowrap transition-colors"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#0969E8]" />
+              <span>Live Aviasales Search (737968)</span>
+            </a>
+          ) : (
+            <div className="ml-auto hidden md:flex items-center gap-1 text-xs text-[#21B96F] font-semibold bg-[#21B96F]/10 px-3 py-1 rounded-full whitespace-nowrap">
+              <Sparkles className="w-3 h-3" />
+              <span>Price Match Guaranteed</span>
+            </div>
+          )}
         </div>
 
         {/* Search Form Fields */}

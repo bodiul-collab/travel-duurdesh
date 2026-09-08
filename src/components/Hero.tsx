@@ -93,20 +93,20 @@ export const Hero: React.FC<HeroProps> = ({
               <button
                 id="hero-explore-destinations-btn"
                 onClick={onExploreClick}
-                className="inline-flex items-center justify-center gap-2.5 bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-xl shadow-lg shadow-blue-700/30 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2.5 bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-xl shadow-lg shadow-blue-700/30 transition-all duration-200 cursor-pointer"
               >
                 <span>Explore Destinations</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <a
-                href="#umrah"
+              <button
                 id="hero-umrah-guide-btn"
-                className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 active:scale-[0.98] text-white backdrop-blur-md border border-white/25 font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl transition-all duration-200"
+                onClick={onSpecialOfferClick}
+                className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 active:scale-[0.98] text-white backdrop-blur-md border border-white/25 font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer"
               >
                 <Compass className="w-4 h-4 text-[#4DA3FF]" />
                 <span>Umrah Pilgrims Guide</span>
-              </a>
+              </button>
             </div>
 
             {/* Social Proof Strip */}

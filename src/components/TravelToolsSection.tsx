@@ -10,10 +10,14 @@ import {
   CheckCircle2,
   Calendar,
   Users,
-  Compass
+  Compass,
+  Smartphone,
+  Wifi
 } from 'lucide-react';
 import { CURRENCIES } from '../data/travelData';
 import { CurrencyConfig } from '../types';
+import { TravelEsimWidget } from './TravelEsimWidget';
+import { LiveWeatherTool } from './LiveWeatherTool';
 
 interface TravelToolsSectionProps {
   currentCurrency: CurrencyConfig;
@@ -26,7 +30,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
   onCurrencyChange,
   onNavigate
 }) => {
-  const [activeTool, setActiveTool] = useState<'converter' | 'budget' | 'weather' | 'visa'>('converter');
+  const [activeTool, setActiveTool] = useState<'converter' | 'budget' | 'weather' | 'visa' | 'esim'>('converter');
 
   // Currency Converter State
   const [amount, setAmount] = useState<number>(100);
@@ -92,11 +96,11 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
           )}
         </div>
 
-        {/* 4 Tool Category Selector Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-8">
+        {/* 5 Tool Category Selector Tabs */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-4xl mx-auto mb-8">
           <button
             onClick={() => setActiveTool('converter')}
-            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               activeTool === 'converter'
                 ? 'bg-[#071B49] text-white shadow-sm'
                 : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
@@ -108,7 +112,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
 
           <button
             onClick={() => setActiveTool('budget')}
-            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               activeTool === 'budget'
                 ? 'bg-[#071B49] text-white shadow-sm'
                 : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
@@ -120,7 +124,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
 
           <button
             onClick={() => setActiveTool('weather')}
-            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               activeTool === 'weather'
                 ? 'bg-[#071B49] text-white shadow-sm'
                 : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
@@ -132,7 +136,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
 
           <button
             onClick={() => setActiveTool('visa')}
-            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               activeTool === 'visa'
                 ? 'bg-[#071B49] text-white shadow-sm'
                 : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
@@ -140,6 +144,21 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
           >
             <FileCheck className="w-4 h-4 text-[#7B61FF]" />
             <span>Visa Info</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTool('esim')}
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer relative ${
+              activeTool === 'esim'
+                ? 'bg-[#071B49] text-white shadow-sm'
+                : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
+            }`}
+          >
+            <Smartphone className="w-4 h-4 text-[#32a8dd]" />
+            <span>Travel eSIM</span>
+            <span className="hidden sm:inline-block text-[9px] font-bold uppercase tracking-wider bg-[#32a8dd]/20 text-[#0969E8] px-1.5 py-0.5 rounded">
+              Airalo
+            </span>
           </button>
         </div>
 
@@ -303,77 +322,27 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             </div>
           )}
 
-          {/* Tool 3: Weather Guide */}
+          {/* Tool 3: Live Weather Guide */}
           {activeTool === 'weather' && (
-            <div className="space-y-5">
-              <div className="border-b border-[#F1F5F9] pb-4">
-                <h3 className="text-lg font-bold text-[#071B49]">Seasonal Weather & Climate by Destination</h3>
-                <p className="text-xs sm:text-sm text-[#64748B] mt-1">
-                  Optimize your itinerary based on temperature ranges, seasonal rainfall, and recommended clothing.
-                </p>
+            <div className="space-y-6">
+              <div className="border-b border-[#F1F5F9] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <h3 className="text-lg font-bold text-[#071B49]">Live Weather & Climate Radar by Destination</h3>
+                  <p className="text-xs sm:text-sm text-[#64748B] mt-1">
+                    Choose your country and city from the dropdowns or search any local area worldwide for instant temperatures and climate advice.
+                  </p>
+                </div>
+                {onNavigate && (
+                  <button
+                    onClick={() => onNavigate('tools')}
+                    className="text-xs font-bold text-[#0969E8] hover:underline self-start sm:self-auto cursor-pointer"
+                  >
+                    Open Full Climate Tool &rarr;
+                  </button>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-[#071B49]">Makkah & Madinah</span>
-                    <span className="text-xs bg-[#FF8A2A]/20 text-[#EA580C] px-2 py-0.5 rounded font-semibold">Dry Heat</span>
-                  </div>
-                  <p className="text-xs text-[#475569] leading-relaxed">
-                    Winter (Nov-Feb): 22°C–31°C (mild and ideal for Tawaf). Summer (Jun-Aug): 40°C–45°C (plan rituals between 9 PM and 8 AM).
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-[#071B49]">Dubai, UAE</span>
-                    <span className="text-xs bg-[#0969E8]/20 text-[#0969E8] px-2 py-0.5 rounded font-semibold">Sunny</span>
-                  </div>
-                  <p className="text-xs text-[#475569] leading-relaxed">
-                    Peak Season (Nov-Apr): 24°C–28°C with pleasant coastal breezes and perfect beach weather.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-[#071B49]">Istanbul, Turkey</span>
-                    <span className="text-xs bg-[#7B61FF]/20 text-[#7B61FF] px-2 py-0.5 rounded font-semibold">Four Seasons</span>
-                  </div>
-                  <p className="text-xs text-[#475569] leading-relaxed">
-                    Spring & Autumn (Apr-May, Sep-Nov): 16°C–22°C (strolling through Old Town & Bosphorus cruises).
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-[#071B49]">Kuala Lumpur</span>
-                    <span className="text-xs bg-[#21B96F]/20 text-[#16A34A] px-2 py-0.5 rounded font-semibold">Tropical</span>
-                  </div>
-                  <p className="text-xs text-[#475569] leading-relaxed">
-                    Consistent 28°C–32°C year-round with occasional afternoon tropical showers. Light cottons recommended.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-[#071B49]">Dhaka, Bangladesh</span>
-                    <span className="text-xs bg-[#FF8A2A]/20 text-[#D97706] px-2 py-0.5 rounded font-semibold">Monsoon/Winter</span>
-                  </div>
-                  <p className="text-xs text-[#475569] leading-relaxed">
-                    Best Season (Nov-Feb): 18°C–25°C cool and dry winter. Monsoon occurs between June and September.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-[#071B49]">London, UK</span>
-                    <span className="text-xs bg-[#64748B]/20 text-[#475569] px-2 py-0.5 rounded font-semibold">Temperate</span>
-                  </div>
-                  <p className="text-xs text-[#475569] leading-relaxed">
-                    Summer (Jun-Aug): 20°C–25°C with long daylight hours. Always carry a light compact umbrella.
-                  </p>
-                </div>
-              </div>
+              <LiveWeatherTool />
             </div>
           )}
 
@@ -421,18 +390,30 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             </div>
           )}
 
-          {/* Internal Placeholder Action Strip */}
+          {/* Tool 5: Global Travel eSIM & Mobile Data (Airalo) */}
+          {activeTool === 'esim' && (
+            <TravelEsimWidget
+              className="border-0 shadow-none p-0"
+              title="Global Prepaid eSIM & Data Packages (Airalo)"
+              subtitle="Search high-speed 4G/5G data packages for Saudi Arabia (Umrah/Hajj), UAE, Turkey, UK, USA, and 200+ global destinations."
+            />
+          )}
+
+          {/* Internal Navigation Action Strip */}
           <div className="mt-8 pt-4 border-t border-[#F1F5F9] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <span className="text-[#64748B]">
-              Internal Placeholder: [See Travel Tools Page]
+              Integrated Tools: Currency, Budget, Weather, Visa, & Global eSIM
             </span>
-            <div className="flex gap-2">
-              <a
-                href="#categories"
-                className="font-bold text-[#0969E8] hover:text-[#071B49] transition-colors"
-              >
-                [Check Visa Requirements Placeholder]
-              </a>
+            <div className="flex items-center gap-3">
+              {onNavigate && (
+                <button
+                  onClick={() => onNavigate('tools')}
+                  className="font-bold text-[#0969E8] hover:text-[#071B49] transition-colors cursor-pointer flex items-center gap-1"
+                >
+                  <span>Open Full Tools Suite</span>
+                  <Sparkles className="w-3 h-3 text-[#FFB800]" />
+                </button>
+              )}
             </div>
           </div>
         </div>

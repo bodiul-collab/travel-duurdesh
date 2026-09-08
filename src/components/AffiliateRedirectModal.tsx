@@ -27,20 +27,23 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
   onClose,
   target
 }) => {
-  const [countdown, setCountdown] = useState(3);
+  const [countdown, setCountdown] = useState(2);
 
   useEffect(() => {
     if (!isOpen || !target) {
-      setCountdown(3);
+      setCountdown(2);
       return;
     }
 
-    setCountdown(3);
+    setCountdown(2);
     const interval = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
-          // Trigger redirect simulation/link
+          if (target?.affiliateUrl) {
+            window.open(target.affiliateUrl, '_blank', 'noopener,noreferrer');
+          }
+          onClose();
           return 0;
         }
         return prev - 1;
@@ -48,12 +51,14 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isOpen, target]);
+  }, [isOpen, target, onClose]);
 
   if (!isOpen || !target) return null;
 
   const handleProceed = () => {
-    // Keep within page as an affiliate placeholder
+    if (target?.affiliateUrl) {
+      window.open(target.affiliateUrl, '_blank', 'noopener,noreferrer');
+    }
     onClose();
   };
 
@@ -63,7 +68,7 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors"
+          className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -76,13 +81,13 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
           </div>
           <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[#21B96F] bg-[#21B96F]/10 px-3 py-1 rounded-full">
             <Lock className="w-3 h-3" />
-            Verified Booking Partner [Placeholder]
+            Verified Booking Partner
           </span>
           <h3 className="text-base sm:text-lg font-bold text-[#071B49] tracking-tight font-syncopate uppercase">
             {target.partnerName}
           </h3>
           <p className="text-xs text-[#5E6B82]">
-            Affiliate-Ready Placeholder: In production with your affiliate IDs connected, this action links directly to {target.partnerName}.
+            Redirecting to official partner rate search in {countdown > 0 ? `${countdown}s` : 'a moment'}... (Partner ID: 737968)
           </p>
         </div>
 
@@ -107,7 +112,7 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
             )}
             <span className="text-[10px] text-[#21B96F] font-semibold flex items-center gap-1">
               <CheckCircle2 className="w-3 h-3" />
-              Verified Partner Rate [Placeholder]
+              Direct Partner Price Guarantee
             </span>
           </div>
         </div>
@@ -116,22 +121,29 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
         <div className="space-y-2 text-xs text-[#5E6B82] bg-[#F3F8FF] p-3.5 rounded-xl border border-blue-100">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#0969E8] shrink-0" />
-            <span>Encrypted SSL 256-bit secure checkout ready</span>
+            <span>Encrypted SSL 256-bit secure checkout</span>
           </div>
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-[#FF8A2A] shrink-0" />
-            <span>Affiliate tracking integration placeholder verified</span>
+            <span>Official live rates with zero extra fees</span>
           </div>
         </div>
 
-        {/* Action Button */}
+        {/* Action Buttons */}
         <div className="space-y-2 pt-1">
           <button
             onClick={handleProceed}
-            className="w-full bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-bold text-sm py-3.5 rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all duration-150"
+            className="w-full bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-bold text-sm py-3.5 rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer"
           >
-            <span>Close & Return to Guide</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Continue to {target.partnerName}</span>
+            <ExternalLink className="w-4 h-4" />
+          </button>
+
+          <button
+            onClick={onClose}
+            className="w-full text-xs text-gray-500 hover:text-gray-800 font-medium py-1.5 rounded-lg transition-colors cursor-pointer"
+          >
+            Cancel and stay on Travel DuurDesh
           </button>
         </div>
       </div>

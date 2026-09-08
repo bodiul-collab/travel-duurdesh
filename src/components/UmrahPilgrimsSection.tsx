@@ -310,13 +310,13 @@ export const UmrahPilgrimsSection: React.FC<UmrahPilgrimsSectionProps> = ({
           )}
         </div>
 
-        {/* Section Action Strip (Internal Placeholders only - no external links) */}
+        {/* Section Action Strip */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4 text-center">
           <button
             onClick={() => onNavigate ? onNavigate('umrah') : window.location.hash = '#umrah'}
             className="inline-flex items-center justify-center gap-2 bg-[#0969E8] hover:bg-[#0759c5] text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md transition-colors cursor-pointer"
           >
-            <span>[Visit Umrah Guide]</span>
+            <span>Explore Complete Umrah Guide</span>
             <ChevronRight className="w-4 h-4" />
           </button>
 
@@ -324,7 +324,7 @@ export const UmrahPilgrimsSection: React.FC<UmrahPilgrimsSectionProps> = ({
             onClick={() => onNavigate ? onNavigate('hotels') : window.location.hash = '#hotels'}
             className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl border border-white/20 transition-colors cursor-pointer"
           >
-            <span>[See Hotels Page]</span>
+            <span>Browse Makkah & Madinah Hotels</span>
           </button>
         </div>
       </div>

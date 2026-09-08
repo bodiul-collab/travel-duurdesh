@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import {
   Sparkles,
   ArrowRight,
@@ -54,7 +55,11 @@ export const FeaturedDeals: React.FC<FeaturedDealsProps> = ({
         {/* Desktop Split Layout (35% Left Heroic Promo Card + 65% 3 Deal Cards) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Main Promotional Feature Card (Left Column) */}
-          <div className="lg:col-span-4 bg-gradient-to-br from-[#071B49] via-[#09357A] to-[#0969E8] text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-xl shadow-blue-950/20">
+          <motion.div
+            whileHover={{ y: -4, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+            className="lg:col-span-4 bg-gradient-to-br from-[#071B49] via-[#09357A] to-[#0969E8] text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-xl shadow-blue-950/20 hover:shadow-2xl transition-shadow duration-300"
+          >
             {/* Background Travel Artwork Vector */}
             <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-blue-400/10 rounded-full blur-2xl pointer-events-none" />
             <div className="absolute top-6 right-6 opacity-15">
@@ -100,7 +105,7 @@ export const FeaturedDeals: React.FC<FeaturedDealsProps> = ({
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* 3 Featured Deal Cards (Right Column Grid) */}
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -113,11 +118,13 @@ export const FeaturedDeals: React.FC<FeaturedDealsProps> = ({
                   : 'bg-[#0969E8]';
 
               return (
-                <div
+                <motion.div
                   key={deal.id}
                   id={`deal-card-${deal.id}`}
                   onClick={() => onDealClick(deal)}
-                  className="group bg-white rounded-2xl border border-[#E7EEF7] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col overflow-hidden cursor-pointer"
+                  whileHover={{ y: -6, scale: 1.025 }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                  className="group bg-white rounded-2xl border border-[#E7EEF7] shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden cursor-pointer"
                 >
                   {/* Deal Image Container */}
                   <div className="relative h-44 w-full overflow-hidden bg-slate-900">
@@ -204,7 +211,7 @@ export const FeaturedDeals: React.FC<FeaturedDealsProps> = ({
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

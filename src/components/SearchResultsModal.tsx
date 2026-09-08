@@ -217,6 +217,40 @@ export const SearchResultsModal: React.FC<SearchResultsModalProps> = ({
           ) : (
             /* List / Grid View */
             <>
+              {searchState.tab === 'flights' && (
+                <div className="p-4 bg-gradient-to-r from-[#071B49] to-[#0969E8] rounded-2xl text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center text-white shrink-0">
+                      <Plane className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-sm font-bold">
+                          Search "{searchState.toLocation || 'Global Flights'}" on Aviasales
+                        </h4>
+                        <span className="text-[10px] bg-[#21B96F] text-white px-2 py-0.5 rounded-full font-bold">
+                          Live Partner Rates
+                        </span>
+                      </div>
+                      <p className="text-xs text-white/80">
+                        Scan 1,000+ airlines, low-cost carriers, and agencies with no extra fees.
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href={`https://www.aviasales.com/search?marker=737968&destination=${encodeURIComponent(
+                      searchState.toLocation || ''
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-[#0969E8] hover:bg-[#F3F8FF] font-bold text-xs rounded-xl shadow transition-colors shrink-0"
+                  >
+                    <span>Check Live Aviasales Fares</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              )}
+
               {/* Destinations Category */}
               {(filterType === 'all' || filterType === 'destinations') && matchedDestinations.length > 0 && (
                 <div className="space-y-3">

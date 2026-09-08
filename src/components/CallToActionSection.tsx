@@ -9,14 +9,46 @@ import {
 } from 'lucide-react';
 
 interface CallToActionSectionProps {
-  onExploreDestinations: () => void;
-  onSearchFlightsHotels: () => void;
+  onNavigate?: (pageId: string) => void;
+  onExploreDestinations?: () => void;
+  onSearchFlightsHotels?: () => void;
 }
 
 export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
+  onNavigate,
   onExploreDestinations,
   onSearchFlightsHotels
 }) => {
+  const handleDestinations = () => {
+    if (onNavigate) {
+      onNavigate('destinations');
+    } else if (onExploreDestinations) {
+      onExploreDestinations();
+    }
+  };
+
+  const handleFlights = () => {
+    if (onNavigate) {
+      onNavigate('flights');
+    } else if (onSearchFlightsHotels) {
+      onSearchFlightsHotels();
+    }
+  };
+
+  const handleHotels = () => {
+    if (onNavigate) {
+      onNavigate('hotels');
+    }
+  };
+
+  const handleUmrah = () => {
+    if (onNavigate) {
+      onNavigate('umrah');
+    } else {
+      window.location.hash = '#umrah';
+    }
+  };
+
   return (
     <section className="py-16 sm:py-20 bg-gradient-to-br from-[#071B49] via-[#0B2564] to-[#071B49] text-white relative overflow-hidden">
       {/* Decorative background blurs */}
@@ -41,37 +73,49 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
           Whether you are embarking on a once-in-a-lifetime Umrah pilgrimage, craving world-class halal street food in historic alleyways, or searching for affordable flights and hotels worldwide, Travel DuurDesh is here to guide every step.
         </p>
 
-        {/* Clean Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+        {/* Clean Action Buttons with exact page landing destinations */}
+        <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
           <button
-            onClick={onExploreDestinations}
-            className="inline-flex items-center justify-center gap-2 bg-[#0969E8] hover:bg-[#0759c5] text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-xl shadow-lg shadow-blue-700/30 transition-all active:scale-[0.98]"
+            id="cta-explore-destinations-btn"
+            onClick={handleDestinations}
+            className="inline-flex items-center justify-center gap-2 bg-[#0969E8] hover:bg-[#0759c5] text-white font-bold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl shadow-lg shadow-blue-700/30 transition-all active:scale-[0.98] cursor-pointer"
           >
             <span>Explore Destinations</span>
             <ArrowRight className="w-4 h-4" />
           </button>
 
-          <a
-            href="#umrah"
-            className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl backdrop-blur-md border border-white/20 transition-all active:scale-[0.98]"
+          <button
+            id="cta-search-flights-btn"
+            onClick={handleFlights}
+            className="inline-flex items-center justify-center gap-2 bg-[#21B96F] hover:bg-[#1ea763] text-white font-bold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl shadow-lg shadow-emerald-700/20 transition-all active:scale-[0.98] cursor-pointer"
+          >
+            <Plane className="w-4 h-4" />
+            <span>Search Flights & Airfare</span>
+          </button>
+
+          <button
+            id="cta-find-hotels-btn"
+            onClick={handleHotels}
+            className="inline-flex items-center justify-center gap-2 bg-[#FF8A2A] hover:bg-[#e67519] text-white font-bold text-sm sm:text-base px-5 sm:px-6 py-3.5 rounded-xl shadow-lg shadow-orange-700/20 transition-all active:scale-[0.98] cursor-pointer"
+          >
+            <Building2 className="w-4 h-4" />
+            <span>Find Hotels & Stays</span>
+          </button>
+
+          <button
+            id="cta-umrah-guide-btn"
+            onClick={handleUmrah}
+            className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white font-bold text-sm sm:text-base px-5 sm:px-6 py-3.5 rounded-xl backdrop-blur-md border border-white/20 transition-all active:scale-[0.98] cursor-pointer"
           >
             <Compass className="w-4 h-4 text-[#4DA3FF]" />
             <span>Read Umrah Guide</span>
-          </a>
-
-          <button
-            onClick={onSearchFlightsHotels}
-            className="inline-flex items-center justify-center gap-2 bg-[#21B96F] hover:bg-[#1ea763] text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-700/20 transition-all active:scale-[0.98]"
-          >
-            <Plane className="w-4 h-4" />
-            <span>Compare Flights & Hotels</span>
           </button>
         </div>
 
-        {/* Affiliate / Partner Disclaimer Placeholder */}
+        {/* Affiliate / Partner Disclaimer */}
         <div className="pt-6">
           <p className="text-[11px] text-white/50 max-w-lg mx-auto leading-relaxed">
-            Travel DuurDesh provides independent editorial travel and pilgrimage advice. All booking actions use internal link placeholders: [Partner Booking Placeholder].
+            Travel DuurDesh provides independent editorial travel and pilgrimage advice with official booking partner integrations (Aviasales Partner ID: 737968).
           </p>
         </div>
       </div>

@@ -67,6 +67,26 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     coordinates: { lat: 24.5247, lng: 39.5692 }
   },
   {
+    id: 'dest-alula',
+    name: 'AlUla',
+    country: 'Saudi Arabia',
+    region: 'Middle East',
+    image: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1000&q=80',
+    startingPrice: 649,
+    currency: 'USD',
+    rating: 4.9,
+    reviewCount: 3740,
+    discountPercentage: 15,
+    tag: 'Ancient Living Museum',
+    description: "The archaeological wonder of Arabia, home to UNESCO World Heritage site Hegra (Mada'in Salih), the Guinness-record mirrored Maraya concert hall, Elephant Rock, and a lush 20-kilometer date palm oasis.",
+    highlights: ["Hegra (Mada'in Salih) Nabataean Tombs", 'Mirrored Maraya Hall & Ashar Valley', 'Elephant Rock (Jabal AlFil) Sunset Lounge', 'AlUla Old Town & Ancient Dadan Inscriptions'],
+    bestTimeToVisit: 'Oct – Apr',
+    affiliateCategory: 'hotels',
+    partnerName: 'Heritage Desert Stays [Placeholder]',
+    affiliateUrl: '#see-hotels-alula-placeholder',
+    coordinates: { lat: 26.6167, lng: 37.9167 }
+  },
+  {
     id: 'dest-dubai',
     name: 'Dubai',
     country: 'UAE',
@@ -303,7 +323,7 @@ export const TRAVEL_CATEGORIES: TravelCategory[] = [
     accentColor: '#0969E8',
     description: 'Find affordable airfares, compare international route options across major global carriers, and discover specialized flight routes for Umrah pilgrims landing directly in Jeddah and Madinah with generous baggage allowances.',
     features: ['Real-time low-fare flight comparisons', 'Direct Jeddah & Madinah Umrah flights', 'Flexible multi-city & transit stopovers'],
-    internalPlaceholder: 'See Flights Page [Placeholder]'
+    internalPlaceholder: 'Explore Global Flights & Fares'
   },
   {
     id: 'cat-hotels',

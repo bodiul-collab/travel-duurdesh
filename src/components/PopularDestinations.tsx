@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { motion } from 'motion/react';
 import {
   Star,
   ArrowRight,
@@ -100,10 +101,12 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
           {filteredDestinations.map((dest) => {
             const isSaved = wishlistIds.includes(dest.id);
             return (
-              <article
+              <motion.article
                 key={dest.id}
                 id={`destination-card-${dest.id}`}
-                className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-sm hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Image Container */}
                 <div className="relative h-48 w-full overflow-hidden bg-[#071B49]">
@@ -238,7 +241,7 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
                     </div>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>
@@ -255,7 +258,7 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
             }}
             className="inline-flex items-center gap-2 text-sm font-bold text-[#0969E8] hover:text-[#071B49] transition-colors cursor-pointer"
           >
-            <span>Explore All 12 Country & City Travel Guides (Bangladesh, Malaysia, Turkey, USA, UK, NYC, London, KL, Dhaka & More)</span>
+            <span>Explore All 13 Country & City Travel Guides (AlUla, Makkah, Bangladesh, Malaysia, Turkey, USA, UK, Dubai, NYC & More)</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
