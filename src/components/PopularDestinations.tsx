@@ -9,7 +9,8 @@ import {
   ExternalLink,
   Sparkles,
   MapPin,
-  Eye
+  Eye,
+  Plane
 } from 'lucide-react';
 import { Destination, CurrencyConfig } from '../types';
 import { getTranslation, TranslationKey } from '../data/translations';
@@ -23,6 +24,7 @@ interface PopularDestinationsProps {
   currency: CurrencyConfig;
   selectedLanguage?: string;
   onNavigate?: (pageId: string) => void;
+  onViewFlights?: (dest: Destination) => void;
 }
 
 export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
@@ -33,7 +35,8 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
   onBookAffiliate,
   currency,
   selectedLanguage = 'en',
-  onNavigate
+  onNavigate,
+  onViewFlights
 }) => {
   const [selectedRegion, setSelectedRegion] = useState<string>('All');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -196,7 +199,7 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
                       </div>
                     </div>
 
-                    {/* Action buttons (Internal placeholders - no external links) */}
+                    {/* Action buttons: Direct View Guide and Direct Landing Page for Destination Flights */}
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => {
@@ -226,17 +229,19 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
 
                       <button
                         onClick={() => {
-                          if (onNavigate) {
-                            onNavigate('hotels');
+                          if (onViewFlights) {
+                            onViewFlights(dest);
+                          } else if (onNavigate) {
+                            onNavigate('flights');
                           } else {
                             onBookAffiliate(dest);
                           }
                         }}
-                        className="w-full inline-flex items-center justify-center gap-1 bg-[#0969E8] hover:bg-[#0759c5] text-white text-xs font-semibold py-2 rounded-xl shadow-sm transition-colors cursor-pointer"
-                        title="See Hotels Page [Placeholder]"
+                        className="w-full inline-flex items-center justify-center gap-1.5 bg-[#0969E8] hover:bg-[#0759c5] text-white text-xs font-bold py-2 rounded-xl shadow-sm transition-colors cursor-pointer"
+                        title={`Check live flights to ${dest.name}`}
                       >
-                        <span>See Hotels</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <Plane className="w-3.5 h-3.5" />
+                        <span>View Flights</span>
                       </button>
                     </div>
                   </div>

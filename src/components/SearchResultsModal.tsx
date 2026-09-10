@@ -23,6 +23,7 @@ import {
   CurrencyConfig
 } from '../types';
 import { InteractiveDestinationMap } from './InteractiveDestinationMap';
+import { buildAviasalesRouteUrl } from '../utils/aviasales';
 
 interface SearchResultsModalProps {
   isOpen: boolean;
@@ -238,9 +239,15 @@ export const SearchResultsModal: React.FC<SearchResultsModalProps> = ({
                     </div>
                   </div>
                   <a
-                    href={`https://www.aviasales.com/search?marker=737968&destination=${encodeURIComponent(
-                      searchState.toLocation || ''
-                    )}`}
+                    href={buildAviasalesRouteUrl(
+                      searchState.fromLocation,
+                      searchState.toLocation,
+                      {
+                        departDate: searchState.checkInDate,
+                        returnDate: searchState.checkOutDate,
+                        passengers: searchState.adults + searchState.children
+                      }
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-[#0969E8] hover:bg-[#F3F8FF] font-bold text-xs rounded-xl shadow transition-colors shrink-0"

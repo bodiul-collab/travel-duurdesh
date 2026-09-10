@@ -27,7 +27,8 @@ import {
   BedDouble,
   Wifi,
   Bus,
-  Sparkle
+  Sparkle,
+  ExternalLink
 } from 'lucide-react';
 import { CurrencyConfig } from '../types';
 
@@ -529,24 +530,41 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
                     {dest.travelTips}
                   </div>
 
-                  {/* Internal Link Placeholder */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-gray-100">
-                    <span className="text-xs font-mono text-[#0969E8] font-bold bg-[#EAF2FB] px-3 py-1.5 rounded-lg">
-                      {dest.placeholderLink}
-                    </span>
-                    <div className="flex items-center gap-2">
+                  {/* Direct Live Booking Actions */}
+                  <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-gray-100">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <a
+                        href={`https://www.booking.com/searchresults.html?ss=${encodeURIComponent(dest.city)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#0969E8] hover:bg-[#0759c5] text-white text-xs font-bold rounded-xl shadow-sm transition-all"
+                      >
+                        <span>Check Rates in {dest.city}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                      <a
+                        href={`https://www.aviasales.com/search?marker=737968&show_hotels=true&destination=${encodeURIComponent(dest.city)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#EAF2FB] hover:bg-[#d8e9fc] text-[#0969E8] text-xs font-bold rounded-xl transition-all"
+                      >
+                        <span>Aviasales Stays (737968)</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
                       <button
                         onClick={() => onNavigate?.('flights')}
-                        className="text-xs font-semibold text-[#5E6B82] hover:text-[#0969E8] transition-colors"
+                        className="font-semibold text-[#5E6B82] hover:text-[#0969E8] transition-colors cursor-pointer"
                       >
-                        [See Flights Page]
+                        Flights to {dest.city}
                       </button>
                       <span className="text-gray-300">•</span>
                       <button
                         onClick={() => onNavigate?.('umrah')}
-                        className="text-xs font-semibold text-[#5E6B82] hover:text-[#0969E8] transition-colors"
+                        className="font-semibold text-[#5E6B82] hover:text-[#0969E8] transition-colors cursor-pointer"
                       >
-                        [Visit Umrah Guide]
+                        Umrah Guide
                       </button>
                     </div>
                   </div>

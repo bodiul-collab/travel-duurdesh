@@ -46,28 +46,45 @@ export function initGoogleTranslate(): void {
   // "TypeError: Cannot set property fetch of #<Window> which has only a getter"
   try {
     if ('fetch' in window) {
-      const orig = window.fetch.bind(window);
-      let active = orig;
-      try {
-        Object.defineProperty(window, 'fetch', {
-          configurable: true,
-          enumerable: true,
-          writable: true,
-          value: orig
-        });
-      } catch {
+      const nativeFetch = window.fetch;
+      let activeFetch = typeof nativeFetch === 'function' ? nativeFetch.bind(window) : nativeFetch;
+
+      const getFetch = () => activeFetch;
+      const setFetch = (newFetch: unknown) => {
+        if (typeof newFetch === 'function') {
+          activeFetch = newFetch as typeof fetch;
+        }
+      };
+
+      if (typeof Window !== 'undefined' && Window.prototype) {
         try {
-          Object.defineProperty(window, 'fetch', {
+          Object.defineProperty(Window.prototype, 'fetch', {
+            get: getFetch,
+            set: setFetch,
             configurable: true,
-            enumerable: true,
-            get: () => active,
-            set: (fn) => {
-              active = typeof fn === 'function' ? fn : orig;
-            }
+            enumerable: true
           });
         } catch {
           // ignore if unconfigurable
         }
+      }
+
+      let target: any = window;
+      while (target) {
+        try {
+          const desc = Object.getOwnPropertyDescriptor(target, 'fetch');
+          if (desc || target === window) {
+            Object.defineProperty(target, 'fetch', {
+              get: getFetch,
+              set: setFetch,
+              configurable: true,
+              enumerable: true
+            });
+          }
+        } catch {
+          // ignore
+        }
+        target = Object.getPrototypeOf(target);
       }
     }
   } catch {

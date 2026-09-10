@@ -260,12 +260,20 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Legal & Policy Placeholders (2 cols) */}
+          {/* Legal & Policy Links (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="text-[11px] font-bold text-white uppercase tracking-wider font-syncopate">
               Trust & Legal
             </h4>
             <ul className="space-y-2 text-xs">
+              <li>
+                <button
+                  onClick={() => onNavigate?.('about')}
+                  className="hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  About Travel DuurDesh
+                </button>
+              </li>
               <li>
                 <button
                   onClick={() => onNavigate?.('privacy')}
@@ -279,23 +287,15 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onNavigate?.('terms')}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  Terms & Conditions (link)
+                  Terms & Conditions
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate?.('privacy')}
+                  onClick={() => onNavigate?.('about')}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  Affiliate Disclosure (link)
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate?.('contact')}
-                  className="hover:text-white transition-colors cursor-pointer text-left"
-                >
-                  Editorial Standards (link)
+                  Editorial Integrity & Disclosure
                 </button>
               </li>
             </ul>
@@ -309,18 +309,23 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2.5 text-xs">
               <li className="flex items-start gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#4DA3FF] shrink-0 mt-0.5" />
-                <span>contact@travelduurdesh.com</span>
+                <a
+                  href="mailto:contact@travelduurdesh.com"
+                  className="hover:text-white transition-colors"
+                >
+                  contact@travelduurdesh.com
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#4DA3FF] shrink-0 mt-0.5" />
-                <span>Travel DuurDesh HQ • Global Support Network</span>
+                <span>Travel DuurDesh Global Support Network</span>
               </li>
               <li className="pt-1">
                 <button
                   onClick={() => onNavigate?.('contact')}
                   className="inline-flex items-center gap-1 text-[#4DA3FF] hover:text-white font-semibold transition-colors cursor-pointer"
                 >
-                  <span>Contact Us (See Contact Page)</span>
+                  <span>Open Contact & Support Page →</span>
                 </button>
               </li>
             </ul>

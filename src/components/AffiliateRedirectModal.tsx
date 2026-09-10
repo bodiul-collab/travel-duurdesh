@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   ExternalLink,
   ShieldCheck,
   Sparkles,
   CheckCircle2,
   Lock,
-  ArrowRight,
   X
 } from 'lucide-react';
-import { AFFILIATE_CONFIG } from '../data/affiliateConfig';
+import { buildAffiliateUrl } from '../data/affiliateConfig';
 
 interface AffiliateRedirectModalProps {
   isOpen: boolean;
@@ -29,6 +28,17 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
 }) => {
   const [countdown, setCountdown] = useState(2);
 
+  // Guarantee valid live landing URL on both desktop and mobile
+  const resolvedUrl = useMemo(() => {
+    if (!target?.affiliateUrl) {
+      return buildAffiliateUrl('booking', { destination: target?.title || '' });
+    }
+    if (target.affiliateUrl.startsWith('http://') || target.affiliateUrl.startsWith('https://')) {
+      return target.affiliateUrl;
+    }
+    return buildAffiliateUrl('booking', { destination: target.title });
+  }, [target]);
+
   useEffect(() => {
     if (!isOpen || !target) {
       setCountdown(2);
@@ -40,10 +50,16 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
-          if (target?.affiliateUrl) {
-            window.open(target.affiliateUrl, '_blank', 'noopener,noreferrer');
+          if (resolvedUrl) {
+            try {
+              const opened = window.open(resolvedUrl, '_blank', 'noopener,noreferrer');
+              if (opened) {
+                onClose();
+              }
+            } catch {
+              // Ignore popup blocking and let user tap the prominent link
+            }
           }
-          onClose();
           return 0;
         }
         return prev - 1;
@@ -51,16 +67,9 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isOpen, target, onClose]);
+  }, [isOpen, target, resolvedUrl, onClose]);
 
   if (!isOpen || !target) return null;
-
-  const handleProceed = () => {
-    if (target?.affiliateUrl) {
-      window.open(target.affiliateUrl, '_blank', 'noopener,noreferrer');
-    }
-    onClose();
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
@@ -87,7 +96,9 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
             {target.partnerName}
           </h3>
           <p className="text-xs text-[#5E6B82]">
-            Redirecting to official partner rate search in {countdown > 0 ? `${countdown}s` : 'a moment'}... (Partner ID: 737968)
+            {countdown > 0
+              ? `Opening verified partner portal in ${countdown}s... (Partner ID: 737968)`
+              : 'Ready to continue to verified partner portal (Partner ID: 737968)'}
           </p>
         </div>
 
@@ -129,18 +140,28 @@ export const AffiliateRedirectModal: React.FC<AffiliateRedirectModalProps> = ({
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons - native <a> guarantees unblocked opening on mobile iOS/Android and desktop */}
         <div className="space-y-2 pt-1">
-          <button
-            onClick={handleProceed}
-            className="w-full bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-bold text-sm py-3.5 rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer"
+          <a
+            href={resolvedUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              setTimeout(onClose, 300);
+            }}
+            className="w-full bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-bold text-sm py-3.5 rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all duration-150 cursor-pointer text-center"
           >
             <span>Continue to {target.partnerName}</span>
-            <ExternalLink className="w-4 h-4" />
-          </button>
+            <ExternalLink className="w-4 h-4 shrink-0" />
+          </a>
+
+          <p className="text-[11px] text-center text-gray-400">
+            Mobile or popup blocked? Tap the blue button above to open directly in a new tab.
+          </p>
 
           <button
             onClick={onClose}
+            type="button"
             className="w-full text-xs text-gray-500 hover:text-gray-800 font-medium py-1.5 rounded-lg transition-colors cursor-pointer"
           >
             Cancel and stay on Travel DuurDesh

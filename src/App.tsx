@@ -24,12 +24,17 @@ import { FoodAndTravelPage } from './components/FoodAndTravelPage';
 import { TravelToolsPage } from './components/TravelToolsPage';
 import { DestinationsPage } from './components/DestinationsPage';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
+import { AboutPage } from './components/AboutPage';
+import { ContactPage } from './components/ContactPage';
+import { TermsPage } from './components/TermsPage';
+import { applySEO, SEO_PAGES } from './utils/seo';
 import { AffiliateRedirectModal } from './components/AffiliateRedirectModal';
 import { QuickViewModal } from './components/QuickViewModal';
 import { FavoritesDrawer } from './components/FavoritesDrawer';
 import { ArticleModal } from './components/ArticleModal';
 import { SearchResultsModal } from './components/SearchResultsModal';
 import { LanguageModal } from './components/LanguageModal';
+import { buildAviasalesRouteUrl } from './utils/aviasales';
 import { initGoogleTranslate, applyGoogleLanguageChange } from './utils/googleTranslate';
 import {
   getInitialCurrency,
@@ -209,6 +214,40 @@ export default function App() {
 
   const handleSearchSubmit = (newSearchState: SearchFilterState) => {
     setSearchState(newSearchState);
+    if (newSearchState.tab === 'flights') {
+      const fromLoc = newSearchState.fromLocation || 'Houston (IAH)';
+      const toLoc = newSearchState.toLocation || 'Madinah (MED)';
+      const affiliateUrl = buildAviasalesRouteUrl(fromLoc, toLoc, {
+        departDate: newSearchState.checkInDate,
+        returnDate: newSearchState.checkOutDate,
+        passengers: newSearchState.adults + newSearchState.children,
+        cabinClass:
+          newSearchState.cabinClass === 'Business'
+            ? 'c'
+            : newSearchState.cabinClass === 'First'
+            ? 'f'
+            : newSearchState.cabinClass === 'Premium Economy'
+            ? 'w'
+            : 'y'
+      });
+
+      // Directly open the official partner landing page for destination flight results
+      try {
+        window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
+      } catch {
+        // Fallback popup handled in modal
+      }
+
+      // Show transparent partner portal redirect with direct action
+      handleTriggerAffiliate({
+        title: `${fromLoc} to ${toLoc}`,
+        partnerName: 'Aviasales Verified Flights',
+        affiliateUrl,
+        price: 'Live Airfare Rates'
+      });
+      return;
+    }
+
     setIsSearchModalOpen(true);
   };
 
@@ -219,66 +258,80 @@ export default function App() {
     }
   };
 
-  // Sync hash changes with active page state
+  // Apply Dynamic SEO & Structured Data per page
   useEffect(() => {
-    const handleHashChange = () => {
-      const rawHash = window.location.hash.replace('#', '');
-      if (rawHash.startsWith('destinations')) {
+    if (activePage !== 'destinations') {
+      const config = SEO_PAGES[activePage] || SEO_PAGES.home;
+      applySEO(config);
+    }
+  }, [activePage]);
+
+  // Sync URL pathname and hash changes with active page state
+  useEffect(() => {
+    const handleRouteSync = () => {
+      // 1. Check clean pathname first (e.g. /flights, /hotels, /umrah, /about)
+      const pathSegment = window.location.pathname.replace(/^\/+|\/+$/g, '').split('/')[0].toLowerCase();
+      // 2. Check hash (e.g. #flights, #destinations)
+      const rawHash = window.location.hash.replace('#', '').toLowerCase();
+
+      const routeKey = pathSegment || rawHash;
+
+      if (routeKey.startsWith('destinations')) {
         setActivePage('destinations');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (rawHash === 'privacy' || rawHash === 'privacy-policy') {
+      } else if (routeKey === 'privacy' || routeKey === 'privacy-policy') {
         setActivePage('privacy');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (['home', 'flights', 'hotels', 'umrah', 'food', 'tools', 'destinations', 'contact'].includes(rawHash)) {
-        setActivePage(rawHash);
-        if (rawHash === 'flights' || rawHash === 'hotels' || rawHash === 'umrah' || rawHash === 'food' || rawHash === 'tools' || rawHash === 'home') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+      } else if (routeKey === 'about' || routeKey === 'about-us') {
+        setActivePage('about');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (routeKey === 'contact' || routeKey === 'contact-us') {
+        setActivePage('contact');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (routeKey === 'terms' || routeKey === 'terms-and-conditions') {
+        setActivePage('terms');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (['home', 'flights', 'hotels', 'umrah', 'food', 'tools'].includes(routeKey)) {
+        setActivePage(routeKey);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
-    handleHashChange(); // Handle initial hash on load
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+
+    handleRouteSync(); // Handle initial route on load
+    window.addEventListener('hashchange', handleRouteSync);
+    window.addEventListener('popstate', handleRouteSync);
+    return () => {
+      window.removeEventListener('hashchange', handleRouteSync);
+      window.removeEventListener('popstate', handleRouteSync);
+    };
   }, []);
 
-  // Central navigation handler for clean 8-item menu and internal placeholders
+  // Central navigation handler for clean routing and SEO canonical compliance
   const handleNavigate = (pageId: string) => {
-    if (pageId === 'hotels') {
-      window.location.hash = '#hotels';
-      setActivePage('hotels');
+    const validPages = [
+      'flights',
+      'hotels',
+      'umrah',
+      'food',
+      'tools',
+      'destinations',
+      'about',
+      'contact',
+      'terms',
+      'privacy',
+      'home'
+    ];
+
+    if (validPages.includes(pageId)) {
+      setActivePage(pageId);
+      window.location.hash = `#${pageId}`;
+      try {
+        const newPath = pageId === 'home' ? '/' : `/${pageId}`;
+        if (window.location.pathname !== newPath) {
+          window.history.pushState(null, '', newPath);
+        }
+      } catch (e) {}
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'umrah') {
-      window.location.hash = '#umrah';
-      setActivePage('umrah');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'food') {
-      window.location.hash = '#food';
-      setActivePage('food');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'tools') {
-      window.location.hash = '#tools';
-      setActivePage('tools');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'destinations') {
-      window.location.hash = '#destinations';
-      setActivePage('destinations');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'home') {
-      window.location.hash = '#home';
-      setActivePage('home');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'flights') {
-      window.location.hash = '#flights';
-      setActivePage('flights');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'privacy' || pageId === 'privacy-policy') {
-      window.location.hash = '#privacy';
-      setActivePage('privacy');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (pageId === 'contact') {
-      window.location.hash = '#contact';
-      const el = document.getElementById('footer-contact') || document.querySelector('footer');
-      el?.scrollIntoView({ behavior: 'smooth' });
     } else {
       window.location.hash = `#${pageId}`;
       setActivePage('home');
@@ -347,6 +400,18 @@ export default function App() {
             currency={currencyConfig}
             onNavigate={handleNavigate}
           />
+        ) : activePage === 'about' ? (
+          <AboutPage
+            onNavigate={handleNavigate}
+          />
+        ) : activePage === 'contact' ? (
+          <ContactPage
+            onNavigate={handleNavigate}
+          />
+        ) : activePage === 'terms' ? (
+          <TermsPage
+            onNavigate={handleNavigate}
+          />
         ) : activePage === 'privacy' ? (
           <PrivacyPolicyPage
             onNavigate={handleNavigate}
@@ -411,6 +476,39 @@ export default function App() {
               title: `${dest.name}, ${dest.country}`,
               partnerName: dest.partnerName,
               affiliateUrl: dest.affiliateUrl,
+              price: `${currencyConfig.symbol}${converted.toLocaleString()}`,
+              image: dest.image
+            });
+          }}
+          onViewFlights={(dest) => {
+            let destCode = 'JED';
+            const name = dest.name.toLowerCase();
+            if (name.includes('madinah') || name.includes('medina')) destCode = 'MED';
+            else if (name.includes('dubai')) destCode = 'DXB';
+            else if (name.includes('istanbul')) destCode = 'IST';
+            else if (name.includes('london')) destCode = 'LHR';
+            else if (name.includes('york')) destCode = 'JFK';
+            else if (name.includes('dhaka')) destCode = 'DAC';
+            else if (name.includes('kuala') || name.includes('lumpur')) destCode = 'KUL';
+            else if (name.includes('paris')) destCode = 'CDG';
+            else if (name.includes('cairo')) destCode = 'CAI';
+            else if (name.includes('doha')) destCode = 'DOH';
+            else if (name.includes('singapore')) destCode = 'SIN';
+            else if (name.includes('riyadh')) destCode = 'RUH';
+            else if (name.includes('alula')) destCode = 'ULH';
+
+            const origin = searchState.fromLocation || 'Houston (IAH)';
+            const affiliateUrl = buildAviasalesRouteUrl(origin, destCode);
+            try {
+              window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
+            } catch {
+              // popup fallback handled by modal
+            }
+            const converted = Math.round(dest.startingPrice * currencyConfig.rateToUSD);
+            handleTriggerAffiliate({
+              title: `Flights to ${dest.name} (${destCode})`,
+              partnerName: 'Aviasales Verified Flights',
+              affiliateUrl,
               price: `${currencyConfig.symbol}${converted.toLocaleString()}`,
               image: dest.image
             });

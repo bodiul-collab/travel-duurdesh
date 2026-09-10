@@ -42,8 +42,8 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     highlights: ['Masjid al-Haram Courtyards', 'Direct Kaaba Courtyard Views', 'Jabal al-Nour & Hira Cave Excursion', 'Zamzam Spring Access & Historic Ziyarat'],
     bestTimeToVisit: 'Year-round (cooler months: Nov – Feb)',
     affiliateCategory: 'hotels',
-    partnerName: 'Verified Hotel Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-makkah-placeholder',
+    partnerName: 'Booking.com & Aviasales',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Makkah',
     coordinates: { lat: 21.3891, lng: 39.8579 }
   },
   {
@@ -62,8 +62,8 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     highlights: ['Al-Masjid an-Nabawi & Rawdah ash-Sharifah', 'Masjid Quba (First Mosque in Islam)', 'Mount Uhud Historic Battle Site', 'Authentic Ajwa Date Markets'],
     bestTimeToVisit: 'Oct – Mar',
     affiliateCategory: 'hotels',
-    partnerName: 'Verified Hotel Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-madinah-placeholder',
+    partnerName: 'Booking.com & Aviasales',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Madinah',
     coordinates: { lat: 24.5247, lng: 39.5692 }
   },
   {
@@ -82,8 +82,8 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     highlights: ["Hegra (Mada'in Salih) Nabataean Tombs", 'Mirrored Maraya Hall & Ashar Valley', 'Elephant Rock (Jabal AlFil) Sunset Lounge', 'AlUla Old Town & Ancient Dadan Inscriptions'],
     bestTimeToVisit: 'Oct – Apr',
     affiliateCategory: 'hotels',
-    partnerName: 'Heritage Desert Stays [Placeholder]',
-    affiliateUrl: '#see-hotels-alula-placeholder',
+    partnerName: 'Booking.com Stays',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=AlUla',
     coordinates: { lat: 26.6167, lng: 37.9167 }
   },
   {
@@ -102,8 +102,8 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     highlights: ['Burj Khalifa Sky Deck Observation', 'Red Dunes Desert Safari & BBQ Dinner', 'Dubai Marina Luxury Sunset Dhow Cruise', 'Museum of the Future Interactive Entry'],
     bestTimeToVisit: 'Nov – Apr',
     affiliateCategory: 'hotels',
-    partnerName: 'Global Stays Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-dubai-placeholder',
+    partnerName: 'Booking.com & Aviasales',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Dubai',
     coordinates: { lat: 25.2048, lng: 55.2708 }
   },
   {
@@ -121,9 +121,9 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     description: 'Where continents converge across the glistening Bosphorus strait. Discover centuries of Ottoman and Byzantine majesty at the Blue Mosque and Hagia Sophia, savor authentic kebabs and Turkish tea, and explore the Grand Bazaar.',
     highlights: ['Hagia Sophia & Sultanahmet Blue Mosque', 'Bosphorus Sunset Sightseeing Cruise', 'Historic Grand Bazaar Spice Market', 'Topkapi Palace Ottoman Relics Tour'],
     bestTimeToVisit: 'Apr – May & Sep – Nov',
-    affiliateCategory: 'packages',
-    partnerName: 'Heritage Stays Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-istanbul-placeholder',
+    affiliateCategory: 'hotels',
+    partnerName: 'Booking.com & Aviasales',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Istanbul',
     coordinates: { lat: 41.0082, lng: 28.9784 }
   },
   {
@@ -141,9 +141,9 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     description: 'Southeast Asia\'s celebrated Muslim-friendly capital, famous for the sky-piercing Petronas Twin Towers, lush tropical city parks, certified halal street food markets on Jalan Alor, and incredible value luxury hotels.',
     highlights: ['Petronas Twin Towers Skybridge View', 'Batu Caves Limestone Temple Excursion', 'Jalan Alor Halal Street Food Trail', 'Bukit Bintang Modern Shopping District'],
     bestTimeToVisit: 'Dec – Feb & May – Aug',
-    affiliateCategory: 'packages',
-    partnerName: 'Southeast Asia Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-kl-placeholder',
+    affiliateCategory: 'hotels',
+    partnerName: 'Booking.com & Agoda',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Kuala+Lumpur',
     coordinates: { lat: 3.1390, lng: 101.6869 }
   },
   {
@@ -162,8 +162,8 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     highlights: ['17th-Century Mughal Lalbagh Fort', 'Pink Palace (Ahsan Manzil) Museum', 'Old Dhaka Authentic Kacchi Biryani Trail', 'Baitul Mukarram National Mosque Visit'],
     bestTimeToVisit: 'Nov – Feb (Mild Winter)',
     affiliateCategory: 'hotels',
-    partnerName: 'Regional Travel Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-dhaka-placeholder',
+    partnerName: 'Booking.com & Aviasales',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Dhaka',
     coordinates: { lat: 23.8103, lng: 90.4125 }
   },
   {
@@ -181,9 +181,9 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     description: 'A royal and historic metropolis blending ancient landmarks with thriving modern culture. Explore Big Ben, the Tower of London, world-class free museums, and an expansive selection of certified halal dining from Edgware Road to East London.',
     highlights: ['Westminster Abbey & Big Ben Walk', 'Tower Bridge & Thames River Stroll', 'British Museum & Free Galleries', 'Edgware Road & Whitechapel Halal Dining'],
     bestTimeToVisit: 'May – Sep',
-    affiliateCategory: 'flights',
-    partnerName: 'UK Stays Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-london-placeholder',
+    affiliateCategory: 'hotels',
+    partnerName: 'Booking.com & Aviasales',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=London',
     coordinates: { lat: 51.5074, lng: -0.1278 }
   },
   {
@@ -201,9 +201,9 @@ export const POPULAR_DESTINATIONS: Destination[] = [
     description: 'The iconic cultural metropolis that never sleeps. Marvel at the Manhattan skyline from Top of the Rock, walk Central Park\'s shaded avenues, catch Broadway productions, and enjoy legendary New York halal food carts on every major avenue.',
     highlights: ['Central Park & Fifth Avenue Stroll', 'Top of the Rock Skyline Observation', 'Times Square & Broadway Theatres', 'Famous NYC Halal Carts & Midtown Dining'],
     bestTimeToVisit: 'Apr – Jun & Sep – Nov',
-    affiliateCategory: 'flights',
-    partnerName: 'US Travel Partner [Placeholder]',
-    affiliateUrl: '#see-hotels-nyc-placeholder',
+    affiliateCategory: 'hotels',
+    partnerName: 'Booking.com & Aviasales',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=New+York',
     coordinates: { lat: 40.7128, lng: -74.0060 }
   }
 ];
@@ -226,8 +226,8 @@ export const FEATURED_DEALS: TravelDeal[] = [
     inclusions: ['4-Star Cliffside Resort', 'Daily Breakfast Buffet', 'Sunset Catamaran Cruise', 'Ferry Transfers Included'],
     accommodationType: 'Boutique Caldera Suites',
     validUntil: 'Limited Summer Season',
-    partnerName: 'Expedia Packages [Placeholder]',
-    affiliateUrl: '#see-packages-santorini-placeholder',
+    partnerName: 'Expedia & Booking.com',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Santorini',
     coordinates: { lat: 36.3932, lng: 25.4615 }
   },
   {
@@ -247,8 +247,8 @@ export const FEATURED_DEALS: TravelDeal[] = [
     inclusions: ['Beachfront Luxury Resort', 'Phi Phi Speedboat Snorkel', 'Elephant Sanctuary Visit', 'Airport VIP Transfers'],
     accommodationType: '5-Star Oceanfront Villa',
     validUntil: 'Ends in 48 Hours',
-    partnerName: 'Agoda VIP Stays [Placeholder]',
-    affiliateUrl: '#see-hotels-phuket-placeholder',
+    partnerName: 'Agoda Stays',
+    affiliateUrl: 'https://www.agoda.com/search?city=Phuket',
     coordinates: { lat: 7.8804, lng: 98.3923 }
   },
   {
@@ -268,8 +268,8 @@ export const FEATURED_DEALS: TravelDeal[] = [
     inclusions: ['7-Day JR Shinkansen Pass', 'Traditional Ryokan with Onsen', 'Guided Kyoto Bamboo Forest', 'English-Speaking Concierge'],
     accommodationType: 'Premium City Stays & Ryokan',
     validUntil: 'Autumn Booking Special',
-    partnerName: 'Viator & Booking.com [Placeholder]',
-    affiliateUrl: '#see-packages-japan-placeholder',
+    partnerName: 'Viator & Booking.com',
+    affiliateUrl: 'https://www.booking.com/searchresults.html?ss=Tokyo',
     coordinates: { lat: 35.0116, lng: 135.7681 }
   }
 ];
@@ -402,8 +402,8 @@ export const TRAVEL_EXPERIENCES: TravelExperience[] = [
     isFeatured: true,
     shortDesc: 'Sail past the volcanic Red and White beaches, swim in natural thermal hot springs, and savor freshly prepared Greek gourmet cuisine with local Assyrtiko wine.',
     highlights: ['Volcanic Hot Springs Swim', 'Greek BBQ Dinner Onboard', 'Open Bar with Local Wines', 'Round-trip Hotel Transport'],
-    partnerName: 'Viator Top Rated [Placeholder]',
-    affiliateUrl: '#see-experiences-santorini-placeholder',
+    partnerName: 'Viator Top Rated',
+    affiliateUrl: 'https://www.viator.com/searchResults/all?text=Santorini+Sunset+Catamaran',
     coordinates: { lat: 36.3932, lng: 25.4615 }
   },
   {
@@ -420,8 +420,8 @@ export const TRAVEL_EXPERIENCES: TravelExperience[] = [
     isFeatured: false,
     shortDesc: 'Soar like an eagle with an experienced pilot over turquoise Lake Brienz and the majestic snow-capped peaks of the Eiger, Mönch and Jungfrau.',
     highlights: ['Certified Tandem Pilot', 'All Safety Gear Provided', 'GoPro HD Photo/Video Package Available', 'Breathtaking 360° Alpine Panorama'],
-    partnerName: 'GetYourGuide [Placeholder]',
-    affiliateUrl: '#see-experiences-swiss-placeholder',
+    partnerName: 'GetYourGuide',
+    affiliateUrl: 'https://www.getyourguide.com/s/?q=Interlaken+Paragliding',
     coordinates: { lat: 46.6863, lng: 7.8632 }
   },
   {
@@ -438,8 +438,8 @@ export const TRAVEL_EXPERIENCES: TravelExperience[] = [
     isFeatured: false,
     shortDesc: 'Thrilling 4x4 dune bashing in Lahbab Desert, camel riding, sandboarding, falconry, fire dancers, and an authentic Arabian buffet dinner under the desert stars.',
     highlights: ['4x4 Dune Bashing on Red Dunes', 'Camel Ride & Sandboarding', 'Tanoura Dance & Fire Show', 'Five-Star BBQ Buffet'],
-    partnerName: 'Viator Exclusive [Placeholder]',
-    affiliateUrl: '#see-experiences-dubai-placeholder',
+    partnerName: 'Viator Exclusive',
+    affiliateUrl: 'https://www.viator.com/searchResults/all?text=Dubai+Red+Dune+Desert+Safari',
     coordinates: { lat: 25.2048, lng: 55.2708 }
   },
   {
@@ -456,8 +456,8 @@ export const TRAVEL_EXPERIENCES: TravelExperience[] = [
     isFeatured: false,
     shortDesc: 'Escape the crowds in a serene private bamboo grove followed by an authentic matcha tea preparation led by an experienced Urasenke master.',
     highlights: ['Private Garden Access', 'Authentic Matcha Preparation', 'Historical Temple Guide', 'Traditional Wagashi Sweets'],
-    partnerName: 'GetYourGuide [Placeholder]',
-    affiliateUrl: '#see-experiences-kyoto-placeholder',
+    partnerName: 'GetYourGuide',
+    affiliateUrl: 'https://www.getyourguide.com/s/?q=Kyoto+Tea+Ceremony+Bamboo',
     coordinates: { lat: 35.0116, lng: 135.7681 }
   }
 ];

@@ -83,6 +83,26 @@ const FLIGHT_DEALS: FlightDeal[] = [
     features: ['Non-stop flight', 'In-flight prayer area & announcement', '2x 23kg luggage']
   },
   {
+    id: 'fl-medina-iah',
+    originCity: 'Houston George Bush',
+    originCode: 'IAH',
+    destinationCity: 'Madinah (Prince Mohammad)',
+    destinationCode: 'MED',
+    country: 'Saudi Arabia',
+    airline: 'Qatar Airways / Turkish Airlines / Saudia',
+    flightType: '1 Stop',
+    duration: '16h 40m',
+    priceUSD: 740,
+    category: 'umrah',
+    badge: 'Top US Pilgrim Route',
+    features: [
+      '1-stop smooth connection to Madinah',
+      'Complimentary 5L Zamzam container',
+      'Includes 2x 23kg checked baggage',
+      'In-flight Halal dining & prayer alerts'
+    ]
+  },
+  {
     id: 'fl-medina-dxb',
     originCity: 'Dubai Intl',
     originCode: 'DXB',
@@ -272,12 +292,24 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
 
   const filteredDeals = FLIGHT_DEALS.filter((deal) => {
     if (selectedCategory === 'all') return true;
+    if (selectedCategory === 'europe' && (deal.category === 'europe' || deal.category === 'americas' || deal.originCode === 'IAH' || deal.originCode === 'JFK')) {
+      return true;
+    }
     return deal.category === selectedCategory;
   });
 
   const handleBookFlight = (deal: FlightDeal) => {
     const affiliateUrl = buildAviasalesRouteUrl(deal.originCode, deal.destinationCode);
-    window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
+    if (onBookAffiliate) {
+      onBookAffiliate({
+        title: `${deal.originCity} (${deal.originCode}) to ${deal.destinationCity} (${deal.destinationCode})`,
+        partnerName: 'Aviasales Verified Flights',
+        affiliateUrl,
+        price: formatPrice(deal.priceUSD)
+      });
+    } else {
+      window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (

@@ -72,6 +72,20 @@ const POPULAR_FLIGHT_ROUTES: FlightRouteDeal[] = [
     isPilgrimRoute: true
   },
   {
+    id: 'route-iah-medina',
+    fromCity: 'Houston',
+    fromCode: 'IAH',
+    toCity: 'Madinah (Prince Mohammad)',
+    toCode: 'MED',
+    country: 'Saudi Arabia',
+    airline: 'Qatar Airways / Turkish Airlines / Saudia',
+    flightType: '1 Stop',
+    duration: '16h 40m',
+    startingPriceUSD: 740,
+    badge: 'US Pilgrim Route',
+    isPilgrimRoute: true
+  },
+  {
     id: 'route-dubai',
     fromCity: 'London',
     fromCode: 'LHR',
@@ -145,7 +159,16 @@ export const FlightsSection: React.FC<FlightsSectionProps> = ({
 
   const handleRouteClick = (route: FlightRouteDeal) => {
     const affiliateUrl = buildAviasalesRouteUrl(route.fromCode, route.toCode);
-    window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
+    if (onBookAffiliate) {
+      onBookAffiliate({
+        title: `${route.fromCity} (${route.fromCode}) to ${route.toCity} (${route.toCode})`,
+        partnerName: 'Aviasales Verified Flights',
+        affiliateUrl,
+        price: formatPrice(route.startingPriceUSD)
+      });
+    } else {
+      window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (

@@ -32,6 +32,8 @@ const KNOWN_IATA_MAP: Record<string, string> = {
   toronto: 'YYZ',
   chicago: 'ORD',
   losangeles: 'LAX',
+  houston: 'IAH',
+  iah: 'IAH',
   bangkok: 'BKK',
   delhi: 'DEL',
   mumbai: 'BOM',
@@ -51,14 +53,14 @@ export function resolveIataCode(input: string, defaultCode = 'LHR'): string {
   // 1. If multiple codes like "JFK / LHR", take the first segment
   const firstPart = input.split('/')[0].trim();
 
-  // 2. Check for parenthesized code, e.g. "Jeddah (JED)" or "London (LHR)"
-  const parenMatch = firstPart.match(/\(([A-Z]{3})\)/);
-  if (parenMatch) return parenMatch[1];
+  // 2. Check for parenthesized code, e.g. "Jeddah (JED)" or "Houston (iah)"
+  const parenMatch = firstPart.match(/\(([A-Za-z]{3})\)/);
+  if (parenMatch) return parenMatch[1].toUpperCase();
 
-  // 3. Check for standalone uppercase 3-letter code
-  const codeMatch = firstPart.match(/\b([A-Z]{3})\b/);
+  // 3. Check for standalone 3-letter code (case-insensitive, e.g. "iah", "IAH", "med")
+  const codeMatch = firstPart.match(/\b([A-Za-z]{3})\b/);
   if (codeMatch && codeMatch[1].length === 3) {
-    return codeMatch[1];
+    return codeMatch[1].toUpperCase();
   }
 
   // 4. Fuzzy map against known cities

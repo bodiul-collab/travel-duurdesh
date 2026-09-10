@@ -17,6 +17,7 @@ import {
   ExternalLink,
   Info
 } from 'lucide-react';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface PrivacyPolicyPageProps {
   onNavigate?: (pageId: string) => void;
@@ -27,16 +28,12 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
     <div className="py-8 sm:py-12 bg-[#F8FAFC]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-[#5E6B82]">
-          <button
-            onClick={() => onNavigate?.('home')}
-            className="hover:text-[#0969E8] transition-colors cursor-pointer"
-          >
-            Home
-          </button>
-          <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-          <span className="text-[#071B49] font-bold">Privacy Policy</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'Home', onClick: () => onNavigate?.('home') },
+            { label: 'Privacy Policy' }
+          ]}
+        />
 
         {/* 1. Page Title & Intro */}
         <header className="relative bg-gradient-to-br from-[#071B49] via-[#0D2A68] to-[#0969E8] text-white rounded-3xl p-8 sm:p-12 overflow-hidden shadow-lg space-y-6">
@@ -54,16 +51,16 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
 
             <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-white/80 pt-1">
               <span className="bg-white/15 px-3 py-1 rounded-full font-medium">
-                Last Updated: September 5, 2026
+                Last Updated: September 2026
               </span>
               <span className="bg-white/15 px-3 py-1 rounded-full font-medium">
-                Applies to: travelduurdesh.ai.studio
+                Applies to: travelduurdesh.com
               </span>
             </div>
 
             <div className="space-y-3 text-white/90 text-sm sm:text-base leading-relaxed pt-2">
               <p>
-                This Privacy Policy describes how <strong>Travel DuurDesh</strong> collects, uses, and protects user information when you visit, browse, or interact with our platform. This policy applies to all visitors and users of <strong>travelduurdesh.ai.studio</strong>.
+                This Privacy Policy describes how <strong>Travel DuurDesh</strong> collects, uses, and protects user information when you visit, browse, or interact with our platform. This policy applies to all visitors and users of <strong>travelduurdesh.com</strong>.
               </p>
               <p>
                 At Travel DuurDesh, our commitment to transparency, user privacy, and ethical digital stewardship is paramount. We believe every global traveler deserves clear, unambiguous information about how their data is handled, stored, and protected as they plan journeys, research flights and hotels, discover authentic halal cuisine, or organize sacred Umrah pilgrimages.
@@ -562,7 +559,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
                 </div>
                 <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#071B49]">
                   <Compass className="w-4 h-4 text-[#0969E8]" />
-                  <span>Platform: <strong>Travel DuurDesh (travelduurdesh.ai.studio)</strong></span>
+                  <span>Platform: <strong>Travel DuurDesh (travelduurdesh.com)</strong></span>
                 </div>
                 <p className="text-xs text-[#475569] pt-1">
                   For privacy questions, please reach out through our{' '}
@@ -570,7 +567,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
                     onClick={() => onNavigate?.('contact')}
                     className="text-[#0969E8] font-bold hover:underline cursor-pointer"
                   >
-                    [See Contact Page]
+                    Contact Us page
                   </button>
                   .
                 </p>
@@ -591,17 +588,17 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
               </div>
 
               <div className="text-xs font-semibold text-[#5E6B82]">
-                Last Updated: September 5, 2026
+                Last Updated: September 2026
               </div>
             </div>
 
-            {/* Quick Internal Navigation Placeholders Only */}
+            {/* Quick Internal Navigation */}
             <div className="flex flex-wrap gap-2.5 pt-1">
               <button
-                onClick={() => onNavigate?.('home')}
+                onClick={() => onNavigate?.('about')}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0969E8] hover:text-[#071B49] bg-[#F8FAFC] hover:bg-[#EDF2F7] border border-gray-200 px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
               >
-                <span>About Travel DuurDesh</span>
+                <span>About Us</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
 
@@ -609,7 +606,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
                 onClick={() => onNavigate?.('contact')}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0969E8] hover:text-[#071B49] bg-[#F8FAFC] hover:bg-[#EDF2F7] border border-gray-200 px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
               >
-                <span>[See Contact Page]</span>
+                <span>Contact Us</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
 
@@ -617,7 +614,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
                 onClick={() => onNavigate?.('destinations')}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0969E8] hover:text-[#071B49] bg-[#F8FAFC] hover:bg-[#EDF2F7] border border-gray-200 px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
               >
-                <span>[See Destinations Page]</span>
+                <span>Destinations</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
 
@@ -625,7 +622,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
                 onClick={() => onNavigate?.('tools')}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0969E8] hover:text-[#071B49] bg-[#F8FAFC] hover:bg-[#EDF2F7] border border-gray-200 px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
               >
-                <span>[See Travel Tools]</span>
+                <span>Travel Tools</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
 
@@ -633,7 +630,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
                 onClick={() => onNavigate?.('umrah')}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0969E8] hover:text-[#071B49] bg-[#F8FAFC] hover:bg-[#EDF2F7] border border-gray-200 px-3.5 py-2 rounded-xl transition-colors cursor-pointer"
               >
-                <span>[Visit Umrah Guide]</span>
+                <span>Umrah Guide</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>

@@ -4,74 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Travel DuurDesh | Global Travel, Umrah Pilgrims, Flights, Hotels & Halal Food Guides</title>
-    <meta name="description" content="Welcome to Travel DuurDesh. Discover global travel guides, specialized Umrah pilgrimage guidance, flight and hotel comparisons, authentic halal food, and smart travel tools." />
+    <meta name="description" content="Welcome to Travel DuurDesh: Discover global travel guides, specialized Umrah pilgrimage guidance, flight and hotel comparisons, authentic halal food, and smart travel tools." />
+    <link rel="canonical" href="https://travelduurdesh.com/" />
     <meta property="og:title" content="Travel DuurDesh | Global Travel, Umrah Pilgrims, Flights, Hotels & Halal Food Guides" />
-    <meta property="og:description" content="Welcome to Travel DuurDesh. Discover global travel guides, specialized Umrah pilgrimage guidance, flight and hotel comparisons, authentic halal food, and smart travel tools." />
+    <meta property="og:description" content="Welcome to Travel DuurDesh: Discover global travel guides, specialized Umrah pilgrimage guidance, flight and hotel comparisons, authentic halal food, and smart travel tools." />
+    <meta property="og:url" content="https://travelduurdesh.com/" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Travel DuurDesh" />
+    <meta property="og:image" content="https://travelduurdesh.com/og-image.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Travel DuurDesh | Global Travel, Umrah Pilgrims, Flights, Hotels & Halal Food Guides" />
+    <meta name="twitter:description" content="Welcome to Travel DuurDesh: Discover global travel guides, specialized Umrah pilgrimage guidance, flight and hotel comparisons, authentic halal food, and smart travel tools." />
+    <meta name="twitter:image" content="https://travelduurdesh.com/og-image.jpg" />
+    <script type="application/ld+json" id="schema-structured-data">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://travelduurdesh.com/#organization",
+            "name": "Travel DuurDesh",
+            "url": "https://travelduurdesh.com",
+            "logo": "https://travelduurdesh.com/favicon.svg",
+            "email": "contact@travelduurdesh.com",
+            "description": "Global travel companion, dedicated Umrah pilgrimage guides, flight and hotel comparison, authentic halal culinary directory, and interactive trip utilities."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://travelduurdesh.com/#website",
+            "name": "Travel DuurDesh",
+            "url": "https://travelduurdesh.com",
+            "inLanguage": "en",
+            "publisher": {
+              "@id": "https://travelduurdesh.com/#organization"
+            },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://travelduurdesh.com/#destinations",
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    </script>
     <script>
-      // Defensive error handling to prevent external third-party widgets or cross-origin scripts from throwing uncaught errors
-      window.addEventListener('error', function(event) {
-        if (!event.message || event.message === 'Script error.' || (event.filename && (event.filename.indexOf('tpwdg.com') !== -1 || event.filename.indexOf('translate.google') !== -1))) {
-          event.preventDefault();
-          return true;
-        }
-      });
-      window.addEventListener('unhandledrejection', function(event) {
-        if (!event.reason || !event.reason.message) {
-          event.preventDefault();
-        }
-      });
-
-      // Defensive polyfill for window.fetch to allow property assignment in sandboxed iframes
+      // 1. Critical fetch setter & getter protection for sandboxed iframes & external scripts
       // Prevents "Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter"
       (function() {
         try {
           if (typeof window !== 'undefined' && 'fetch' in window) {
             var nativeFetch = window.fetch;
-            if (nativeFetch) {
-              var boundFetch = nativeFetch.bind(window);
-              var activeFetch = boundFetch;
-              try {
-                Object.defineProperty(window, 'fetch', {
-                  configurable: true,
-                  enumerable: true,
-                  writable: true,
-                  value: boundFetch
-                });
-              } catch (e1) {
-                try {
-                  Object.defineProperty(window, 'fetch', {
-                    configurable: true,
-                    enumerable: true,
-                    get: function() {
-                      return activeFetch;
-                    },
-                    set: function(newFetch) {
-                      activeFetch = newFetch;
-                    }
-                  });
-                } catch (e2) {
-                  try {
-                    var proto = Object.getPrototypeOf(window);
-                    if (proto) {
-                      Object.defineProperty(proto, 'fetch', {
-                        configurable: true,
-                        enumerable: true,
-                        get: function() {
-                          return activeFetch;
-                        },
-                        set: function(newFetch) {
-                          activeFetch = newFetch;
-                        }
-                      });
-                    }
-                  } catch (e3) {}
-                }
+            var activeFetch = typeof nativeFetch === 'function' ? nativeFetch.bind(window) : nativeFetch;
+
+            var getFetch = function() {
+              return activeFetch;
+            };
+            var setFetch = function(newFetch) {
+              if (typeof newFetch === 'function') {
+                activeFetch = newFetch;
               }
+            };
+
+            // Explicitly define on Window.prototype (where fetch getter resides in modern browsers)
+            if (typeof Window !== 'undefined' && Window.prototype) {
+              try {
+                Object.defineProperty(Window.prototype, 'fetch', {
+                  get: getFetch,
+                  set: setFetch,
+                  configurable: true,
+                  enumerable: true
+                });
+              } catch (eProto) {}
+            }
+
+            // Walk prototype chain of window and ensure every prototype level has the setter
+            var target = window;
+            while (target) {
+              try {
+                var desc = Object.getOwnPropertyDescriptor(target, 'fetch');
+                if (desc || target === window) {
+                  Object.defineProperty(target, 'fetch', {
+                    get: getFetch,
+                    set: setFetch,
+                    configurable: true,
+                    enumerable: true
+                  });
+                }
+              } catch (eDesc) {}
+              target = Object.getPrototypeOf(target);
             }
           }
         } catch (globalErr) {}
+
+        // Global defensive error handling to prevent third-party scripts/widgets from breaking runtime
+        try {
+          window.addEventListener('error', function(event) {
+            var msg = event && event.message ? String(event.message) : '';
+            if (
+              !msg ||
+              msg === 'Script error.' ||
+              msg.indexOf('fetch') !== -1 ||
+              (event.filename && (event.filename.indexOf('tpwdg.com') !== -1 || event.filename.indexOf('translate.google') !== -1))
+            ) {
+              event.preventDefault();
+              if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+              return true;
+            }
+          }, true);
+
+          window.addEventListener('unhandledrejection', function(event) {
+            var reason = event && event.reason;
+            var msg = (reason && reason.message) ? String(reason.message) : (typeof reason === 'string' ? reason : '');
+            if (!msg || msg.indexOf('fetch') !== -1) {
+              event.preventDefault();
+            }
+          });
+
+          var prevOnError = window.onerror;
+          window.onerror = function(message, source, lineno, colno, error) {
+            var msg = message ? String(message) : '';
+            if (msg.indexOf('fetch') !== -1 && msg.indexOf('getter') !== -1) {
+              return true;
+            }
+            if (prevOnError) {
+              return prevOnError.apply(this, arguments);
+            }
+            return false;
+          };
+        } catch (eHandler) {}
+
+        // Preferred canonical domain enforcement (ensures www does not cause duplicate indexing)
+        try {
+          if (typeof window !== 'undefined' && window.location.hostname === 'www.travelduurdesh.com') {
+            window.location.replace('https://travelduurdesh.com' + window.location.pathname + window.location.search + window.location.hash);
+          }
+        } catch (eCanonical) {}
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">

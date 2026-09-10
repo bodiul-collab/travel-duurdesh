@@ -4,13 +4,14 @@ import {
   ExternalLink,
   ShieldCheck,
   Sparkles,
-  Calendar,
   Users,
   Search,
   ArrowRightLeft,
   ChevronDown
 } from 'lucide-react';
 import { buildAviasalesRouteUrl } from '../utils/aviasales';
+import { LocationAutocompleteInput } from './LocationAutocompleteInput';
+import { DatePickerPopover } from './DatePickerPopover';
 
 interface AviasalesWidgetProps {
   className?: string;
@@ -28,8 +29,16 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
   const [tripType, setTripType] = useState<'round' | 'oneWay'>('round');
   const [origin, setOrigin] = useState('London (LHR)');
   const [destination, setDestination] = useState('Jeddah (JED)');
-  const [departDate, setDepartDate] = useState('2026-09-20');
-  const [returnDate, setReturnDate] = useState('2026-10-05');
+  const [departDate, setDepartDate] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 7);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  });
+  const [returnDate, setReturnDate] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 14);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  });
   const [passengers, setPassengers] = useState(1);
   const [cabinClass, setCabinClass] = useState('Economy');
 
@@ -176,28 +185,24 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
           </div>
 
           {/* Search Inputs Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-end">
             {/* Origin */}
-            <div className="lg:col-span-3 bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 focus-within:border-[#0969E8] focus-within:bg-white transition-all">
-              <label className="block text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">From</label>
-              <div className="flex items-center gap-1.5">
-                <Plane className="w-4 h-4 text-[#0969E8] shrink-0" />
-                <input
-                  type="text"
-                  value={origin}
-                  onChange={(e) => setOrigin(e.target.value)}
-                  placeholder="City or Airport (e.g. London LHR)"
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#071B49] border-none p-0 focus:outline-none focus:ring-0"
-                />
-              </div>
+            <div className="lg:col-span-3">
+              <LocationAutocompleteInput
+                label="From"
+                value={origin}
+                onChange={(val) => setOrigin(val)}
+                placeholder="Airport code or city (e.g. LHR, JFK)"
+                isDestination={false}
+              />
             </div>
 
             {/* Swap Button */}
-            <div className="hidden lg:flex lg:col-span-1 justify-center -mx-2 z-10">
+            <div className="hidden lg:flex lg:col-span-1 justify-center -mx-2 z-10 pb-2">
               <button
                 type="button"
                 onClick={handleSwapAirports}
-                className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-[#5E6B82] hover:text-[#0969E8] hover:border-[#0969E8] transition-colors"
+                className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-[#5E6B82] hover:text-[#0969E8] hover:border-[#0969E8] transition-colors cursor-pointer"
                 title="Swap origin and destination"
               >
                 <ArrowRightLeft className="w-3.5 h-3.5" />
@@ -205,48 +210,39 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
             </div>
 
             {/* Destination */}
-            <div className="lg:col-span-3 bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 focus-within:border-[#0969E8] focus-within:bg-white transition-all">
-              <label className="block text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">To Destination</label>
-              <div className="flex items-center gap-1.5">
-                <Plane className="w-4 h-4 text-[#21B96F] shrink-0 rotate-45" />
-                <input
-                  type="text"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  placeholder="City or Airport (e.g. Jeddah JED)"
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#071B49] border-none p-0 focus:outline-none focus:ring-0"
-                />
-              </div>
+            <div className="lg:col-span-3">
+              <LocationAutocompleteInput
+                label="To Destination"
+                value={destination}
+                onChange={(val) => setDestination(val)}
+                placeholder="Airport code or city (e.g. JED, MED)"
+                isDestination={true}
+              />
             </div>
 
             {/* Dates */}
             <div className="lg:col-span-3 grid grid-cols-2 gap-2">
-              <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 focus-within:border-[#0969E8] focus-within:bg-white transition-all">
-                <label className="block text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">Depart</label>
-                <div className="flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                  <input
-                    type="date"
-                    value={departDate}
-                    onChange={(e) => setDepartDate(e.target.value)}
-                    className="w-full bg-transparent text-xs font-semibold text-[#071B49] border-none p-0 focus:outline-none focus:ring-0"
-                  />
-                </div>
-              </div>
+              <DatePickerPopover
+                label="Depart"
+                value={departDate}
+                onChange={(val) => {
+                  setDepartDate(val);
+                  if (returnDate && returnDate < val) {
+                    const next = new Date(val);
+                    next.setDate(next.getDate() + 7);
+                    const nextStr = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}-${String(next.getDate()).padStart(2, '0')}`;
+                    setReturnDate(nextStr);
+                  }
+                }}
+              />
 
               {tripType === 'round' ? (
-                <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 focus-within:border-[#0969E8] focus-within:bg-white transition-all">
-                  <label className="block text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">Return</label>
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                    <input
-                      type="date"
-                      value={returnDate}
-                      onChange={(e) => setReturnDate(e.target.value)}
-                      className="w-full bg-transparent text-xs font-semibold text-[#071B49] border-none p-0 focus:outline-none focus:ring-0"
-                    />
-                  </div>
-                </div>
+                <DatePickerPopover
+                  label="Return"
+                  value={returnDate}
+                  minDate={departDate}
+                  onChange={(val) => setReturnDate(val)}
+                />
               ) : (
                 <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 focus-within:border-[#0969E8] focus-within:bg-white transition-all">
                   <label className="block text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">Travelers</label>
@@ -284,6 +280,7 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
           <div className="flex flex-wrap items-center gap-1.5 text-xs text-[#5E6B82] pt-1">
             <span className="font-semibold text-[#071B49]">Popular Quick Searches:</span>
             {[
+              { origin: 'Houston (IAH)', dest: 'Madinah (MED)', label: '✈️ Houston (IAH) → Madinah' },
               { origin: 'London (LHR)', dest: 'Jeddah (JED)', label: 'London → Jeddah' },
               { origin: 'New York (JFK)', dest: 'Madinah (MED)', label: 'NYC → Madinah' },
               { origin: 'Dubai (DXB)', dest: 'Istanbul (IST)', label: 'Dubai → Istanbul' },

@@ -32,6 +32,9 @@ import { LondonCityGuide } from './destinations/LondonCityGuide';
 import { KualaLumpurCityGuide } from './destinations/KualaLumpurCityGuide';
 import { DhakaCityGuide } from './destinations/DhakaCityGuide';
 
+import { Breadcrumbs } from './Breadcrumbs';
+import { DESTINATION_SEO, SEO_PAGES, applySEO } from '../utils/seo';
+
 export type DestinationKey =
   | 'bangladesh'
   | 'malaysia'
@@ -118,9 +121,30 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
     { id: 'dhaka', name: 'Dhaka', tag: 'Bangladesh', icon: '🏛️' },
   ];
 
+  const allGuides = [...countryGuides, ...cityGuides];
+  const activeGuideObj = allGuides.find((g) => g.id === activeDestination);
+  const activeGuideName = activeGuideObj?.name || 'Guide';
+
+  useEffect(() => {
+    if (DESTINATION_SEO[activeDestination]) {
+      applySEO(DESTINATION_SEO[activeDestination]);
+    } else {
+      applySEO(SEO_PAGES.destinations);
+    }
+  }, [activeDestination]);
+
   return (
     <div className="py-8 sm:py-12 bg-[#F8FAFC]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumbs
+          items={[
+            { label: 'Home', onClick: () => onNavigate('home') },
+            { label: 'Destinations', onClick: () => handleSelectDestination('bangladesh') },
+            { label: activeGuideName }
+          ]}
+        />
+
         {/* Navigation / Switcher Bar */}
         <div className="bg-white rounded-3xl p-5 sm:p-6 border border-gray-200 shadow-sm space-y-5">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-4">
