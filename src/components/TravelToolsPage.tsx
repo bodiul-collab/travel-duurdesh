@@ -1390,7 +1390,7 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
               <ExternalLink className="w-3.5 h-3.5 opacity-80" />
             </a>
             <a
-              href="https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click"
+              href="https://c120.travelpayouts.com/click?shmarker=737968&promo_id=3665&source_type=link&type=click"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl border border-white/20 transition-colors cursor-pointer inline-flex items-center gap-1.5"

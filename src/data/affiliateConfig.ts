@@ -103,10 +103,13 @@ export const AFFILIATE_CONFIG = {
     airhelp: {
       name: 'AirHelp',
       category: 'Flight Delay & Cancellation Compensation',
-      baseUrl: 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click',
+      baseUrl: 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=3665&source_type=link&type=click',
+      claimFunnelUrl:
+        'https://funnel.airhelp.com/claims/new/trip-details?lang=en&utm_source=pap&utm_medium=affiliate&utm_campaign=aff-Travelpayouts&a_aid=Travelpayouts&a_bid=12eefaac&partner_id=Travelpayouts&data5=737968',
       marker: '737968',
       campaignId: '120',
       promoId: '8679',
+      linkPromoId: '3665',
       trs: '570661',
       widgetScriptSrc:
         'https://tpwdg.com/content?trs=570661&shmarker=737968&lang=en&powered_by=true&campaign_id=120&promo_id=8679',
@@ -124,7 +127,7 @@ export const AFFILIATE_CONFIG = {
     experiences: 'https://www.viator.com',
     esim: 'https://tp.media/r?p=8588&marker=737968&trs=570661&u=https%3A%2F%2Fwww.airalo.com',
     insurance: 'https://ektatraveling.tpx.gr/uNlKi2Qe',
-    compensation: 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click'
+    compensation: 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=3665&source_type=link&type=click'
   }
 };
 
@@ -142,6 +145,8 @@ export function buildAffiliateUrl(
     guests?: number;
     category?: string;
     query?: string;
+    departure?: string;
+    arrival?: string;
   }
 ): string {
   const dest = params?.destination || params?.query || '';
@@ -197,7 +202,10 @@ export function buildAffiliateUrl(
     partnerKey === 'compensation' ||
     params?.category === 'compensation'
   ) {
-    return 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click';
+    if (params?.departure && params?.arrival) {
+      return `https://funnel.airhelp.com/claims/new/trip-details?lang=en&utm_source=pap&utm_medium=affiliate&utm_campaign=aff-Travelpayouts&a_aid=Travelpayouts&a_bid=12eefaac&partner_id=Travelpayouts&data5=737968&departureAirportIata=${encodeURIComponent(params.departure.toUpperCase())}&arrivalAirportIata=${encodeURIComponent(params.arrival.toUpperCase())}`;
+    }
+    return 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=3665&source_type=link&type=click';
   }
 
   // Hotels (Booking.com & Agoda)
