@@ -34,7 +34,7 @@ import { FavoritesDrawer } from './components/FavoritesDrawer';
 import { ArticleModal } from './components/ArticleModal';
 import { SearchResultsModal } from './components/SearchResultsModal';
 import { LanguageModal } from './components/LanguageModal';
-import { buildAviasalesRouteUrl } from './utils/aviasales';
+import { buildAviasalesRouteUrl, buildAviasalesMultiCityUrl } from './utils/aviasales';
 import { initGoogleTranslate, applyGoogleLanguageChange } from './utils/googleTranslate';
 import {
   getInitialCurrency,
@@ -215,21 +215,36 @@ export default function App() {
   const handleSearchSubmit = (newSearchState: SearchFilterState) => {
     setSearchState(newSearchState);
     if (newSearchState.tab === 'flights') {
+      const isMulti = newSearchState.tripType === 'multiCity' && newSearchState.multiLegs && newSearchState.multiLegs.length > 0;
       const fromLoc = newSearchState.fromLocation || 'Houston (IAH)';
       const toLoc = newSearchState.toLocation || 'Madinah (MED)';
-      const affiliateUrl = buildAviasalesRouteUrl(fromLoc, toLoc, {
-        departDate: newSearchState.checkInDate,
-        returnDate: newSearchState.checkOutDate,
-        passengers: newSearchState.adults + newSearchState.children,
-        cabinClass:
-          newSearchState.cabinClass === 'Business'
-            ? 'c'
-            : newSearchState.cabinClass === 'First'
-            ? 'f'
-            : newSearchState.cabinClass === 'Premium Economy'
-            ? 'w'
-            : 'y'
-      });
+
+      const affiliateUrl = isMulti
+        ? buildAviasalesMultiCityUrl(newSearchState.multiLegs!, {
+            passengers: newSearchState.adults + newSearchState.children,
+            cabinClass:
+              newSearchState.cabinClass === 'Business'
+                ? 'c'
+                : newSearchState.cabinClass === 'First'
+                ? 'f'
+                : newSearchState.cabinClass === 'Premium Economy'
+                ? 'w'
+                : 'y'
+          })
+        : buildAviasalesRouteUrl(fromLoc, toLoc, {
+            departDate: newSearchState.checkInDate,
+            returnDate: newSearchState.tripType === 'oneWay' ? undefined : newSearchState.checkOutDate,
+            isOneWay: newSearchState.tripType === 'oneWay',
+            passengers: newSearchState.adults + newSearchState.children,
+            cabinClass:
+              newSearchState.cabinClass === 'Business'
+                ? 'c'
+                : newSearchState.cabinClass === 'First'
+                ? 'f'
+                : newSearchState.cabinClass === 'Premium Economy'
+                ? 'w'
+                : 'y'
+          });
 
       // Directly open the official partner landing page for destination flight results
       try {
@@ -240,7 +255,9 @@ export default function App() {
 
       // Show transparent partner portal redirect with direct action
       handleTriggerAffiliate({
-        title: `${fromLoc} to ${toLoc}`,
+        title: isMulti
+          ? `Multi-City Route (${newSearchState.multiLegs!.length} Flights)`
+          : `${fromLoc} to ${toLoc}`,
         partnerName: 'Aviasales Verified Flights',
         affiliateUrl,
         price: 'Live Airfare Rates'

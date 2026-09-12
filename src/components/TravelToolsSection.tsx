@@ -12,12 +12,18 @@ import {
   Users,
   Compass,
   Smartphone,
-  Wifi
+  Wifi,
+  ShieldCheck,
+  ExternalLink,
+  Car,
+  Scale
 } from 'lucide-react';
 import { CURRENCIES } from '../data/travelData';
 import { CurrencyConfig } from '../types';
 import { TravelEsimWidget } from './TravelEsimWidget';
 import { LiveWeatherTool } from './LiveWeatherTool';
+import { CarRentalWidget } from './CarRentalWidget';
+import { FlightCompensationWidget } from './FlightCompensationWidget';
 
 interface TravelToolsSectionProps {
   currentCurrency: CurrencyConfig;
@@ -30,7 +36,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
   onCurrencyChange,
   onNavigate
 }) => {
-  const [activeTool, setActiveTool] = useState<'converter' | 'budget' | 'weather' | 'visa' | 'esim'>('converter');
+  const [activeTool, setActiveTool] = useState<'converter' | 'budget' | 'weather' | 'visa' | 'esim' | 'insurance' | 'carRental' | 'compensation'>('converter');
 
   // Currency Converter State
   const [amount, setAmount] = useState<number>(100);
@@ -96,8 +102,8 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
           )}
         </div>
 
-        {/* 5 Tool Category Selector Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-4xl mx-auto mb-8">
+        {/* 8 Tool Category Selector Tabs */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 max-w-7xl mx-auto mb-8">
           <button
             onClick={() => setActiveTool('converter')}
             className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
@@ -107,7 +113,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             }`}
           >
             <ArrowRightLeft className="w-4 h-4 text-[#4DA3FF]" />
-            <span>Currency Converter</span>
+            <span>Currency</span>
           </button>
 
           <button
@@ -119,7 +125,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             }`}
           >
             <DollarSign className="w-4 h-4 text-[#21B96F]" />
-            <span>Budget Calculator</span>
+            <span>Budget</span>
           </button>
 
           <button
@@ -131,7 +137,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             }`}
           >
             <CloudSun className="w-4 h-4 text-[#FFB800]" />
-            <span>Weather Guide</span>
+            <span>Weather</span>
           </button>
 
           <button
@@ -155,9 +161,54 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             }`}
           >
             <Smartphone className="w-4 h-4 text-[#32a8dd]" />
-            <span>Travel eSIM</span>
+            <span>eSIM</span>
             <span className="hidden sm:inline-block text-[9px] font-bold uppercase tracking-wider bg-[#32a8dd]/20 text-[#0969E8] px-1.5 py-0.5 rounded">
               Airalo
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTool('insurance')}
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer relative ${
+              activeTool === 'insurance'
+                ? 'bg-[#071B49] text-white shadow-sm'
+                : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
+            }`}
+          >
+            <ShieldCheck className="w-4 h-4 text-[#21B96F]" />
+            <span>Insurance</span>
+            <span className="hidden sm:inline-block text-[9px] font-bold uppercase tracking-wider bg-[#21B96F]/20 text-[#21B96F] px-1.5 py-0.5 rounded">
+              EKTA
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTool('carRental')}
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer relative ${
+              activeTool === 'carRental'
+                ? 'bg-[#071B49] text-white shadow-sm'
+                : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
+            }`}
+          >
+            <Car className="w-4 h-4 text-[#FF8A2A]" />
+            <span>Car Hire</span>
+            <span className="hidden sm:inline-block text-[9px] font-bold uppercase tracking-wider bg-[#FF8A2A]/20 text-[#D97706] px-1.5 py-0.5 rounded">
+              Economy
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTool('compensation')}
+            className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer relative ${
+              activeTool === 'compensation'
+                ? 'bg-[#071B49] text-white shadow-sm'
+                : 'bg-white text-[#475569] hover:text-[#071B49] hover:bg-white/80'
+            }`}
+          >
+            <Scale className="w-4 h-4 text-[#0969E8]" />
+            <span>Flight Claim</span>
+            <span className="hidden sm:inline-block text-[9px] font-bold uppercase tracking-wider bg-[#0969E8]/20 text-[#0969E8] px-1.5 py-0.5 rounded">
+              AirHelp
             </span>
           </button>
         </div>
@@ -399,10 +450,109 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             />
           )}
 
+          {/* Tool 6: EKTA Travel & Medical Insurance */}
+          {activeTool === 'insurance' && (
+            <div className="space-y-6">
+              <div className="border-b border-[#F1F5F9] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-[#071B49]">Worldwide Travel & Medical Insurance</h3>
+                    <span className="bg-[#21B96F]/10 text-[#21B96F] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      EKTA Traveling
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-[#64748B] mt-1">
+                    Accredited international travel insurance accepted for Schengen, Saudi Arabia, USA, and worldwide visa applications.
+                  </p>
+                </div>
+                <span className="text-xs font-semibold text-[#0969E8] bg-[#0969E8]/10 px-3 py-1 rounded-full shrink-0 w-fit">
+                  From ~$0.99 / day
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] flex items-start gap-3">
+                  <ShieldCheck className="w-5 h-5 text-[#21B96F] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-[#071B49]">Emergency Medical & Hospital Coverage</h4>
+                    <p className="text-xs text-[#475569] mt-1 leading-relaxed">
+                      Up to $100,000 for emergency doctor consultations, hospital admissions, ambulance transit, and emergency surgery abroad.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#0969E8] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-[#071B49]">Instant Embassy-Compliant Policy</h4>
+                    <p className="text-xs text-[#475569] mt-1 leading-relaxed">
+                      Receive an official stamped PDF policy in under 2 minutes directly in your email, ready for consulate visa submissions.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#FFB800] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-[#071B49]">COVID-19 & Trip Disruption</h4>
+                    <p className="text-xs text-[#475569] mt-1 leading-relaxed">
+                      Comprehensive coverage for COVID-19 treatment, quarantine hotel expenses, flight cancellations, and delayed itineraries.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#EC4899] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-[#071B49]">Lost & Delayed Baggage Protection</h4>
+                    <p className="text-xs text-[#475569] mt-1 leading-relaxed">
+                      Rapid compensation for missing or damaged personal belongings and essential replacement toiletries and clothes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-[#071B49] to-[#0A225C] text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <h4 className="font-bold text-sm sm:text-base">Protect Your Upcoming Voyage with EKTA</h4>
+                  <p className="text-xs text-white/80 mt-0.5">Instant online issue • No medical examinations required • 24/7 support</p>
+                </div>
+                <a
+                  href="https://ektatraveling.tpx.gr/uNlKi2Qe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#21B96F] hover:bg-[#1ca361] text-white font-bold text-xs sm:text-sm shadow-md transition-all shrink-0 cursor-pointer"
+                >
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Get Instant EKTA Policy</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tool 7: Worldwide Car Rental & Airport Transfers (EconomyBookings) */}
+          {activeTool === 'carRental' && (
+            <CarRentalWidget
+              className="border-0 shadow-none p-0"
+              title="Worldwide Car Rental & Airport Transfers"
+              subtitle="Compare 800+ car rental suppliers (Enterprise, Hertz, Europcar, Avis, Sixt, Budget, Alamo) at 20,000+ airport locations across 150+ countries."
+            />
+          )}
+
+          {/* Tool 8: Flight Delay & Cancellation Compensation (AirHelp) */}
+          {activeTool === 'compensation' && (
+            <FlightCompensationWidget
+              className="border-0 shadow-none p-0"
+              title="Flight Delay & Cancellation Compensation (AirHelp)"
+              subtitle="Check in 3 minutes if airlines owe you up to $650 (€600) cash compensation for delayed, cancelled, or overbooked flights under EU/UK 261 passenger rights laws."
+            />
+          )}
+
           {/* Internal Navigation Action Strip */}
           <div className="mt-8 pt-4 border-t border-[#F1F5F9] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <span className="text-[#64748B]">
-              Integrated Tools: Currency, Budget, Weather, Visa, & Global eSIM
+              Integrated Tools: Currency, Budget, Weather, Visa, eSIM, Insurance, Car Hire & Flight Claim (AirHelp)
             </span>
             <div className="flex items-center gap-3">
               {onNavigate && (

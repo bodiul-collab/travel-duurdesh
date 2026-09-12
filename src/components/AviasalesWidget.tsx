@@ -6,8 +6,7 @@ import {
   Sparkles,
   Users,
   Search,
-  ArrowRightLeft,
-  ChevronDown
+  ArrowRightLeft
 } from 'lucide-react';
 import { buildAviasalesRouteUrl } from '../utils/aviasales';
 import { LocationAutocompleteInput } from './LocationAutocompleteInput';
@@ -75,10 +74,20 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
 
   const handleSearchAviasales = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+
+    const cabinMap: Record<string, 'y' | 'w' | 'c' | 'f'> = {
+      Economy: 'y',
+      'Premium Economy': 'w',
+      Business: 'c',
+      First: 'f'
+    };
+
     const url = buildAviasalesRouteUrl(origin, destination, {
       departDate,
-      returnDate: tripType === 'round' ? returnDate : undefined,
-      passengers
+      returnDate: tripType === 'oneWay' ? undefined : returnDate,
+      isOneWay: tripType === 'oneWay',
+      passengers,
+      cabinClass: cabinMap[cabinClass] || 'y'
     });
 
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -147,7 +156,7 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
       {activeMode === 'interactive' ? (
         <form onSubmit={handleSearchAviasales} className="space-y-4">
           {/* Trip Type Selector */}
-          <div className="flex items-center gap-4 text-xs font-semibold text-[#5E6B82]">
+          <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-[#5E6B82]">
             <label className="flex items-center gap-1.5 cursor-pointer">
               <input
                 type="radio"
@@ -168,7 +177,23 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
               />
               <span className={tripType === 'oneWay' ? 'text-[#071B49] font-bold' : ''}>One Way</span>
             </label>
-            <span className="text-gray-300">|</span>
+            <span className="text-gray-300 hidden sm:inline">|</span>
+            <div className="flex items-center gap-1.5 text-[#5E6B82] font-semibold">
+              <Users className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+              <span>Travelers:</span>
+              <select
+                value={passengers}
+                onChange={(e) => setPassengers(Number(e.target.value))}
+                className="bg-transparent border-none p-0 text-xs font-bold text-[#071B49] focus:ring-0 cursor-pointer"
+              >
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <option key={num} value={num}>
+                    {num} {num === 1 ? 'Adult' : 'Adults'}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <span className="text-gray-300 hidden sm:inline">|</span>
             <div className="flex items-center gap-1 text-[#0969E8] font-bold">
               <span>Class:</span>
               <select
@@ -184,7 +209,7 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
             </div>
           </div>
 
-          {/* Search Inputs Grid */}
+          {/* Search Inputs Grid (Round Trip & One Way) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-end">
             {/* Origin */}
             <div className="lg:col-span-3">
@@ -244,22 +269,9 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
                   onChange={(val) => setReturnDate(val)}
                 />
               ) : (
-                <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 focus-within:border-[#0969E8] focus-within:bg-white transition-all">
-                  <label className="block text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">Travelers</label>
-                  <div className="flex items-center gap-1">
-                    <Users className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                    <select
-                      value={passengers}
-                      onChange={(e) => setPassengers(Number(e.target.value))}
-                      className="w-full bg-transparent text-xs font-semibold text-[#071B49] border-none p-0 focus:outline-none focus:ring-0 cursor-pointer"
-                    >
-                      {[1, 2, 3, 4, 5, 6].map((num) => (
-                        <option key={num} value={num}>
-                          {num} {num === 1 ? 'Adult' : 'Adults'}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 opacity-60 flex flex-col justify-center">
+                  <span className="text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">Return</span>
+                  <span className="text-xs font-medium text-gray-400">One-way only</span>
                 </div>
               )}
             </div>
@@ -268,7 +280,7 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
             <div className="lg:col-span-2">
               <button
                 type="submit"
-                className="w-full h-11 bg-[#0969E8] hover:bg-[#0759c5] text-white font-bold text-xs sm:text-sm rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all"
+                className="w-full h-11 bg-[#0969E8] hover:bg-[#0759c5] text-white font-bold text-xs sm:text-sm rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 <Search className="w-4 h-4" />
                 <span>Find Fares</span>
@@ -293,7 +305,7 @@ export const AviasalesWidget: React.FC<AviasalesWidgetProps> = ({
                   setOrigin(shortcut.origin);
                   setDestination(shortcut.dest);
                 }}
-                className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#EAF2FB] hover:text-[#0969E8] border border-gray-200 transition-colors text-[11px]"
+                className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#EAF2FB] hover:text-[#0969E8] border border-gray-200 transition-colors text-[11px] cursor-pointer"
               >
                 {shortcut.label}
               </button>

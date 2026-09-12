@@ -8,13 +8,15 @@ import {
   Search,
   ArrowRightLeft,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  Plus,
+  Trash2
 } from 'lucide-react';
-import { BookingTabType, SearchFilterState } from '../types';
+import { BookingTabType, SearchFilterState, FlightLeg } from '../types';
 import { getTranslation, TranslationKey } from '../data/translations';
 import { LocationAutocompleteInput } from './LocationAutocompleteInput';
 import { DatePickerPopover } from './DatePickerPopover';
-import { buildAviasalesRouteUrl } from '../utils/aviasales';
+import { buildAviasalesRouteUrl, buildAviasalesMultiCityUrl } from '../utils/aviasales';
 
 interface BookingSearchWidgetProps {
   selectedLanguage: string;
@@ -37,6 +39,9 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<BookingTabType>('flights');
   
+  // Flight trip type: round, oneWay, or multiCity
+  const [flightTripType, setFlightTripType] = useState<'round' | 'oneWay' | 'multiCity'>('round');
+
   // Search parameters state with dynamic upcoming dates
   const [fromLocation, setFromLocation] = useState('New York (JFK)');
   const [toLocation, setToLocation] = useState('Jeddah (JED)');
@@ -46,6 +51,12 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(1);
   const [cabinClass, setCabinClass] = useState<'Economy' | 'Premium Economy' | 'Business' | 'First'>('Economy');
+
+  // Multi-city legs state
+  const [multiCityLegs, setMultiCityLegs] = useState<FlightLeg[]>([
+    { id: 'b-leg-1', origin: 'New York (JFK)', destination: 'Jeddah (JED)', date: getFutureDateStr(7) },
+    { id: 'b-leg-2', origin: 'Madinah (MED)', destination: 'New York (JFK)', date: getFutureDateStr(17) }
+  ]);
 
   // UI toggle states for popups/dropdowns
   const [showTravelerDropdown, setShowTravelerDropdown] = useState(false);
@@ -67,6 +78,40 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
     setToLocation(temp);
   };
 
+  const handleAddMultiLeg = () => {
+    if (multiCityLegs.length >= 5) return;
+    const lastLeg = multiCityLegs[multiCityLegs.length - 1];
+    let nextDate: string;
+    try {
+      const d = new Date(lastLeg.date);
+      d.setDate(d.getDate() + 5);
+      nextDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    } catch {
+      nextDate = getFutureDateStr(21);
+    }
+
+    setMultiCityLegs([
+      ...multiCityLegs,
+      {
+        id: `b-leg-${Date.now()}-${multiCityLegs.length + 1}`,
+        origin: lastLeg.destination || 'Jeddah (JED)',
+        destination: 'New York (JFK)',
+        date: nextDate
+      }
+    ]);
+  };
+
+  const handleRemoveMultiLeg = (id: string) => {
+    if (multiCityLegs.length <= 2) return;
+    setMultiCityLegs(multiCityLegs.filter((leg) => leg.id !== id));
+  };
+
+  const handleUpdateMultiLeg = (id: string, field: 'origin' | 'destination' | 'date', value: string) => {
+    setMultiCityLegs((prev) =>
+      prev.map((leg) => (leg.id === id ? { ...leg, [field]: value } : leg))
+    );
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearchSubmit({
@@ -74,11 +119,13 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
       fromLocation: fromLocation || 'Houston (IAH)',
       toLocation: toLocation || 'Madinah (MED)',
       checkInDate,
-      checkOutDate,
+      checkOutDate: flightTripType === 'oneWay' ? undefined : checkOutDate,
       adults,
       children,
       rooms,
-      cabinClass
+      cabinClass,
+      tripType: activeTab === 'flights' ? flightTripType : undefined,
+      multiLegs: activeTab === 'flights' && flightTripType === 'multiCity' ? multiCityLegs : undefined
     });
   };
 
@@ -109,11 +156,20 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
 
           {activeTab === 'flights' ? (
             <a
-              href={buildAviasalesRouteUrl(
-                fromLocation || 'Houston (IAH)',
-                toLocation || 'Madinah (MED)',
-                { departDate: checkInDate, returnDate: checkOutDate, passengers: adults + children }
-              )}
+              href={
+                flightTripType === 'multiCity'
+                  ? buildAviasalesMultiCityUrl(multiCityLegs, { passengers: adults + children })
+                  : buildAviasalesRouteUrl(
+                      fromLocation || 'Houston (IAH)',
+                      toLocation || 'Madinah (MED)',
+                      {
+                        departDate: checkInDate,
+                        returnDate: flightTripType === 'round' ? checkOutDate : undefined,
+                        isOneWay: flightTripType === 'oneWay',
+                        passengers: adults + children
+                      }
+                    )
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="ml-auto hidden sm:flex items-center gap-1.5 text-xs text-[#0969E8] font-bold bg-[#EAF2FB] hover:bg-[#d8e9fc] px-3 py-1.5 rounded-full whitespace-nowrap transition-colors"
@@ -129,72 +185,235 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
           )}
         </div>
 
+        {/* Flight Sub-header with Trip Type Radio Buttons (Round Trip, One Way, Multiple City) */}
+        {activeTab === 'flights' && (
+          <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-[#5E6B82] pb-3 mb-2 border-b border-[#F0F5FA]">
+            <span className="font-bold text-[#071B49] text-xs">Trip Type:</span>
+            <label className="flex items-center gap-1.5 cursor-pointer">
+              <input
+                type="radio"
+                name="bookingFlightTripType"
+                checked={flightTripType === 'round'}
+                onChange={() => setFlightTripType('round')}
+                className="text-[#0969E8] focus:ring-[#0969E8]"
+              />
+              <span className={flightTripType === 'round' ? 'text-[#071B49] font-bold' : ''}>Round Trip</span>
+            </label>
+            <label className="flex items-center gap-1.5 cursor-pointer">
+              <input
+                type="radio"
+                name="bookingFlightTripType"
+                checked={flightTripType === 'oneWay'}
+                onChange={() => setFlightTripType('oneWay')}
+                className="text-[#0969E8] focus:ring-[#0969E8]"
+              />
+              <span className={flightTripType === 'oneWay' ? 'text-[#071B49] font-bold' : ''}>One Way</span>
+            </label>
+            <label className="flex items-center gap-1.5 cursor-pointer">
+              <input
+                type="radio"
+                name="bookingFlightTripType"
+                checked={flightTripType === 'multiCity'}
+                onChange={() => setFlightTripType('multiCity')}
+                className="text-[#0969E8] focus:ring-[#0969E8]"
+              />
+              <span className={flightTripType === 'multiCity' ? 'text-[#071B49] font-bold' : ''}>Multiple City</span>
+            </label>
+          </div>
+        )}
+
         {/* Search Form Fields */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 items-end">
-            {/* Origin Location with Direct Editable Input & Code Search */}
-            <div className="relative lg:col-span-3">
-              <div className="flex items-center justify-between mb-1">
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#5E6B82]">
-                  {activeTab === 'hotels' ? t('toWhere') : t('fromWhere')}
-                </label>
-                {activeTab === 'flights' && (
+          {activeTab === 'flights' && flightTripType === 'multiCity' ? (
+            /* Multi-City flight segments builder */
+            <div className="space-y-3">
+              {multiCityLegs.map((leg, index) => (
+                <div
+                  key={leg.id}
+                  className="p-3 sm:p-4 rounded-2xl bg-[#F8FAFC] border border-gray-200/90 space-y-2 transition-all hover:border-blue-200"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#0969E8] text-white text-[11px] font-bold flex items-center gap-1">
+                        <Plane className="w-3 h-3" />
+                        <span>Flight {index + 1}</span>
+                      </span>
+                      {index === 0 && (
+                        <span className="text-[11px] text-[#5E6B82] hidden sm:inline">
+                          Departure Leg
+                        </span>
+                      )}
+                    </div>
+                    {multiCityLegs.length > 2 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveMultiLeg(leg.id)}
+                        className="text-xs text-red-500 hover:text-red-700 flex items-center gap-1 font-semibold px-2 py-1 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+                        title={`Remove Flight ${index + 1}`}
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Remove Leg</span>
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-end">
+                    {/* Origin */}
+                    <div className="lg:col-span-5">
+                      <LocationAutocompleteInput
+                        label="From"
+                        value={leg.origin}
+                        onChange={(val) => handleUpdateMultiLeg(leg.id, 'origin', val)}
+                        placeholder="Airport code or city (e.g. LHR, JFK)"
+                        isDestination={false}
+                        type="flights"
+                      />
+                    </div>
+
+                    {/* Destination */}
+                    <div className="lg:col-span-4">
+                      <LocationAutocompleteInput
+                        label="To Destination"
+                        value={leg.destination}
+                        onChange={(val) => handleUpdateMultiLeg(leg.id, 'destination', val)}
+                        placeholder="Airport code or city (e.g. JED, MED)"
+                        isDestination={true}
+                        type="flights"
+                      />
+                    </div>
+
+                    {/* Flight Date */}
+                    <div className="lg:col-span-3">
+                      <DatePickerPopover
+                        label="Flight Date"
+                        value={leg.date}
+                        minDate={index > 0 ? multiCityLegs[index - 1].date : undefined}
+                        onChange={(val) => handleUpdateMultiLeg(leg.id, 'date', val)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Multi-City Controls */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
+                {multiCityLegs.length < 5 ? (
                   <button
                     type="button"
-                    onClick={handleSwapLocations}
-                    className="inline-flex items-center gap-1 text-[10px] font-bold text-[#0969E8] hover:text-[#0759c5] transition-colors cursor-pointer"
-                    title="Swap departure and arrival"
+                    onClick={handleAddMultiLeg}
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-dashed border-[#0969E8] text-[#0969E8] hover:bg-[#EAF2FB] text-xs font-bold transition-all cursor-pointer"
                   >
-                    <ArrowRightLeft className="w-3 h-3" />
-                    <span>Swap</span>
+                    <Plus className="w-4 h-4" />
+                    <span>Add Another Flight Leg (up to 5)</span>
                   </button>
+                ) : (
+                  <span className="text-xs text-[#5E6B82] italic">
+                    Maximum 5 flight segments reached
+                  </span>
+                )}
+
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* Travelers */}
+                  <div className="flex items-center gap-2 bg-[#F8FAFC] border border-gray-200 rounded-xl px-3 py-2">
+                    <Users className="w-4 h-4 text-gray-400 shrink-0" />
+                    <span className="text-xs text-[#5E6B82] font-semibold">Travelers:</span>
+                    <select
+                      value={adults + children}
+                      onChange={(e) => setAdults(Number(e.target.value))}
+                      className="bg-transparent text-xs font-bold text-[#071B49] border-none p-0 focus:ring-0 cursor-pointer"
+                    >
+                      {[1, 2, 3, 4, 5, 6].map((num) => (
+                        <option key={num} value={num}>
+                          {num} {num === 1 ? 'Adult' : 'Adults'}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Multi-City Submit */}
+                  <button
+                    type="submit"
+                    className="h-11 px-6 bg-[#0969E8] hover:bg-[#0759c5] text-white font-bold text-xs sm:text-sm rounded-xl shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  >
+                    <Search className="w-4 h-4" />
+                    <span>Search Multi-City Flights</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Standard Grid for Round Trip / One Way Flights, Hotels, Packages, Experiences */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 items-end">
+              {/* Origin Location with Direct Editable Input & Code Search */}
+              <div className="relative lg:col-span-3">
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-[#5E6B82]">
+                    {activeTab === 'hotels' ? t('toWhere') : t('fromWhere')}
+                  </label>
+                  {activeTab === 'flights' && (
+                    <button
+                      type="button"
+                      onClick={handleSwapLocations}
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-[#0969E8] hover:text-[#0759c5] transition-colors cursor-pointer"
+                      title="Swap departure and arrival"
+                    >
+                      <ArrowRightLeft className="w-3 h-3" />
+                      <span>Swap</span>
+                    </button>
+                  )}
+                </div>
+                <LocationAutocompleteInput
+                  label=""
+                  value={fromLocation}
+                  onChange={(val) => setFromLocation(val)}
+                  placeholder="Airport code or city (e.g. DAC, JFK, LHR)"
+                  isDestination={false}
+                  type={activeTab}
+                />
+              </div>
+
+              {/* Destination Location with Direct Editable Input & Code Search */}
+              <div className="relative lg:col-span-3">
+                <LocationAutocompleteInput
+                  label={t('toWhere')}
+                  value={toLocation}
+                  onChange={(val) => setToLocation(val)}
+                  placeholder="Going to (e.g. JED, MED, DXB, Paris)"
+                  isDestination={true}
+                  type={activeTab}
+                />
+              </div>
+
+              {/* Dates (Departure/Check-in & Return/Check-out) with Interactive Calendar Popovers */}
+              <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <DatePickerPopover
+                  label={activeTab === 'flights' ? t('departure') : t('checkIn')}
+                  value={checkInDate}
+                  onChange={(newDate) => {
+                    setCheckInDate(newDate);
+                    if (checkOutDate && checkOutDate < newDate) {
+                      const next = new Date(newDate);
+                      next.setDate(next.getDate() + 7);
+                      const nextStr = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}-${String(next.getDate()).padStart(2, '0')}`;
+                      setCheckOutDate(nextStr);
+                    }
+                  }}
+                />
+
+                {activeTab === 'flights' && flightTripType === 'oneWay' ? (
+                  <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5 focus-within:border-[#0969E8] focus-within:bg-white transition-all">
+                    <label className="block text-[10px] uppercase font-bold text-[#5E6B82] mb-0.5">Trip Style</label>
+                    <span className="text-xs font-semibold text-[#071B49] block pt-1">One-Way Direct</span>
+                  </div>
+                ) : (
+                  <DatePickerPopover
+                    label={activeTab === 'flights' ? t('returnDate') : t('checkOut')}
+                    value={checkOutDate}
+                    minDate={checkInDate}
+                    onChange={(newDate) => setCheckOutDate(newDate)}
+                  />
                 )}
               </div>
-              <LocationAutocompleteInput
-                label=""
-                value={fromLocation}
-                onChange={(val) => setFromLocation(val)}
-                placeholder="Airport code or city (e.g. DAC, JFK, LHR)"
-                isDestination={false}
-                type={activeTab}
-              />
-            </div>
-
-            {/* Destination Location with Direct Editable Input & Code Search */}
-            <div className="relative lg:col-span-3">
-              <LocationAutocompleteInput
-                label={t('toWhere')}
-                value={toLocation}
-                onChange={(val) => setToLocation(val)}
-                placeholder="Going to (e.g. JED, MED, DXB, Paris)"
-                isDestination={true}
-                type={activeTab}
-              />
-            </div>
-
-            {/* Dates (Departure/Check-in & Return/Check-out) with Interactive Calendar Popovers */}
-            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <DatePickerPopover
-                label={activeTab === 'flights' ? t('departure') : t('checkIn')}
-                value={checkInDate}
-                onChange={(newDate) => {
-                  setCheckInDate(newDate);
-                  if (checkOutDate && checkOutDate < newDate) {
-                    const next = new Date(newDate);
-                    next.setDate(next.getDate() + 7);
-                    const nextStr = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}-${String(next.getDate()).padStart(2, '0')}`;
-                    setCheckOutDate(nextStr);
-                  }
-                }}
-              />
-
-              <DatePickerPopover
-                label={activeTab === 'flights' ? t('returnDate') : t('checkOut')}
-                value={checkOutDate}
-                minDate={checkInDate}
-                onChange={(newDate) => setCheckOutDate(newDate)}
-              />
-            </div>
 
             {/* Travelers & Search Button (3 cols on lg) */}
             <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-12 gap-2 items-end">
@@ -325,6 +544,7 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
               </div>
             </div>
           </div>
+        )}
 
           {/* Quick Route Shortcuts for Flights */}
           {activeTab === 'flights' && (

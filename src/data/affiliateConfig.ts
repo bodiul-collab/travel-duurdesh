@@ -76,9 +76,9 @@ export const AFFILIATE_CONFIG = {
       baseUrl: 'https://c10.travelpayouts.com/click?shmarker=737968&promo_id=2020&source_type=link&type=click',
       marker: '737968',
       campaignId: '10',
-      promoId: '2082',
+      promoId: '4480',
       widgetScriptSrc:
-        'https://tpwdg.com/content?trs=570661&shmarker=737968&locale=en&width=100&height=30&powered_by=true&campaign_id=10&promo_id=2082',
+        'https://tpwdg.com/content?trs=570661&shmarker=737968&locale=en&powered_by=true&border_radius=6&plain=true&show_logo=true&color_background=%23ffca28&color_button=%2355a539&color_text=%23000000&color_input_text=%23000000&color_button_text=%23ffffff&promo_id=4480&campaign_id=10',
       disclosure: 'Official car rental search partner (EconomyBookings / Travelpayouts 737968)',
       defaultCommissionNote: 'Compare 800+ car rental suppliers across 20,000 locations worldwide.'
     },
@@ -92,6 +92,26 @@ export const AFFILIATE_CONFIG = {
       trs: '570661',
       disclosure: 'Official travel eSIM partner (Airalo / Travelpayouts 737968)',
       defaultCommissionNote: 'Instant digital eSIM activation with local network 4G/5G speeds in 200+ countries.'
+    },
+    ekta: {
+      name: 'EKTA Travel Insurance',
+      category: 'Travel & Health Insurance',
+      baseUrl: 'https://ektatraveling.tpx.gr/uNlKi2Qe',
+      disclosure: 'Official international travel insurance partner (EKTA Traveling / Travelpayouts)',
+      defaultCommissionNote: 'Instant digital policy issuance for worldwide visas, emergency medical coverage, and trip disruption protection.'
+    },
+    airhelp: {
+      name: 'AirHelp',
+      category: 'Flight Delay & Cancellation Compensation',
+      baseUrl: 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click',
+      marker: '737968',
+      campaignId: '120',
+      promoId: '8679',
+      trs: '570661',
+      widgetScriptSrc:
+        'https://tpwdg.com/content?trs=570661&shmarker=737968&lang=en&powered_by=true&campaign_id=120&promo_id=8679',
+      disclosure: 'Official flight passenger rights compensation partner (AirHelp / Travelpayouts 737968)',
+      defaultCommissionNote: 'Claim up to €600 ($650) for flight delays over 3 hours, cancellations, and overbookings under EU/UK 261 laws.'
     }
   },
   
@@ -102,7 +122,9 @@ export const AFFILIATE_CONFIG = {
     hotels: 'https://www.booking.com/searchresults.html',
     packages: 'https://www.aviasales.com/search?marker=737968&show_hotels=true',
     experiences: 'https://www.viator.com',
-    esim: 'https://tp.media/r?p=8588&marker=737968&trs=570661&u=https%3A%2F%2Fwww.airalo.com'
+    esim: 'https://tp.media/r?p=8588&marker=737968&trs=570661&u=https%3A%2F%2Fwww.airalo.com',
+    insurance: 'https://ektatraveling.tpx.gr/uNlKi2Qe',
+    compensation: 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click'
   }
 };
 
@@ -158,6 +180,24 @@ export function buildAffiliateUrl(
       return `https://tp.media/r?p=8588&marker=737968&trs=570661&u=${encodeURIComponent(targetUrl)}`;
     }
     return 'https://tp.media/r?p=8588&marker=737968&trs=570661&u=https%3A%2F%2Fwww.airalo.com';
+  }
+
+  // EKTA / Travel Insurance
+  if (
+    partnerKey === 'ekta' ||
+    partnerKey === 'insurance' ||
+    params?.category === 'insurance'
+  ) {
+    return 'https://ektatraveling.tpx.gr/uNlKi2Qe';
+  }
+
+  // AirHelp / Flight Delay Compensation
+  if (
+    partnerKey === 'airhelp' ||
+    partnerKey === 'compensation' ||
+    params?.category === 'compensation'
+  ) {
+    return 'https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click';
   }
 
   // Hotels (Booking.com & Agoda)

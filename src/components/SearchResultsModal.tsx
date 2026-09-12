@@ -23,7 +23,7 @@ import {
   CurrencyConfig
 } from '../types';
 import { InteractiveDestinationMap } from './InteractiveDestinationMap';
-import { buildAviasalesRouteUrl } from '../utils/aviasales';
+import { buildAviasalesRouteUrl, buildAviasalesMultiCityUrl } from '../utils/aviasales';
 
 interface SearchResultsModalProps {
   isOpen: boolean;
@@ -227,27 +227,38 @@ export const SearchResultsModal: React.FC<SearchResultsModalProps> = ({
                     <div>
                       <div className="flex items-center gap-2">
                         <h4 className="text-sm font-bold">
-                          Search "{searchState.toLocation || 'Global Flights'}" on Aviasales
+                          {searchState.tripType === 'multiCity'
+                            ? `Search Multi-City Route (${searchState.multiLegs?.length || 2} flights) on Aviasales`
+                            : `Search "${searchState.toLocation || 'Global Flights'}" on Aviasales`}
                         </h4>
                         <span className="text-[10px] bg-[#21B96F] text-white px-2 py-0.5 rounded-full font-bold">
                           Live Partner Rates
                         </span>
                       </div>
                       <p className="text-xs text-white/80">
-                        Scan 1,000+ airlines, low-cost carriers, and agencies with no extra fees.
+                        {searchState.tripType === 'multiCity'
+                          ? 'Optimized multi-segment search through Aviasales affiliate network.'
+                          : 'Scan 1,000+ airlines, low-cost carriers, and agencies with no extra fees.'}
                       </p>
                     </div>
                   </div>
                   <a
-                    href={buildAviasalesRouteUrl(
-                      searchState.fromLocation,
-                      searchState.toLocation,
-                      {
-                        departDate: searchState.checkInDate,
-                        returnDate: searchState.checkOutDate,
-                        passengers: searchState.adults + searchState.children
-                      }
-                    )}
+                    href={
+                      searchState.tripType === 'multiCity' && searchState.multiLegs && searchState.multiLegs.length > 0
+                        ? buildAviasalesMultiCityUrl(searchState.multiLegs, {
+                            passengers: searchState.adults + searchState.children
+                          })
+                        : buildAviasalesRouteUrl(
+                            searchState.fromLocation,
+                            searchState.toLocation,
+                            {
+                              departDate: searchState.checkInDate,
+                              returnDate: searchState.tripType === 'oneWay' ? undefined : searchState.checkOutDate,
+                              isOneWay: searchState.tripType === 'oneWay',
+                              passengers: searchState.adults + searchState.children
+                            }
+                          )
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-[#0969E8] hover:bg-[#F3F8FF] font-bold text-xs rounded-xl shadow transition-colors shrink-0"

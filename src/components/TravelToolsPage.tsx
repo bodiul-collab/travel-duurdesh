@@ -32,13 +32,16 @@ import {
   Wifi,
   QrCode,
   PhoneCall,
-  Car
+  Car,
+  Scale,
+  ExternalLink
 } from 'lucide-react';
 import { CURRENCIES } from '../data/travelData';
 import { CurrencyConfig } from '../types';
 import { TravelEsimWidget } from './TravelEsimWidget';
 import { LiveWeatherTool } from './LiveWeatherTool';
 import { CarRentalWidget } from './CarRentalWidget';
+import { FlightCompensationWidget } from './FlightCompensationWidget';
 
 interface TravelToolsPageProps {
   currency?: CurrencyConfig;
@@ -300,7 +303,7 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
             </p>
 
             {/* Feature Highlights Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 pt-2">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5">
                 <ArrowRightLeft className="w-5 h-5 text-[#4DA3FF] shrink-0" />
                 <div className="text-xs">
@@ -329,13 +332,43 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
                   <div className="text-white/70 text-[11px]">Nusuk & transit guides</div>
                 </div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5 col-span-2 sm:col-span-1">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5">
                 <Smartphone className="w-5 h-5 text-[#32a8dd] shrink-0" />
                 <div className="text-xs">
                   <div className="font-bold text-white">Travel eSIM Data</div>
                   <div className="text-white/70 text-[11px]">Airalo 200+ countries</div>
                 </div>
               </div>
+              <a
+                href="#insurance"
+                className="bg-white/10 hover:bg-white/20 transition-all backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5 cursor-pointer"
+              >
+                <ShieldCheck className="w-5 h-5 text-[#21B96F] shrink-0" />
+                <div className="text-xs">
+                  <div className="font-bold text-white">Travel Insurance</div>
+                  <div className="text-white/70 text-[11px]">EKTA Worldwide Cover</div>
+                </div>
+              </a>
+              <a
+                href="#car-rental"
+                className="bg-white/10 hover:bg-white/20 transition-all backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5 cursor-pointer"
+              >
+                <Car className="w-5 h-5 text-[#FF8A2A] shrink-0" />
+                <div className="text-xs">
+                  <div className="font-bold text-white">Car Rental</div>
+                  <div className="text-white/70 text-[11px]">EconomyBookings</div>
+                </div>
+              </a>
+              <a
+                href="#flight-claim"
+                className="bg-white/10 hover:bg-white/20 transition-all backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5 cursor-pointer"
+              >
+                <Scale className="w-5 h-5 text-[#4DA3FF] shrink-0" />
+                <div className="text-xs">
+                  <div className="font-bold text-white">Flight Claim</div>
+                  <div className="text-white/70 text-[11px]">AirHelp Up to €600</div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -983,19 +1016,138 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
       {/* ============================================================ */}
       {/* 7. Travel Insurance Guide */}
       {/* ============================================================ */}
-      <section className="bg-gradient-to-b from-[#071B49] to-[#0A225C] text-white py-20">
+      <section id="insurance" className="bg-gradient-to-b from-[#071B49] to-[#0A225C] text-white py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
             <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FFB800] bg-white/10 px-3.5 py-1.5 rounded-full uppercase tracking-wider border border-white/15">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Health & Trip Protection</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
-              Travel Insurance Guide for Global Pilgrims
+              Travel Insurance Guide & Instant Policy
             </h2>
             <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal">
-              Travel insurance is your financial and medical shield against the unexpected. From emergency hospital admissions in foreign countries and flight cancellations to lost luggage containing irreplaceable personal items, comprehensive protection ensures you are never stranded.
+              Travel insurance is your essential financial and medical shield against unforeseen events abroad. From emergency hospital admissions and sudden flight cancellations to lost luggage containing irreplaceable personal items, reliable protection ensures you are never left stranded.
             </p>
+          </div>
+
+          {/* EKTA Travel Insurance Feature Card */}
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-10 mb-14 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#21B96F]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#0969E8]/20 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7 space-y-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="bg-[#21B96F] text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    Official Partner
+                  </span>
+                  <span className="bg-white/15 text-[#FFB800] text-[11px] font-bold px-3 py-1 rounded-full border border-white/10">
+                    ★ 4.9/5 Trust Rating
+                  </span>
+                  <span className="bg-white/10 text-white/90 text-[11px] font-medium px-3 py-1 rounded-full border border-white/10">
+                    Instant Visa-Ready PDF in 2 Mins
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-syncopate tracking-tight">
+                    EKTA Worldwide Travel & Medical Insurance
+                  </h3>
+                  <p className="text-sm text-white/80 leading-relaxed">
+                    Recognized and accepted by consulates and border control authorities worldwide for Schengen, Saudi Arabia (Umrah/Hajj & Tourist eVisas), USA, UK, and Asian visa requirements. Get full medical coverage, COVID-19 treatment, baggage compensation, and trip cancellation protection starting at just <span className="text-[#FFB800] font-bold">~$0.99/day</span>.
+                  </p>
+                </div>
+
+                {/* Coverage Checklist */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs text-white/90">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#21B96F] shrink-0" />
+                    <span>Emergency medical expenses up to $100,000</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#21B96F] shrink-0" />
+                    <span>COVID-19 treatment & hospital stays</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#21B96F] shrink-0" />
+                    <span>Embassy & consulate accredited certificate</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#21B96F] shrink-0" />
+                    <span>Trip cancellation & flight delay reimbursement</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#21B96F] shrink-0" />
+                    <span>Lost or delayed baggage assistance</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#21B96F] shrink-0" />
+                    <span>24/7 global multilingual emergency assistance</span>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <a
+                    href="https://ektatraveling.tpx.gr/uNlKi2Qe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-[#21B96F] hover:bg-[#1ca361] text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-500/25 transition-all transform hover:-translate-y-0.5 cursor-pointer group w-full sm:w-auto"
+                  >
+                    <ShieldCheck className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+                    <span>Get Instant Policy with EKTA</span>
+                    <ExternalLink className="w-4 h-4 opacity-80" />
+                  </a>
+
+                  <span className="text-[11px] text-white/60">
+                    No medical exam required • Electronic delivery directly to your inbox
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Summary Column */}
+              <div className="lg:col-span-5 bg-white/10 rounded-2xl p-6 border border-white/15 space-y-4">
+                <div className="border-b border-white/10 pb-3 flex items-center justify-between">
+                  <span className="text-xs uppercase tracking-wider text-white/70 font-semibold">Insurance Partner</span>
+                  <span className="text-xs font-bold text-[#FFB800]">EKTA Traveling</span>
+                </div>
+
+                <div className="space-y-3 text-xs text-white/80">
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/60">Coverage Region</span>
+                    <span className="font-semibold text-white">Worldwide (190+ Countries)</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/60">Starting Daily Cost</span>
+                    <span className="font-semibold text-[#21B96F]">From $0.99 / day</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/60">Policy Delivery</span>
+                    <span className="font-semibold text-white">Instant PDF (2 minutes)</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/60">Age Eligibility</span>
+                    <span className="font-semibold text-white">All ages (Infants to Seniors)</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/60">Visa Acceptance</span>
+                    <span className="font-semibold text-[#FFB800]">100% Embassy Compliant</span>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-white/10">
+                  <a
+                    href="https://ektatraveling.tpx.gr/uNlKi2Qe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center text-xs text-[#4DA3FF] hover:text-white transition-colors underline font-medium py-1"
+                  >
+                    View EKTA Coverage Tiers & Calculate Exact Premium →
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1053,7 +1205,57 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
       </section>
 
       {/* ============================================================ */}
-      {/* 8. Internal Link Suggestions */}
+      {/* 8. Car Rental & Airport Transfers (EconomyBookings) */}
+      {/* ============================================================ */}
+      <section id="car-rental" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-2 bg-[#FF8A2A]/10 text-[#D97706] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              <Car className="w-3.5 h-3.5 text-[#FF8A2A]" />
+              <span>Ground Mobility & Transfers</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#071B49] tracking-tight font-syncopate">
+              Worldwide Car Rental & Airport Transfers
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5E6B82] leading-relaxed">
+              Compare 800+ verified car rental suppliers across 20,000 airport and city hubs. Secure flexible airport pick-ups, transparent insurance options, and 24/7 roadside assistance with EconomyBookings.
+            </p>
+          </div>
+
+          <CarRentalWidget
+            title="Worldwide Car Hire & Airport Pickup Search"
+            subtitle="Search rental deals with Sixt, Hertz, Europcar, Avis, Enterprise, Alamo, and local verified suppliers with free cancellation."
+          />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 9. Flight Delay & Cancellation Compensation (AirHelp) */}
+      {/* ============================================================ */}
+      <section id="flight-claim" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-2 bg-[#0969E8]/10 text-[#0969E8] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              <Scale className="w-3.5 h-3.5 text-[#0969E8]" />
+              <span>Passenger Rights & Disruption Compensation</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#071B49] tracking-tight font-syncopate">
+              Flight Delay & Cancellation Compensation
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5E6B82] leading-relaxed">
+              If your flight was delayed by more than 3 hours, cancelled, or you were denied boarding in the past 3 years, you may be legally entitled to up to $650 (€600) cash compensation per passenger under EU 261 / UK 261 laws. Check your eligibility in 3 minutes with AirHelp.
+            </p>
+          </div>
+
+          <FlightCompensationWidget
+            title="AirHelp Flight Delay & Cancellation Claim Service"
+            subtitle="Check claims for past flights over the last 3 years with zero upfront cost—AirHelp operates on a strict No Win, No Fee basis."
+          />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 10. Internal Link Suggestions */}
       {/* ============================================================ */}
       <section className="bg-white border-y border-[#E7EEF7] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1131,7 +1333,7 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
       </section>
 
       {/* ============================================================ */}
-      {/* 9. Call-to-Action */}
+      {/* 10. Call-to-Action */}
       {/* ============================================================ */}
       <section className="bg-[#071B49] text-white py-16 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -1163,16 +1365,46 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
             </button>
             <button
               onClick={() => onNavigate?.('umrah')}
-              className="bg-[#21B96F] hover:bg-[#1ea362] text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md transition-colors cursor-pointer"
+              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl border border-white/20 transition-colors cursor-pointer"
             >
               [Visit Umrah Guide]
             </button>
+            <a
+              href="https://ektatraveling.tpx.gr/uNlKi2Qe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#21B96F] hover:bg-[#1ea362] text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md transition-colors cursor-pointer inline-flex items-center gap-1.5"
+            >
+              <ShieldCheck className="w-4 h-4" />
+              <span>Get EKTA Insurance</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+            </a>
+            <a
+              href="https://c10.travelpayouts.com/click?shmarker=737968&promo_id=2020&source_type=link&type=click"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl border border-white/20 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+            >
+              <Car className="w-4 h-4 text-[#FF8A2A]" />
+              <span>Car Rental</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+            </a>
+            <a
+              href="https://c120.travelpayouts.com/click?shmarker=737968&promo_id=8679&source_type=link&type=click"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl border border-white/20 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+            >
+              <Scale className="w-4 h-4 text-[#4DA3FF]" />
+              <span>Claim Compensation</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+            </a>
           </div>
         </div>
       </section>
 
       {/* ============================================================ */}
-      {/* 10. Footer Section */}
+      {/* 12. Footer Section */}
       {/* ============================================================ */}
       <footer className="bg-[#051336] text-white/80 border-t border-white/10 py-12 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">

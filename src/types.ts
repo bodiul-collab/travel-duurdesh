@@ -113,6 +113,13 @@ export interface Testimonial {
   date: string;
 }
 
+export interface FlightLeg {
+  id: string;
+  origin: string;
+  destination: string;
+  date: string;
+}
+
 export interface SearchFilterState {
   tab: BookingTabType;
   fromLocation: string;
@@ -124,6 +131,8 @@ export interface SearchFilterState {
   rooms: number;
   cabinClass: 'Economy' | 'Premium Economy' | 'Business' | 'First';
   hotelStars?: number;
+  tripType?: 'round' | 'oneWay' | 'multiCity';
+  multiLegs?: FlightLeg[];
 }
 
 export interface CurrencyConfig {

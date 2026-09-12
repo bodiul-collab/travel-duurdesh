@@ -39,35 +39,31 @@ export const CarRentalWidget: React.FC<CarRentalWidgetProps> = ({
     * {
       box-sizing: border-box;
     }
-    body {
+    html, body {
       margin: 0;
-      padding: 6px 10px;
+      padding: 6px;
       background: #FFFFFF;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 110px;
+      min-height: 200px;
     }
     #economy-widget-wrapper {
       width: 100%;
+      min-height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     iframe {
       width: 100% !important;
-      min-height: 90px !important;
       border: 0 !important;
-      border-radius: 12px;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
   <div id="economy-widget-wrapper">
-    <script async src="https://tpwdg.com/content?trs=570661&shmarker=737968&locale=en&width=100&height=30&powered_by=true&campaign_id=10&promo_id=2082" charset="utf-8" async="true"></script>
+    <script async src="https://tpwdg.com/content?trs=570661&shmarker=737968&locale=en&powered_by=true&border_radius=6&plain=true&show_logo=true&color_background=%23ffca28&color_button=%2355a539&color_text=%23000000&color_input_text=%23000000&color_button_text=%23ffffff&promo_id=4480&campaign_id=10" charset="utf-8"></script>
   </div>
 </body>
 </html>
@@ -135,12 +131,12 @@ export const CarRentalWidget: React.FC<CarRentalWidgetProps> = ({
             </span>
           </div>
 
-          <div className="w-full relative min-h-[105px] bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div className="w-full relative min-h-[220px] bg-white rounded-xl border border-gray-200 overflow-hidden">
             <iframe
-              title="EconomyBookings Car Rental Banner"
+              title="EconomyBookings Car Rental Search Widget"
               srcDoc={iframeHtml}
-              className="w-full h-[110px] border-0"
-              scrolling="no"
+              className="w-full min-h-[220px] sm:min-h-[240px] h-[240px] border-0"
+              scrolling="auto"
               onLoad={() => setIframeLoaded(true)}
             />
           </div>
