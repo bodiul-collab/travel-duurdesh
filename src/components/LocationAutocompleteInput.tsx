@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { MapPin, X, Plane, Check, Search, Globe, ChevronDown } from 'lucide-react';
+import { MapPin, X, Plane, Check, Search, Globe, ChevronDown, Loader2 } from 'lucide-react';
 import {
   searchAirports,
   AirportOption,
@@ -8,6 +8,12 @@ import {
   AIRPORT_REGIONS,
   GLOBAL_AIRPORTS
 } from '../data/airportsData';
+import {
+  fetchAviasalesPlaces,
+  AviasalesPlace,
+  getCountryFlagEmoji,
+  mapPlaceToAirportOption
+} from '../utils/aviasalesAutocomplete';
 
 interface LocationAutocompleteInputProps {
   label: string;
@@ -29,6 +35,8 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState(value);
   const [selectedRegion, setSelectedRegion] = useState<string>('all');
+  const [remotePlaces, setRemotePlaces] = useState<AviasalesPlace[]>([]);
+  const [isLoadingRemote, setIsLoadingRemote] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -40,10 +48,80 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
   // Clean typed query
   const cleanQuery = searchQuery.trim();
 
-  // Search filtered airports (takes region & current value into account so it doesn't narrow down to 1 airport when just opened)
-  const suggestions = useMemo(() => {
+  // Query Aviasales live IATA database whenever user types
+  useEffect(() => {
+    if (cleanQuery.length < 2 || cleanQuery.toLowerCase() === value.toLowerCase()) {
+      setRemotePlaces([]);
+      setIsLoadingRemote(false);
+      return;
+    }
+
+    const controller = new AbortController();
+    setIsLoadingRemote(true);
+
+    const timer = setTimeout(async () => {
+      try {
+        const places = await fetchAviasalesPlaces(cleanQuery, controller.signal);
+        setRemotePlaces(places);
+      } catch {
+        setRemotePlaces([]);
+      } finally {
+        setIsLoadingRemote(false);
+      }
+    }, 180);
+
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [cleanQuery, value]);
+
+  // Search filtered local airports
+  const localSuggestions = useMemo(() => {
     return searchAirports(searchQuery, selectedRegion, value);
   }, [searchQuery, selectedRegion, value]);
+
+  // Combine live Aviasales IATA places with local airports
+  const suggestions: (AirportOption & { countryCode?: string; isLiveIata?: boolean })[] = useMemo(() => {
+    if (!cleanQuery || cleanQuery.toLowerCase() === value.toLowerCase()) {
+      return localSuggestions;
+    }
+
+    if (remotePlaces.length > 0) {
+      const seenCodes = new Set<string>();
+      const combined: (AirportOption & { countryCode?: string; isLiveIata?: boolean })[] = [];
+
+      // 1. Add remote places from Aviasales IATA database
+      for (const place of remotePlaces) {
+        if (!seenCodes.has(place.code.toUpperCase())) {
+          seenCodes.add(place.code.toUpperCase());
+          const opt = mapPlaceToAirportOption(place);
+          combined.push({
+            ...opt,
+            countryCode: place.country_code,
+            isLiveIata: true
+          });
+        }
+      }
+
+      // 2. Add any remaining local suggestions that weren't in remote
+      for (const local of localSuggestions) {
+        if (!seenCodes.has(local.code.toUpperCase())) {
+          seenCodes.add(local.code.toUpperCase());
+          combined.push(local);
+        }
+      }
+
+      // Filter by region if user clicked a specific region tab
+      if (selectedRegion !== 'all') {
+        return combined.filter((item) => item.region === selectedRegion);
+      }
+
+      return combined;
+    }
+
+    return localSuggestions;
+  }, [localSuggestions, remotePlaces, cleanQuery, value, selectedRegion]);
 
   // Check if typed text could be a custom 3-letter airport code
   const isCustomCode = cleanQuery.length >= 2 && cleanQuery.length <= 4;
@@ -101,6 +179,7 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
     e.stopPropagation();
     setSearchQuery('');
     onChange('');
+    setRemotePlaces([]);
     inputRef.current?.focus();
     setIsOpen(true);
   };
@@ -203,15 +282,22 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
       {/* Autocomplete Dropdown List */}
       {isOpen && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 p-2.5 z-50 max-h-[380px] overflow-y-auto custom-scrollbar animate-fadeIn">
-          {/* Header Banner with Freeform indicator */}
+          {/* Header Banner with Freeform indicator & Aviasales Live IATA status */}
           <div className="flex items-center justify-between px-2.5 py-1.5 bg-[#F0F7FF] rounded-xl border border-[#D0E6FF] mb-2">
             <div className="flex items-center gap-1.5 text-xs text-[#0969E8] font-bold">
-              <Plane className="w-3.5 h-3.5 text-[#0969E8]" />
-              <span>Airport Search & Codes</span>
+              <Globe className="w-3.5 h-3.5 text-[#0969E8]" />
+              <span>Aviasales Global IATA Database</span>
             </div>
-            <span className="text-[10px] bg-[#0969E8] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
-              Freeform Typing Enabled
-            </span>
+            {isLoadingRemote ? (
+              <span className="flex items-center gap-1 text-[10px] text-[#0969E8] font-bold">
+                <Loader2 className="w-3 h-3 animate-spin" />
+                <span>Searching Worldwide...</span>
+              </span>
+            ) : (
+              <span className="text-[10px] bg-[#0969E8] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                9,000+ Worldwide Hubs
+              </span>
+            )}
           </div>
 
           {/* Quick Select Popular Codes Pills Bar */}
@@ -304,10 +390,13 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
                   value.toLowerCase() === airport.city.toLowerCase();
 
                 const isIah = airport.code === 'IAH';
+                const flagEmoji = airport.countryCode
+                  ? getCountryFlagEmoji(airport.countryCode)
+                  : '';
 
                 return (
                   <button
-                    key={`${airport.code}-${airport.city}`}
+                    key={`${airport.code}-${airport.city}-${airport.name}`}
                     type="button"
                     onClick={() => handleSelectAirport(airport)}
                     className={`w-full text-left px-3 py-2 rounded-xl text-xs flex items-center justify-between gap-2 transition-all cursor-pointer ${
@@ -332,10 +421,16 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
                       </span>
                       <div className="truncate">
                         <div className="font-bold text-[#101C36] truncate flex items-center gap-1.5">
+                          {flagEmoji && <span className="text-sm">{flagEmoji}</span>}
                           <span>{airport.city}</span>
                           <span className="font-normal text-gray-500">
                             ({airport.country})
                           </span>
+                          {airport.isLiveIata && (
+                            <span className="text-[9px] bg-blue-50 text-[#0969E8] border border-blue-200/60 font-semibold px-1.5 py-0.2 rounded-md">
+                              Live IATA
+                            </span>
+                          )}
                           {isIah && (
                             <span className="text-[9px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.2 rounded-md">
                               Houston Intercontinental

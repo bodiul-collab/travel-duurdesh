@@ -75,8 +75,9 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'flights', name: 'Flights', href: '#flights' },
     { id: 'hotels', name: 'Hotels', href: '#hotels' },
     { id: 'umrah', name: 'Umrah', href: '#umrah' },
-    { id: 'food', name: 'Food & Travel', href: '#food' },
-    { id: 'tools', name: 'Travel Tools', href: '#tools' },
+    { id: 'food', name: 'Food', href: '#food' },
+    { id: 'blog', name: 'Travel & Food', href: '#blog' },
+    { id: 'tools', name: 'Tools', href: '#tools' },
     { id: 'destinations', name: 'Destinations', href: '#destinations' },
     { id: 'contact', name: 'Contact', href: '#contact' }
   ];
@@ -338,14 +339,18 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </button>
 
-            <button
+            <a
               id="header-book-now-btn"
-              onClick={onBookNowClick}
-              className="hidden sm:inline-flex items-center gap-2 bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-semibold text-sm px-4 sm:px-5 py-2.5 rounded-xl shadow-md shadow-blue-600/20 transition-all duration-150 whitespace-nowrap shrink-0"
+              href="#flights"
+              onClick={(e) => {
+                e.preventDefault();
+                onBookNowClick();
+              }}
+              className="hidden sm:inline-flex items-center gap-2 bg-[#0969E8] hover:bg-[#0759c5] active:scale-[0.98] text-white font-semibold text-sm px-4 sm:px-5 py-2.5 rounded-xl shadow-md shadow-blue-600/20 transition-all duration-150 whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Plane className="w-4 h-4" />
               <span>{t('bookNow')}</span>
-            </button>
+            </a>
 
             {/* Mobile Hamburger Toggle */}
             <button
@@ -387,16 +392,18 @@ export const Header: React.FC<HeaderProps> = ({
                 );
               })}
               <div className="pt-4 mt-2 border-t border-gray-100 flex flex-col gap-3">
-                <button
-                  onClick={() => {
+                <a
+                  href="#flights"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setMobileMenuOpen(false);
                     onBookNowClick();
                   }}
-                  className="w-full flex items-center justify-center gap-2 bg-[#0969E8] text-white font-semibold text-sm py-3 rounded-xl shadow-md"
+                  className="w-full flex items-center justify-center gap-2 bg-[#0969E8] hover:bg-[#0759c5] text-white font-semibold text-sm py-3 rounded-xl shadow-md cursor-pointer"
                 >
                   <Plane className="w-4 h-4" />
                   <span>{t('bookNow')}</span>
-                </button>
+                </a>
 
                 <div className="flex items-center justify-between text-xs text-[#5E6B82] px-2 py-1">
                   <button

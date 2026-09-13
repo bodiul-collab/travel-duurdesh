@@ -289,6 +289,133 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
       }
     ]
   },
+  blog: {
+    title: 'Travel & Food Blog | Travel DuurDesh',
+    description: 'Comprehensive travel guides, authentic halal food culture, Umrah pilgrimage insights, and practical packing and budget tips by Travel DuurDesh Editorial Team.',
+    canonicalUrl: `${BASE_URL}/blog`,
+    ogType: 'website',
+    ogImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food Blog', item: `${BASE_URL}/blog` }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Travel & Food Blog',
+        url: `${BASE_URL}/blog`,
+        description: 'Comprehensive travel guides, halal dining discoveries, pilgrimage advice, and practical travel tips.'
+      }
+    ]
+  },
+  'blog-makkah': {
+    title: 'Makkah Travel Guide for First-Time Visitors | Travel DuurDesh',
+    description: 'Complete, respectful first-timer guide to visiting Makkah: Haram navigation, airport transit from Jeddah, hotel selection, halal dining, packing, and FAQs.',
+    canonicalUrl: 'https://travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors',
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${BASE_URL}/blog` },
+          { '@type': 'ListItem', position: 3, name: 'Travel Guides', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'Makkah Travel Guide for First-Time Visitors',
+            item: 'https://travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors'
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'Makkah Travel Guide for First-Time Visitors',
+        description: 'Complete, respectful first-timer guide to visiting Makkah: Haram navigation, airport transit from Jeddah, hotel selection, halal dining, packing, and FAQs.',
+        image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'TravelDuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-09-13',
+        dateModified: '2026-09-13',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors'
+        }
+      }
+    ]
+  },
+  'blog-umrah-first-time': {
+    title: 'First-Time Umrah Travel Guide | TravelDuurDesh',
+    description: 'Planning your first Umrah? Explore practical travel preparation tips, packing advice, transportation considerations, accommodation planning, and useful guidance for your journey.',
+    canonicalUrl: 'https://travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide',
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/blog` },
+          { '@type': 'ListItem', position: 3, name: 'Umrah Travel', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'First-Time Umrah Travel Guide',
+            item: 'https://travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide'
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'First-Time Umrah Travel Guide: What Every Traveler Should Know',
+        description: 'Planning your first Umrah? Explore practical travel preparation tips, packing advice, transportation considerations, accommodation planning, and useful guidance for your journey.',
+        image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'TravelDuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-09-13',
+        dateModified: '2026-09-13',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide'
+        }
+      }
+    ]
+  },
   '404': {
     title: 'Page Not Found (404) | Travel DuurDesh',
     description: 'The requested page could not be found on Travel DuurDesh. Return to our homepage or explore our destination guides, flights, hotels, and Umrah resources.',

@@ -27,6 +27,10 @@ import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { AboutPage } from './components/AboutPage';
 import { ContactPage } from './components/ContactPage';
 import { TermsPage } from './components/TermsPage';
+import { BlogHomePage } from './components/BlogHomePage';
+import { BlogPostDetailPage } from './components/BlogPostDetailPage';
+import { UmrahFirstTimeArticlePage } from './components/UmrahFirstTimeArticlePage';
+import { BLOG_POSTS, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE } from './data/blogData';
 import { applySEO, SEO_PAGES } from './utils/seo';
 import { AffiliateRedirectModal } from './components/AffiliateRedirectModal';
 import { QuickViewModal } from './components/QuickViewModal';
@@ -159,10 +163,15 @@ export default function App() {
   });
 
   const [activePage, setActivePage] = useState<string>(() => {
-    if (typeof window !== 'undefined' && window.location.hash) {
-      const hash = window.location.hash.replace('#', '');
-      if (['home', 'flights', 'hotels', 'umrah', 'food', 'tools', 'destinations', 'contact'].includes(hash)) {
-        return hash;
+    if (typeof window !== 'undefined') {
+      const cleanPath = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+      const rawHash = window.location.hash.replace('#', '').toLowerCase();
+      const routeKey = cleanPath || rawHash;
+      if (routeKey.startsWith('blog/')) {
+        return routeKey;
+      }
+      if (['home', 'flights', 'hotels', 'umrah', 'food', 'tools', 'destinations', 'contact', 'blog', 'privacy', 'about', 'terms'].includes(routeKey)) {
+        return routeKey;
       }
     }
     return 'home';
@@ -277,7 +286,17 @@ export default function App() {
 
   // Apply Dynamic SEO & Structured Data per page
   useEffect(() => {
-    if (activePage !== 'destinations') {
+    if (activePage === 'blog') {
+      applySEO(SEO_PAGES.blog);
+    } else if (activePage.startsWith('blog/')) {
+      if (activePage.includes('first-time-umrah-travel-guide')) {
+        applySEO(SEO_PAGES['blog-umrah-first-time']);
+      } else if (activePage.includes('makkah-travel-guide-first-time-visitors')) {
+        applySEO(SEO_PAGES['blog-makkah']);
+      } else {
+        applySEO(SEO_PAGES.blog);
+      }
+    } else if (activePage !== 'destinations') {
       const config = SEO_PAGES[activePage] || SEO_PAGES.home;
       applySEO(config);
     }
@@ -286,14 +305,20 @@ export default function App() {
   // Sync URL pathname and hash changes with active page state
   useEffect(() => {
     const handleRouteSync = () => {
-      // 1. Check clean pathname first (e.g. /flights, /hotels, /umrah, /about)
-      const pathSegment = window.location.pathname.replace(/^\/+|\/+$/g, '').split('/')[0].toLowerCase();
-      // 2. Check hash (e.g. #flights, #destinations)
+      // 1. Check clean pathname first (e.g. /flights, /hotels, /umrah, /blog, /blog/travel-guides/makkah...)
+      const rawPath = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+      // 2. Check hash (e.g. #flights, #blog)
       const rawHash = window.location.hash.replace('#', '').toLowerCase();
 
-      const routeKey = pathSegment || rawHash;
+      const routeKey = rawPath || rawHash;
 
-      if (routeKey.startsWith('destinations')) {
+      if (routeKey.startsWith('blog/')) {
+        setActivePage(routeKey);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (routeKey === 'blog') {
+        setActivePage('blog');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (routeKey.startsWith('destinations')) {
         setActivePage('destinations');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (routeKey === 'privacy' || routeKey === 'privacy-policy') {
@@ -332,12 +357,25 @@ export default function App() {
       'food',
       'tools',
       'destinations',
+      'blog',
       'about',
       'contact',
       'terms',
       'privacy',
       'home'
     ];
+
+    if (pageId.startsWith('blog/')) {
+      setActivePage(pageId);
+      window.location.hash = `#${pageId}`;
+      try {
+        if (window.location.pathname !== `/${pageId}`) {
+          window.history.pushState(null, '', `/${pageId}`);
+        }
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
 
     if (validPages.includes(pageId)) {
       setActivePage(pageId);
@@ -372,12 +410,7 @@ export default function App() {
         onSelectLanguage={handleSelectLanguage}
         onOpenLanguageModal={() => setIsLanguageModalOpen(true)}
         onBookNowClick={() => {
-          if (activePage === 'hotels') {
-            const el = document.getElementById('popular-destinations-section');
-            el?.scrollIntoView({ behavior: 'smooth' });
-          } else {
-            scrollToSection('destinations');
-          }
+          handleNavigate('flights');
         }}
         isCurrencyAutoDetected={isCurrencyAutoDetected}
         onResetCurrencyToAuto={handleResetCurrencyToAuto}
@@ -431,6 +464,22 @@ export default function App() {
           />
         ) : activePage === 'privacy' ? (
           <PrivacyPolicyPage
+            onNavigate={handleNavigate}
+          />
+        ) : activePage === 'blog' ? (
+          <BlogHomePage
+            onNavigate={handleNavigate}
+          />
+        ) : activePage.includes('first-time-umrah-travel-guide') ? (
+          <UmrahFirstTimeArticlePage
+            post={UMRAH_FIRST_TIME_ARTICLE}
+            onNavigate={handleNavigate}
+          />
+        ) : activePage.startsWith('blog/') ? (
+          <BlogPostDetailPage
+            post={
+              BLOG_POSTS.find(p => activePage.includes(p.slug)) || MAKKAH_ARTICLE
+            }
             onNavigate={handleNavigate}
           />
         ) : (
