@@ -43,6 +43,7 @@ import {
   AviasalesPlace,
   getCountryFlagEmoji
 } from '../utils/aviasalesAutocomplete';
+import { registerPlaceIata } from '../utils/iataRegistry';
 
 import { Breadcrumbs } from './Breadcrumbs';
 import { DESTINATION_SEO, SEO_PAGES, applySEO } from '../utils/seo';
@@ -121,6 +122,7 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
   };
 
   const handleSelectGlobalPlace = (place: AviasalesPlace) => {
+    registerPlaceIata(place.city_name, place.name, place.code);
     setSelectedGlobalPlace(place);
     setIsSearchFocused(false);
     setSearchQuery(`${place.city_name || place.name} (${place.code.toUpperCase()})`);

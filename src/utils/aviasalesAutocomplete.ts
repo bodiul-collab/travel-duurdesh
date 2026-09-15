@@ -4,6 +4,7 @@
  */
 
 import { AirportOption, GLOBAL_AIRPORTS } from '../data/airportsData';
+import { registerPlaceIata } from './iataRegistry';
 
 export interface AviasalesPlace {
   id: string;
@@ -76,6 +77,11 @@ export async function fetchAviasalesPlaces(
     const validPlaces = (Array.isArray(rawData) ? rawData : []).filter(
       (item) => item && typeof item.code === 'string' && item.code.length === 3
     );
+
+    // Register all live places into the global IATA registry for bulletproof mapping
+    validPlaces.forEach((place) => {
+      registerPlaceIata(place.city_name, place.name, place.code);
+    });
 
     // Cache valid results
     placesCache.set(clean, {

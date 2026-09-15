@@ -102,7 +102,33 @@ export const UMRAH_FIRST_TIME_ARTICLE: BlogPost = {
   tags: ['Umrah Travel', 'First-Time Umrah', 'Pilgrim Planning', 'Makkah', 'Madinah', 'Travel Preparation']
 };
 
+export const UMRAH_PACKING_ARTICLE: BlogPost = {
+  slug: 'what-to-pack-for-umrah',
+  categorySlug: 'umrah-travel',
+  categoryName: 'Umrah Travel',
+  title: 'What to Pack for Umrah: A Practical Packing Checklist',
+  metaTitle: 'What to Pack for Umrah: Complete Packing Checklist | TravelDuurDesh',
+  metaDescription: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
+  canonicalUrl: 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah',
+  summary: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
+  author: {
+    name: 'TravelDuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-09-13',
+  lastUpdatedDate: '2026-09-13',
+  readingTime: '15 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Travel essentials prepared for an Umrah journey',
+    caption: 'Practical packing essentials, travel documents, and organized baggage prepared for an Umrah journey'
+  },
+  tags: ['Umrah Travel', 'Umrah Packing Checklist', 'Pilgrim Travel', 'Makkah', 'Madinah', 'Travel Essentials']
+};
+
 export const BLOG_POSTS: BlogPost[] = [
   UMRAH_FIRST_TIME_ARTICLE,
+  UMRAH_PACKING_ARTICLE,
   MAKKAH_ARTICLE
 ];

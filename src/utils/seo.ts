@@ -416,6 +416,57 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
       }
     ]
   },
+  'blog-what-to-pack-for-umrah': {
+    title: 'What to Pack for Umrah: Complete Packing Checklist | TravelDuurDesh',
+    description: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
+    canonicalUrl: 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah',
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/blog` },
+          { '@type': 'ListItem', position: 3, name: 'Umrah Travel', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'What to Pack for Umrah',
+            item: 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah'
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'What to Pack for Umrah: A Practical Packing Checklist',
+        description: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
+        image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'TravelDuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-09-13',
+        dateModified: '2026-09-13',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah'
+        }
+      }
+    ]
+  },
   '404': {
     title: 'Page Not Found (404) | Travel DuurDesh',
     description: 'The requested page could not be found on Travel DuurDesh. Return to our homepage or explore our destination guides, flights, hotels, and Umrah resources.',

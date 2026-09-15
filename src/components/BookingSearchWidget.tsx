@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Plane,
   Building,
@@ -57,6 +57,30 @@ export const BookingSearchWidget: React.FC<BookingSearchWidgetProps> = ({
     { id: 'b-leg-1', origin: 'New York (JFK)', destination: 'Jeddah (JED)', date: getFutureDateStr(7) },
     { id: 'b-leg-2', origin: 'Madinah (MED)', destination: 'New York (JFK)', date: getFutureDateStr(17) }
   ]);
+
+  // Handle dynamic pre-fill from global destination search or guides
+  useEffect(() => {
+    const handlePrefill = (e: Event) => {
+      const customEvent = e as CustomEvent<{
+        to?: string;
+        from?: string;
+        tripType?: 'round' | 'oneWay' | 'multiCity';
+      }>;
+      if (customEvent.detail?.to) {
+        setToLocation(customEvent.detail.to);
+      }
+      if (customEvent.detail?.from) {
+        setFromLocation(customEvent.detail.from);
+      }
+      if (customEvent.detail?.tripType) {
+        setFlightTripType(customEvent.detail.tripType);
+      }
+      setActiveTab('flights');
+    };
+
+    window.addEventListener('prefill-flight-destination', handlePrefill);
+    return () => window.removeEventListener('prefill-flight-destination', handlePrefill);
+  }, []);
 
   // UI toggle states for popups/dropdowns
   const [showTravelerDropdown, setShowTravelerDropdown] = useState(false);

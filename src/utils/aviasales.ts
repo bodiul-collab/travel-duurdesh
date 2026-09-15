@@ -1,3 +1,5 @@
+import { safeExtractIata } from './iataRegistry';
+
 /**
  * Aviasales & Travelpayouts Affiliate Deep-Link & URL Generator
  * Affiliate Partner ID / Marker: 737968
@@ -8,72 +10,12 @@ export const AVIASALES_AFFILIATE_MARKER = '737968';
 export const TRAVELPAYOUTS_PROMO_ID = '7879';
 export const TRAVELPAYOUTS_TRS = '570661';
 
-const KNOWN_IATA_MAP: Record<string, string> = {
-  london: 'LHR',
-  heathrow: 'LHR',
-  gatwick: 'LGW',
-  'new york': 'JFK',
-  jfk: 'JFK',
-  newark: 'EWR',
-  jeddah: 'JED',
-  madinah: 'MED',
-  medina: 'MED',
-  dubai: 'DXB',
-  dhaka: 'DAC',
-  doha: 'DOH',
-  istanbul: 'IST',
-  paris: 'CDG',
-  'kuala lumpur': 'KUL',
-  singapore: 'SIN',
-  cairo: 'CAI',
-  riyadh: 'RUH',
-  manchester: 'MAN',
-  birmingham: 'BHX',
-  toronto: 'YYZ',
-  chicago: 'ORD',
-  losangeles: 'LAX',
-  houston: 'IAH',
-  iah: 'IAH',
-  bangkok: 'BKK',
-  delhi: 'DEL',
-  mumbai: 'BOM',
-  karachi: 'KHI',
-  islamabad: 'ISB',
-  lahore: 'LHE',
-  colombo: 'CMB',
-  jakarta: 'CGK'
-};
-
 /**
- * Extracts or resolves a 3-letter IATA code from user input or deal titles
+ * Extracts or resolves a 3-letter IATA code from user input, city names, or deal titles
+ * Uses the comprehensive global IATA registry to prevent booking errors.
  */
 export function resolveIataCode(input: string, defaultCode = 'LHR'): string {
-  if (!input) return defaultCode;
-
-  // 1. If multiple codes like "JFK / LHR", take the first segment
-  const firstPart = input.split('/')[0].trim();
-
-  // 2. Check for parenthesized code, e.g. "Jeddah (JED)" or "Houston (iah)"
-  const parenMatch = firstPart.match(/\(([A-Za-z]{3})\)/);
-  if (parenMatch) return parenMatch[1].toUpperCase();
-
-  // 3. Check for standalone 3-letter code (case-insensitive, e.g. "iah", "IAH", "med")
-  const codeMatch = firstPart.match(/\b([A-Za-z]{3})\b/);
-  if (codeMatch && codeMatch[1].length === 3) {
-    return codeMatch[1].toUpperCase();
-  }
-
-  // 4. Fuzzy map against known cities
-  const clean = firstPart.toLowerCase().replace(/[^a-z\s]/g, '');
-  for (const [cityName, iata] of Object.entries(KNOWN_IATA_MAP)) {
-    if (clean.includes(cityName)) {
-      return iata;
-    }
-  }
-
-  // 5. Fallback clean 3 chars
-  const fallback = firstPart.replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase();
-  return fallback.length === 3 ? fallback : defaultCode;
+  return safeExtractIata(input, defaultCode);
 }
 
 /**
@@ -124,8 +66,17 @@ export function buildAviasalesRouteUrl(
   destination: string,
   options?: AviasalesRouteOptions
 ): string {
-  const originIata = resolveIataCode(origin, 'LHR');
-  const destIata = resolveIataCode(destination, 'JED');
+  let originIata = resolveIataCode(origin, 'LHR');
+  let destIata = resolveIataCode(destination, 'JED');
+
+  // Strict format guard: MUST be exactly 3 uppercase ASCII letters
+  if (!/^[A-Z]{3}$/.test(originIata)) originIata = 'LHR';
+  if (!/^[A-Z]{3}$/.test(destIata)) destIata = 'JED';
+
+  // Prevent same origin and destination which causes Aviasales search errors
+  if (originIata === destIata) {
+    destIata = originIata === 'JED' ? 'MED' : 'JED';
+  }
 
   const departDDMM = formatAviasalesDDMM(options?.departDate, 21);
   let routeParams = `${originIata}${departDDMM}${destIata}`;
@@ -187,11 +138,20 @@ export function buildAviasalesMultiCityUrl(
   const cabinClassPrefix = options?.cabinClass && options.cabinClass !== 'y' ? options.cabinClass : '';
   const passengerSuffix = `${cabinClassPrefix}${adults}`;
 
-  const resolvedLegs = legs.map((leg, idx) => ({
-    originIata: resolveIataCode(leg.origin, idx === 0 ? 'JFK' : 'JED'),
-    destIata: resolveIataCode(leg.destination, idx === 0 ? 'JED' : 'JFK'),
-    departDDMM: formatAviasalesDDMM(leg.date, 14 + idx * 7)
-  }));
+  const resolvedLegs = legs.map((leg, idx) => {
+    let originIata = resolveIataCode(leg.origin, idx === 0 ? 'JFK' : 'JED');
+    let destIata = resolveIataCode(leg.destination, idx === 0 ? 'JED' : 'JFK');
+    if (!/^[A-Z]{3}$/.test(originIata)) originIata = idx === 0 ? 'JFK' : 'JED';
+    if (!/^[A-Z]{3}$/.test(destIata)) destIata = idx === 0 ? 'JED' : 'JFK';
+    if (originIata === destIata) {
+      destIata = originIata === 'JED' ? 'MED' : 'JED';
+    }
+    return {
+      originIata,
+      destIata,
+      departDDMM: formatAviasalesDDMM(leg.date, 14 + idx * 7)
+    };
+  });
 
   // Direct Round-Trip Detection:
   // If there are exactly 2 legs and the second leg returns to the first leg's origin:

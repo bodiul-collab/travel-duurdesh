@@ -14,6 +14,7 @@ import {
   getCountryFlagEmoji,
   mapPlaceToAirportOption
 } from '../utils/aviasalesAutocomplete';
+import { registerPlaceIata } from '../utils/iataRegistry';
 
 interface LocationAutocompleteInputProps {
   label: string;
@@ -149,6 +150,7 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
   };
 
   const handleSelectAirport = (airport: AirportOption) => {
+    registerPlaceIata(airport.city, airport.name, airport.code);
     const formatted = formatAirportSelection(airport);
     setSearchQuery(formatted);
     onChange(formatted);
@@ -156,7 +158,8 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
   };
 
   const handleSelectQuickCode = (code: string, city: string) => {
-    const formatted = `${city} (${code})`;
+    registerPlaceIata(city, undefined, code);
+    const formatted = `${city} (${code.toUpperCase()})`;
     setSearchQuery(formatted);
     onChange(formatted);
     setIsOpen(false);
@@ -164,6 +167,7 @@ export const LocationAutocompleteInput: React.FC<LocationAutocompleteInputProps>
 
   const handleSelectCustomCode = () => {
     const code = uppercaseCustomCode;
+    registerPlaceIata(undefined, undefined, code);
     // Check if we know this code in GLOBAL_AIRPORTS
     const known = GLOBAL_AIRPORTS.find((a) => a.code.toUpperCase() === code);
     if (known) {

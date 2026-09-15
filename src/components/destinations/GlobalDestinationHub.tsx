@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { AviasalesPlace, getCountryFlagEmoji } from '../../utils/aviasalesAutocomplete';
 import { buildAviasalesRouteUrl } from '../../utils/aviasales';
+import { registerPlaceIata, safeExtractIata } from '../../utils/iataRegistry';
 import { CurrencyConfig } from '../../types';
 
 interface GlobalDestinationHubProps {
@@ -36,7 +37,10 @@ export const GlobalDestinationHub: React.FC<GlobalDestinationHubProps> = ({
   const [selectedOrigin, setSelectedOrigin] = useState<'IAH' | 'LHR' | 'JFK' | 'DAC' | 'DXB'>('IAH');
   const cityName = place.city_name || place.name;
   const flagEmoji = getCountryFlagEmoji(place.country_code);
-  const iataCode = place.code.toUpperCase();
+
+  // Guarantee valid 3-letter IATA code and register in global registry
+  registerPlaceIata(place.city_name, place.name, place.code);
+  const iataCode = safeExtractIata(place.code, 'JED');
 
   const originNames: Record<string, string> = {
     IAH: 'Houston (IAH)',
@@ -295,7 +299,19 @@ export const GlobalDestinationHub: React.FC<GlobalDestinationHubProps> = ({
             </p>
             <button
               type="button"
-              onClick={() => onNavigate('flights')}
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(
+                    new CustomEvent('prefill-flight-destination', {
+                      detail: {
+                        to: `${cityName} (${iataCode})`,
+                        tripType: 'multiCity'
+                      }
+                    })
+                  );
+                }
+                onNavigate('flights');
+              }}
               className="text-xs text-[#0969E8] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer pt-1"
             >
               <span>Open Multi-City Builder</span>

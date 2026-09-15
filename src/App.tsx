@@ -30,7 +30,8 @@ import { TermsPage } from './components/TermsPage';
 import { BlogHomePage } from './components/BlogHomePage';
 import { BlogPostDetailPage } from './components/BlogPostDetailPage';
 import { UmrahFirstTimeArticlePage } from './components/UmrahFirstTimeArticlePage';
-import { BLOG_POSTS, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE } from './data/blogData';
+import { UmrahPackingChecklistArticlePage } from './components/UmrahPackingChecklistArticlePage';
+import { BLOG_POSTS, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE, UMRAH_PACKING_ARTICLE } from './data/blogData';
 import { applySEO, SEO_PAGES } from './utils/seo';
 import { AffiliateRedirectModal } from './components/AffiliateRedirectModal';
 import { QuickViewModal } from './components/QuickViewModal';
@@ -291,6 +292,8 @@ export default function App() {
     } else if (activePage.startsWith('blog/')) {
       if (activePage.includes('first-time-umrah-travel-guide')) {
         applySEO(SEO_PAGES['blog-umrah-first-time']);
+      } else if (activePage.includes('what-to-pack-for-umrah')) {
+        applySEO(SEO_PAGES['blog-what-to-pack-for-umrah']);
       } else if (activePage.includes('makkah-travel-guide-first-time-visitors')) {
         applySEO(SEO_PAGES['blog-makkah']);
       } else {
@@ -468,6 +471,11 @@ export default function App() {
           />
         ) : activePage === 'blog' ? (
           <BlogHomePage
+            onNavigate={handleNavigate}
+          />
+        ) : activePage.includes('what-to-pack-for-umrah') ? (
+          <UmrahPackingChecklistArticlePage
+            post={UMRAH_PACKING_ARTICLE}
             onNavigate={handleNavigate}
           />
         ) : activePage.includes('first-time-umrah-travel-guide') ? (
