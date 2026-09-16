@@ -147,7 +147,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigate }) => {
             <div className="p-4 bg-[#F8FAFC] border border-gray-200 rounded-2xl text-xs text-[#071B49] space-y-1">
               <div className="font-bold">Travel DuurDesh Legal & Editorial Team</div>
               <div>Official Email: <a href="mailto:contact@travelduurdesh.com" className="text-[#0969E8] font-bold hover:underline">contact@travelduurdesh.com</a></div>
-              <div>Website: <a href="https://travelduurdesh.com" className="text-[#0969E8] font-bold hover:underline">https://travelduurdesh.com</a></div>
+              <div>Website: <a href="https://www.travelduurdesh.com" className="text-[#0969E8] font-bold hover:underline">https://www.travelduurdesh.com</a></div>
             </div>
           </section>
         </article>

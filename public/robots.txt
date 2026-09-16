@@ -1,5 +1,37 @@
+# robots.txt for Travel DuurDesh
+# Canonical Domain: https://www.travelduurdesh.com
+# Compatible with Google Search Console & Bing Webmaster Tools
+
 User-agent: *
 Allow: /
-Disallow: /api/
 
-Sitemap: https://travelduurdesh.com/sitemap.xml
+# Disallowed internal endpoints, APIs, and administrative utilities
+Disallow: /api/
+Disallow: /admin/
+Disallow: /search
+Disallow: /404
+Disallow: /*?*q=
+Disallow: /*?*query=
+Disallow: /*?*search=
+Disallow: /*?*filter=
+Disallow: /*?*sort=
+
+# Specific rules for Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /search
+Disallow: /404
+
+# Specific rules for Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /search
+Disallow: /404
+Crawl-delay: 1
+
+# Master Sitemap Index
+Sitemap: https://www.travelduurdesh.com/sitemap.xml

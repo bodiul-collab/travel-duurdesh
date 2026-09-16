@@ -7,8 +7,8 @@ export interface RouteSEOConfig {
   jsonLd?: object[];
 }
 
-export const BASE_URL = 'https://travelduurdesh.com';
-export const DEFAULT_OG_IMAGE = 'https://travelduurdesh.com/og-image.jpg';
+export const BASE_URL = 'https://www.travelduurdesh.com';
+export const DEFAULT_OG_IMAGE = 'https://www.travelduurdesh.com/og-image.jpg';
 
 // Common Organization Schema
 export const ORGANIZATION_SCHEMA = {
@@ -317,7 +317,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
   'blog-makkah': {
     title: 'Makkah Travel Guide for First-Time Visitors | Travel DuurDesh',
     description: 'Complete, respectful first-timer guide to visiting Makkah: Haram navigation, airport transit from Jeddah, hotel selection, halal dining, packing, and FAQs.',
-    canonicalUrl: 'https://travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors',
+    canonicalUrl: `${BASE_URL}/blog/travel-guides/makkah-travel-guide-first-time-visitors`,
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1600&q=85',
     jsonLd: [
@@ -333,7 +333,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
             '@type': 'ListItem',
             position: 4,
             name: 'Makkah Travel Guide for First-Time Visitors',
-            item: 'https://travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors'
+            item: `${BASE_URL}/blog/travel-guides/makkah-travel-guide-first-time-visitors`
           }
         ]
       },
@@ -360,7 +360,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         dateModified: '2026-09-13',
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': 'https://travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors'
+          '@id': `${BASE_URL}/blog/travel-guides/makkah-travel-guide-first-time-visitors`
         }
       }
     ]
@@ -368,7 +368,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
   'blog-umrah-first-time': {
     title: 'First-Time Umrah Travel Guide | TravelDuurDesh',
     description: 'Planning your first Umrah? Explore practical travel preparation tips, packing advice, transportation considerations, accommodation planning, and useful guidance for your journey.',
-    canonicalUrl: 'https://travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide',
+    canonicalUrl: `${BASE_URL}/blog/umrah-travel/first-time-umrah-travel-guide`,
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1600&q=85',
     jsonLd: [
@@ -384,7 +384,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
             '@type': 'ListItem',
             position: 4,
             name: 'First-Time Umrah Travel Guide',
-            item: 'https://travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide'
+            item: `${BASE_URL}/blog/umrah-travel/first-time-umrah-travel-guide`
           }
         ]
       },
@@ -411,7 +411,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         dateModified: '2026-09-13',
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': 'https://travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide'
+          '@id': `${BASE_URL}/blog/umrah-travel/first-time-umrah-travel-guide`
         }
       }
     ]
@@ -419,7 +419,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
   'blog-what-to-pack-for-umrah': {
     title: 'What to Pack for Umrah: Complete Packing Checklist | TravelDuurDesh',
     description: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
-    canonicalUrl: 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah',
+    canonicalUrl: `${BASE_URL}/blog/umrah-travel/what-to-pack-for-umrah`,
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=85',
     jsonLd: [
@@ -435,7 +435,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
             '@type': 'ListItem',
             position: 4,
             name: 'What to Pack for Umrah',
-            item: 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah'
+            item: `${BASE_URL}/blog/umrah-travel/what-to-pack-for-umrah`
           }
         ]
       },
@@ -462,7 +462,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         dateModified: '2026-09-13',
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah'
+          '@id': `${BASE_URL}/blog/umrah-travel/what-to-pack-for-umrah`
         }
       }
     ]

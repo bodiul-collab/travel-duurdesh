@@ -1,1 +1,4 @@
+# Cloudflare Pages Redirects
+# Static assets (/sitemap.xml, /robots.txt, /sitemaps/*) are served directly.
+# All other paths fallback to index.html for client-side routing.
 /*    /index.html   200

@@ -59,7 +59,7 @@ export const MAKKAH_ARTICLE: BlogPost = {
   title: 'Makkah Travel Guide for First-Time Visitors',
   metaTitle: 'Makkah Travel Guide for First-Time Visitors | Travel DuurDesh',
   metaDescription: 'Complete, respectful first-timer guide to visiting Makkah: Haram navigation, airport transit from Jeddah, hotel selection, halal dining, packing, and FAQs.',
-  canonicalUrl: 'https://travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors',
   summary: 'A comprehensive, practical, and respectful travel blueprint for first-time visitors to Makkah. Learn how to plan your journey, navigate transit from Jeddah, select accommodations near Masjid al-Haram, explore local dining, and prepare mentally and physically.',
   author: {
     name: 'TravelDuurDesh Editorial Team',
@@ -84,7 +84,7 @@ export const UMRAH_FIRST_TIME_ARTICLE: BlogPost = {
   title: 'First-Time Umrah Travel Guide: What Every Traveler Should Know',
   metaTitle: 'First-Time Umrah Travel Guide | TravelDuurDesh',
   metaDescription: 'Planning your first Umrah? Explore practical travel preparation tips, packing advice, transportation considerations, accommodation planning, and useful guidance for your journey.',
-  canonicalUrl: 'https://travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide',
   summary: 'A practical, respectful travel blueprint for pilgrims planning their first Umrah journey. Learn how to organize documents, choose realistic travel dates, pack essentials, plan transit between Makkah and Madinah, and avoid common travel pitfalls.',
   author: {
     name: 'TravelDuurDesh Editorial Team',
@@ -109,7 +109,7 @@ export const UMRAH_PACKING_ARTICLE: BlogPost = {
   title: 'What to Pack for Umrah: A Practical Packing Checklist',
   metaTitle: 'What to Pack for Umrah: Complete Packing Checklist | TravelDuurDesh',
   metaDescription: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
-  canonicalUrl: 'https://travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah',
   summary: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
   author: {
     name: 'TravelDuurDesh Editorial Team',
