@@ -1,3 +1,5 @@
+import umrahPackingChecklistImg from '../assets/images/umrah_packing_checklist_1789949815620.jpg';
+
 export interface BlogPost {
   slug: string;
   categorySlug: 'travel-guides' | 'food-culture' | 'umrah-travel' | 'travel-tips';
@@ -120,9 +122,9 @@ export const UMRAH_PACKING_ARTICLE: BlogPost = {
   lastUpdatedDate: '2026-09-13',
   readingTime: '15 min read',
   heroImage: {
-    url: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=85',
-    alt: 'Travel essentials prepared for an Umrah journey',
-    caption: 'Practical packing essentials, travel documents, and organized baggage prepared for an Umrah journey'
+    url: umrahPackingChecklistImg,
+    alt: 'Comprehensive Umrah packing checklist and travel essentials flat lay',
+    caption: 'Essential packing checklist items for Umrah including Ihram garments, travel documents, prayer items, and toiletries'
   },
   tags: ['Umrah Travel', 'Umrah Packing Checklist', 'Pilgrim Travel', 'Makkah', 'Madinah', 'Travel Essentials']
 };

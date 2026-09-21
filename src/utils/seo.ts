@@ -1,3 +1,5 @@
+import umrahPackingChecklistImg from '../assets/images/umrah_packing_checklist_1789949815620.jpg';
+
 export interface RouteSEOConfig {
   title: string;
   description: string;
@@ -421,7 +423,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
     description: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
     canonicalUrl: `${BASE_URL}/blog/umrah-travel/what-to-pack-for-umrah`,
     ogType: 'article',
-    ogImage: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=85',
+    ogImage: umrahPackingChecklistImg,
     jsonLd: [
       ORGANIZATION_SCHEMA,
       {
@@ -444,7 +446,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         '@type': 'Article',
         headline: 'What to Pack for Umrah: A Practical Packing Checklist',
         description: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
-        image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=85',
+        image: umrahPackingChecklistImg,
         author: {
           '@type': 'Organization',
           name: 'TravelDuurDesh Editorial Team',

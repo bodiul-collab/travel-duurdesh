@@ -292,10 +292,10 @@ export const GlobalDestinationHub: React.FC<GlobalDestinationHubProps> = ({
           <div className="p-4 rounded-2xl border border-gray-200 bg-white space-y-2">
             <div className="flex items-center gap-2 text-xs font-bold text-[#071B49]">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>Multi-City & Umrah Routing</span>
+              <span>Umrah & Transit Stopovers</span>
             </div>
             <p className="text-xs text-[#5E6B82] leading-relaxed">
-              Combine {cityName} with stopovers in Jeddah (JED), Madinah (MED), Istanbul (IST), or Dubai (DXB) using our Multi-City booking tool.
+              Combine {cityName} with stopovers in Jeddah (JED), Madinah (MED), Istanbul (IST), or Dubai (DXB).
             </p>
             <button
               type="button"
@@ -305,7 +305,7 @@ export const GlobalDestinationHub: React.FC<GlobalDestinationHubProps> = ({
                     new CustomEvent('prefill-flight-destination', {
                       detail: {
                         to: `${cityName} (${iataCode})`,
-                        tripType: 'multiCity'
+                        tripType: 'round'
                       }
                     })
                   );
@@ -314,7 +314,7 @@ export const GlobalDestinationHub: React.FC<GlobalDestinationHubProps> = ({
               }}
               className="text-xs text-[#0969E8] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer pt-1"
             >
-              <span>Open Multi-City Builder</span>
+              <span>Search Flights</span>
               <ArrowRight className="w-3 h-3" />
             </button>
           </div>

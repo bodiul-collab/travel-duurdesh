@@ -268,7 +268,8 @@ export const UmrahPackingChecklistArticlePage: React.FC<UmrahPackingChecklistArt
         <div className="rounded-2xl overflow-hidden shadow-sm border border-[#E2E8F0] bg-white">
           <img
             src={post.heroImage.url}
-            alt="Travel essentials prepared for an Umrah journey"
+            alt={post.heroImage.alt}
+            referrerPolicy="no-referrer"
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
             loading="eager"
           />
