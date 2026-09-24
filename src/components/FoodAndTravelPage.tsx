@@ -23,9 +23,61 @@ import {
   Layers,
   HelpCircle,
   Check,
-  ChevronDown
+  ChevronDown,
+  ShoppingCart,
+  ExternalLink,
+  Star
 } from 'lucide-react';
 import { CurrencyConfig } from '../types';
+
+interface HalalWellnessProduct {
+  id: string;
+  name: string;
+  category: string;
+  badge: string;
+  description: string;
+  amazonUrl: string;
+  benefits: string[];
+}
+
+export const HALAL_WELLNESS_PRODUCTS: HalalWellnessProduct[] = [
+  {
+    id: 'prod-sunna-collagen',
+    name: 'SUNNA SUPPLEMENTS Halal Bovine Collagen Protein Powder (250g)',
+    category: 'Joint & Cartilage Support',
+    badge: 'Grass-Fed Halal Bovine',
+    description: 'Hydrolyzed Type I & III grass-fed bovine collagen peptides. Unflavoured powder supporting cartilage resilience, knee mobility, and connective tissue recovery after long walking days.',
+    amazonUrl: 'https://link.amazon/B0eFpSe3n',
+    benefits: ['Supports joints, knees & cartilage', 'Type I & III hydrolyzed peptides', 'Non-GMO, gluten-free & unflavoured']
+  },
+  {
+    id: 'prod-qualitude-collagen',
+    name: 'QUALITUDE Dual Halal Certified Collagen Peptides Powder',
+    category: 'Pure Protein & Stamina',
+    badge: 'Dual Halal Certified',
+    description: 'Rigorously batch-tested, unflavored grass-fed bovine collagen supplying 10g of clean protein per scoop. Mixes effortlessly into water, tea, or Zamzam without altering taste.',
+    amazonUrl: 'https://link.amazon/B03hDE9Xq',
+    benefits: ['Dual Halal certified & Eurofins tested', '10g clean protein per serving', 'Rapid cold & hot liquid dissolution']
+  },
+  {
+    id: 'prod-noor-vitamins',
+    name: 'Noor Vitamins Energy+ Halal Multivitamin (2-Month Supply)',
+    category: 'Daily Energy & Immunity',
+    badge: 'Gelatin-Free Sunnah Blend',
+    description: '100% Halal-certified daily multivitamin with 26 essential nutrients, organic black seed, date extract, and honey to naturally combat travel exhaustion and bolster immune defense.',
+    amazonUrl: 'https://link.amazon/B0iSIUkUq',
+    benefits: ['26 vital vitamins & minerals', 'Infused with Black Seed, Dates & Honey', '100% gelatin-free Halal formula']
+  },
+  {
+    id: 'prod-zen-collagen',
+    name: 'ZEN HALAL Hydrolyzed Collagen Peptides Powder (Vanilla)',
+    category: 'Recovery & Liposomal Vitamin C',
+    badge: 'With Liposomal Vitamin C',
+    description: 'Grass-fed bovine collagen peptides infused with 180mg high-potency liposomal Vitamin C for enhanced collagen absorption, immune defense, and delicious smooth vanilla taste.',
+    amazonUrl: 'https://link.amazon/B0dFXaDv6',
+    benefits: ['180mg Liposomal Vitamin C included', 'Natural smooth vanilla flavor', 'Fights physical fatigue & joint stiffness']
+  }
+];
 
 interface FoodAndTravelPageProps {
   currency?: CurrencyConfig;
@@ -408,6 +460,92 @@ export const FoodAndTravelPage: React.FC<FoodAndTravelPageProps> = ({
               <p className="text-xs text-white/75 leading-relaxed">
                 Keep a small zip-lock pouch in your shoe bag with: 3 to 5 premium Ajwa dates, raw almonds, walnuts, dried figs, and sugar-free mints. These non-perishable snacks provide instantaneous, clean energy during long waits between Maghrib and Isha prayers.
               </p>
+            </div>
+          </div>
+
+          {/* Halal Wellness & Pilgrim Nutrition Supplements Showcase */}
+          <div className="mt-16 bg-white/10 backdrop-blur-md rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/15 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-white/10">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FFB800] uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Halal Dietary Supplements</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-syncopate flex items-center gap-2.5">
+                  <ShoppingCart className="w-5 h-5 text-[#FFB800]" />
+                  <span>Recommended Halal Nutrition & Joint Support (Available on Amazon)</span>
+                </h3>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-amber-200 bg-amber-950/40 border border-amber-400/30 px-3.5 py-1.5 rounded-full shrink-0 self-start sm:self-auto font-medium">
+                <Star className="w-3.5 h-3.5 text-[#FFB800] fill-[#FFB800]" />
+                <span>100% Halal Verified</span>
+              </div>
+            </div>
+
+            <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-4xl">
+              During high-mileage pilgrimages and international trips—where travelers routinely log 15,000 to 25,000 steps daily across marble floors—protecting joint mobility and sustaining physical stamina is essential. Our team recommends these trusted, certified Halal collagen peptides and gelatin-free multivitamins for clean, Sunnah-aligned vitality accessible via Amazon with global delivery.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+              {HALAL_WELLNESS_PRODUCTS.map((prod, idx) => (
+                <div
+                  key={prod.id}
+                  className="bg-white rounded-2xl p-5 text-[#101C36] border border-white/20 shadow-md hover:shadow-xl transition-all flex flex-col justify-between space-y-3 group"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[10px] font-bold text-[#0969E8] uppercase tracking-wider bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                        {prod.category}
+                      </span>
+                      <span className="text-[10px] font-bold text-amber-900 bg-amber-100/90 border border-amber-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3 text-amber-700" />
+                        <span>{prod.badge}</span>
+                      </span>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="text-[11px] font-bold text-gray-400">Supplement #{idx + 1}</div>
+                      <h4 className="text-sm font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors leading-snug">
+                        {prod.name}
+                      </h4>
+                    </div>
+
+                    <p className="text-xs text-[#475569] leading-relaxed">
+                      {prod.description}
+                    </p>
+
+                    <ul className="space-y-1 pt-1">
+                      {prod.benefits.map((b, bIdx) => (
+                        <li key={bIdx} className="text-[11px] text-[#334155] flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-2 border-t border-gray-100">
+                    <a
+                      href={prod.amazonUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#FF9900] hover:bg-[#e68a00] text-[#111111] font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-xs hover:shadow cursor-pointer"
+                    >
+                      <ShoppingCart className="w-3.5 h-3.5 text-black" />
+                      <span>View on Amazon</span>
+                      <ExternalLink className="w-3 h-3 text-black/70" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Affiliate Disclosure Notice */}
+            <div className="p-3.5 rounded-xl bg-white/10 border border-white/15 text-white/80 text-[11px] sm:text-xs leading-relaxed flex items-start gap-2.5">
+              <Info className="w-4 h-4 text-[#FFB800] shrink-0 mt-0.5" />
+              <div>
+                <strong>Affiliate Disclosure:</strong> Travel DuurDesh is reader-supported. When you purchase through the verified Amazon partner links on this page, we may earn an affiliate commission at no extra cost to you. We only recommend genuine Halal-certified wellness items suited for international journeys.
+              </div>
             </div>
           </div>
 

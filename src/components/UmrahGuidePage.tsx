@@ -28,7 +28,9 @@ import {
   ArrowRight,
   SlidersHorizontal,
   BookmarkCheck,
-  Calculator
+  Calculator,
+  ShoppingCart,
+  ExternalLink
 } from 'lucide-react';
 import { CurrencyConfig } from '../types';
 
@@ -430,6 +432,31 @@ export const UmrahGuidePage: React.FC<UmrahGuidePageProps> = ({
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Dedicated Packing Guide & Amazon Gear Banner */}
+          <div className="mt-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#071B49] via-[#0D2E7C] to-[#041235] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md border border-white/10">
+            <div className="space-y-2 text-center md:text-left">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 bg-amber-400/20 border border-amber-400/30 px-3 py-1 rounded-full uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span>Full Article & Gear Guide</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold font-syncopate">
+                Need the Complete 40+ Item Umrah Packing Checklist & Verified Amazon Gear?
+              </h3>
+              <p className="text-xs sm:text-sm text-white/80 max-w-2xl leading-relaxed">
+                Access our in-depth interactive packing checklist with progress tracking, printable options, baggage allocation tips, and verified Amazon pilgrimage essentials (Ihram sets, anti-theft belts, anti-slip Tawaf slippers, Type G power adapters & more).
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => onNavigate?.('blog/umrah-travel/what-to-pack-for-umrah')}
+              className="inline-flex items-center gap-2 bg-[#FF9900] hover:bg-[#e68a00] text-[#111111] font-bold text-xs sm:text-sm px-6 py-3.5 rounded-2xl transition-all shadow-md shrink-0 cursor-pointer"
+            >
+              <ShoppingCart className="w-4 h-4 text-black" />
+              <span>View Packing Guide & Amazon Gear</span>
+              <ArrowRight className="w-4 h-4 text-black" />
+            </button>
           </div>
         </div>
       </section>

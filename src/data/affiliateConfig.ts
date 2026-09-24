@@ -115,6 +115,13 @@ export const AFFILIATE_CONFIG = {
         'https://tpwdg.com/content?trs=570661&shmarker=737968&lang=en&powered_by=true&campaign_id=120&promo_id=8679',
       disclosure: 'Official flight passenger rights compensation partner (AirHelp / Travelpayouts 737968)',
       defaultCommissionNote: 'Claim up to €600 ($650) for flight delays over 3 hours, cancellations, and overbookings under EU/UK 261 laws.'
+    },
+    amazon: {
+      name: 'Amazon',
+      category: 'Travel Gear & Pilgrimage Supplies',
+      baseUrl: 'https://www.amazon.com',
+      disclosure: 'Travel gear, luggage accessories, and Umrah packing supplies (Amazon Partner)',
+      defaultCommissionNote: 'Official customer protection and verified customer reviews on travel accessories.'
     }
   },
   
@@ -261,3 +268,29 @@ export function buildAffiliateUrl(
 
   return 'https://www.aviasales.com/search?marker=737968';
 }
+
+/**
+ * Verified Amazon product partner links for Umrah pilgrimage essentials and travel packing
+ */
+export const AMAZON_UMRAH_LINKS = [
+  { asin: 'B00DYewrQ', url: 'https://link.amazon/B00DYewrQ', title: "Men's 2-Piece Ihram Towel Set with Adjustable Belt & Tasbih Kit" },
+  { asin: 'B0cnxiwI5', url: 'https://link.amazon/B0cnxiwI5', title: "Premium Microfiber Men's Ihram Garment Set with Secure Belt" },
+  { asin: 'B0fhBm3se', url: 'https://link.amazon/B0fhBm3se', title: 'BAODINI Mini Pocket Travel Umbrella with UV Sun Protection' },
+  { asin: 'B01obMPrx', url: 'https://link.amazon/B01obMPrx', title: 'Step-by-Step Umrah Dua Cards & Pocket Prayer Guide' },
+  { asin: 'B0gn0mqvl', url: 'https://link.amazon/B0gn0mqvl', title: 'My Wudhu Companion Portable Wudhu Bottle & Drip-Free Sprayer' },
+  { asin: 'B0drFcXhz', url: 'https://link.amazon/B0drFcXhz', title: 'Multi-Outlet International Travel Power Strip & Multi-USB Hub' },
+  { asin: 'B07XwHEto', url: 'https://link.amazon/B07XwHEto', title: 'Ahram Heavy-Duty Ihram Belt & Anti-Theft Money Pouch' },
+  { asin: 'B05Oo5Uez', url: 'https://link.amazon/B05Oo5Uez', title: 'Genuine Halal Leather Tawaf Shoes / Islam Mest Slippers' },
+  { asin: 'B07QPP7lp', url: 'https://link.amazon/B07QPP7lp', title: 'VRURC 20,000mAh Power Bank with Built-in Cables & Wall Plug' },
+  { asin: 'B0dDBZxyL', url: 'https://link.amazon/B0dDBZxyL', title: 'SURE LOCK TSA-Approved Luggage Cable Locks (2-Pack)' },
+] as const;
+
+/**
+ * Verified Amazon partner links for Halal wellness, nutrition, and pilgrim health supplements
+ */
+export const AMAZON_HALAL_WELLNESS_LINKS = [
+  { asin: 'B0eFpSe3n', url: 'https://link.amazon/B0eFpSe3n', title: 'SUNNA SUPPLEMENTS Halal Bovine Collagen Powder (250g)' },
+  { asin: 'B03hDE9Xq', url: 'https://link.amazon/B03hDE9Xq', title: 'QUALITUDE Dual Halal Certified Collagen Peptides Powder' },
+  { asin: 'B0iSIUkUq', url: 'https://link.amazon/B0iSIUkUq', title: 'Noor Vitamins Energy+ Halal Multivitamin (Gelatin-Free)' },
+  { asin: 'B0dFXaDv6', url: 'https://link.amazon/B0dFXaDv6', title: 'ZEN HALAL Hydrolyzed Collagen Peptides Powder (Vanilla)' },
+] as const;

@@ -32,7 +32,10 @@ import {
   Layers,
   Sun,
   Shield,
-  HelpCircle as QuestionIcon
+  HelpCircle as QuestionIcon,
+  ShoppingCart,
+  ExternalLink,
+  Star
 } from 'lucide-react';
 import { Breadcrumbs } from './Breadcrumbs';
 import { BlogPost, UMRAH_PACKING_ARTICLE } from '../data/blogData';
@@ -48,7 +51,112 @@ interface ChecklistItem {
   label: string;
   tier: 'essential' | 'useful' | 'optional';
   note?: string;
+  amazonUrl?: string;
+  amazonLabel?: string;
 }
+
+export interface AmazonProductRecommendation {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  amazonUrl: string;
+  badge: string;
+  benefits: string[];
+}
+
+export const RECOMMENDED_AMAZON_PRODUCTS: AmazonProductRecommendation[] = [
+  {
+    id: 'prod-ihram-bundle',
+    name: 'Men’s 2-Piece Ihram Towel Set with Adjustable Belt & Tasbih Kit',
+    category: 'Ihram & Essentials',
+    description: 'Complete all-in-one pilgrimage starter kit including 2 absorbent unstitched microfiber Ihram towels, an adjustable waist belt, digital Tasbih tally counter, and anti-chafing balm to prevent walking friction during Tawaf.',
+    amazonUrl: 'https://link.amazon/B00DYewrQ',
+    badge: 'Complete Starter Kit',
+    benefits: ['2 absorbent unstitched Ihram towels', 'Includes adjustable waist belt & Tasbih', 'Anti-friction balm for walking comfort']
+  },
+  {
+    id: 'prod-microfiber-ihram',
+    name: "Premium Microfiber Men's Ihram Garment Set with Secure Belt",
+    category: 'Ihram Clothing',
+    description: 'Ultra-soft, quick-drying microfiber unstitched white towels engineered for rapid sweat absorption and non-transparent coverage during rites under warm Saudi Arabian temperatures.',
+    amazonUrl: 'https://link.amazon/B0cnxiwI5',
+    badge: 'Breathable Comfort',
+    benefits: ['Breathable quick-drying microfiber', 'Includes matching adjustable belt', 'Opaque non-see-through coverage']
+  },
+  {
+    id: 'prod-uv-umbrella',
+    name: 'BAODINI Mini Pocket Travel Umbrella with UV Sun Protection',
+    category: 'Sun & Weather Protection',
+    description: 'Ultra-compact 8.6 oz palm-sized umbrella with UPF 50+ UV ray blocking protection and water-repellent canopy, shielding you from intense desert sun during courtyard walks and outdoor prayers.',
+    amazonUrl: 'https://link.amazon/B0fhBm3se',
+    badge: 'UPF 50+ UV Shield',
+    benefits: ['UPF 50+ UV ray blocking canopy', 'Weighs only 8.6 oz (pocket-sized)', 'Fits easily in small backpack or sling']
+  },
+  {
+    id: 'prod-umrah-dua-cards',
+    name: 'Step-by-Step Umrah Dua Cards & Pocket Prayer Guide',
+    category: 'Prayer & Spiritual',
+    description: 'Convenient ring-bound flashcards containing essential authentic supplications for Ihram, Tawaf, Maqam Ibrahim, Sa’i, and Halq with clear Arabic, transliteration, and English meanings.',
+    amazonUrl: 'https://link.amazon/B01obMPrx',
+    badge: 'Step-by-Step Guide',
+    benefits: ['Ring-bound flashcards for easy handling', 'Clear Arabic, phonetics & English', 'Duas for each circuit & sacred station']
+  },
+  {
+    id: 'prod-wudhu-sprayer',
+    name: 'My Wudhu Companion Portable Wudhu Bottle & Drip-Free Sprayer',
+    category: 'Personal Care & Ablution',
+    description: 'Shariah-compliant, leak-proof portable ablution bidet bottle and precision water sprayer designed for performing fresh Wudhu easily in airport terminals, transit coaches, and hotels.',
+    amazonUrl: 'https://link.amazon/B0gn0mqvl',
+    badge: 'Ablution Companion',
+    benefits: ['Drip-free precision spray nozzle', 'Compact & discreet for travel bags', 'Essential for airport transit ablution']
+  },
+  {
+    id: 'prod-travel-power-strip',
+    name: 'Multi-Outlet International Travel Power Strip & Multi-USB Hub',
+    category: 'Electronics & Charging',
+    description: 'Compact international travel power strip equipped with 3 AC outlets and 4 high-speed USB charging ports—charge all your smartphones, power banks, and accessories simultaneously from one hotel outlet.',
+    amazonUrl: 'https://link.amazon/B0drFcXhz',
+    badge: 'Multi-Device Hub',
+    benefits: ['Powers up to 7 devices simultaneously', '4 high-speed USB ports (no bricks needed)', 'Compact lightweight travel power strip']
+  },
+  {
+    id: 'prod-ahram-belt',
+    name: 'Ahram Heavy-Duty Ihram Belt & Anti-Theft Money Pouch',
+    category: 'Ihram & Security',
+    description: 'Heavy-duty adjustable waist belt (26"–50") with secure double-lock safety buckle and hidden zippered water-resistant pockets to hold passports, phones, and cash securely during Tawaf.',
+    amazonUrl: 'https://link.amazon/B07XwHEto',
+    badge: 'Anti-Theft Buckle',
+    benefits: ['Adjustable 26"-50" waist with safety buckle', 'Concealed water-resistant zippered pockets', 'Keeps lower Izar tightly secured']
+  },
+  {
+    id: 'prod-halal-leather-shoes',
+    name: 'Genuine Halal Leather Tawaf Shoes / Islam Mest Slippers',
+    category: 'Footwear & Comfort',
+    description: 'Handcrafted halal soft leather slippers (Khuffain/Mest) designed for walking comfortably across marble floors during Tawaf and Sa’i, keeping feet cushioned, protected, and clean.',
+    amazonUrl: 'https://link.amazon/B05Oo5Uez',
+    badge: 'Genuine Halal Leather',
+    benefits: ['Soft flexible genuine halal leather', 'Cushioned sole for smooth marble floors', 'Easy slip-on design for prayers']
+  },
+  {
+    id: 'prod-vrurc-power-bank',
+    name: 'VRURC 20,000mAh Power Bank with Built-in Cables & Wall Plug',
+    category: 'Power & Connectivity',
+    description: 'All-in-one 20,000mAh high-speed portable battery equipped with built-in folding AC wall plug, integrated USB-C & Lightning cables, and digital LED percentage display—no extra wires required.',
+    amazonUrl: 'https://link.amazon/B07QPP7lp',
+    badge: 'Built-in Plug & Cables',
+    benefits: ['Built-in folding AC plug & cables', '20,000mAh capacity (4-5 phone charges)', 'Digital LED battery level percentage screen']
+  },
+  {
+    id: 'prod-surelock-tsa',
+    name: 'SURE LOCK TSA-Approved Luggage Cable Locks (2-Pack)',
+    category: 'Luggage & Security',
+    description: 'Heavy-duty flexible cable combination locks featuring a red inspection open-alert indicator that pops up if airport security opens your bag. Fits suitcases, duffels, and backpacks securely.',
+    amazonUrl: 'https://link.amazon/B0dDBZxyL',
+    badge: 'TSA Open Alert',
+    benefits: ['TSA recognized 3-digit combination', 'Flexible steel cable fits narrow zipper holes', 'Inspection indicator alerts if bag was opened']
+  }
+];
 
 const CHECKLIST_ITEMS: ChecklistItem[] = [
   // Travel Documents
@@ -59,6 +167,7 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
   { id: 'doc-5', category: 'Travel Documents', label: 'Travel insurance certificate & emergency medical assistance details', tier: 'essential' },
   { id: 'doc-6', category: 'Travel Documents', label: 'Emergency contact sheet (consulate, family, group lead numbers)', tier: 'essential' },
   { id: 'doc-7', category: 'Travel Documents', label: 'Physical photocopies & offline digital backups of all key documents', tier: 'essential' },
+  { id: 'doc-8', category: 'Travel Documents', label: 'Pocket Dua cards & step-by-step Umrah prayer guide', tier: 'useful', note: 'Ring-bound cards with transliteration for Tawaf and Sa’i supplications', amazonUrl: 'https://link.amazon/B01obMPrx', amazonLabel: 'Umrah Dua Flashcards' },
 
   // Clothing
   { id: 'clo-1', category: 'Clothing', label: 'Comfortable everyday modest clothing in breathable, lightweight fabrics', tier: 'essential', note: 'Cotton, linen blends, or loose-fitting breathable weaves' },
@@ -69,17 +178,18 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
   { id: 'clo-6', category: 'Clothing', label: 'Loose-fitting walking clothes suitable for sitting on prayer rugs', tier: 'essential' },
 
   // Ihram-Related Items
-  { id: 'ihr-1', category: 'Ihram-Related Items', label: 'Ihram garments for men (2 sets recommended for convenience)', tier: 'essential', note: 'Two white unstitched sheets per set; spare set protects against spills' },
-  { id: 'ihr-2', category: 'Ihram-Related Items', label: 'Ihram belt, money pouch, or heavy-duty safety pins (for men)', tier: 'useful', note: 'Keeps the lower izar secure while walking and carrying small items' },
+  { id: 'ihr-1', category: 'Ihram-Related Items', label: 'Ihram garments for men (2 sets recommended for convenience)', tier: 'essential', note: 'Two white unstitched sheets per set; spare set protects against spills', amazonUrl: 'https://link.amazon/B0cnxiwI5', amazonLabel: 'Microfiber Ihram Set' },
+  { id: 'ihr-2', category: 'Ihram-Related Items', label: 'Ihram belt & anti-theft money pouch with zippered pockets (for men)', tier: 'useful', note: 'Keeps the lower izar secure while carrying phone, passport, and riyals', amazonUrl: 'https://link.amazon/B07XwHEto', amazonLabel: 'Anti-Theft Ihram Belt' },
   { id: 'ihr-3', category: 'Ihram-Related Items', label: 'Modest, comfortable travel clothing for women', tier: 'essential', note: 'Loose-fitting abayas or tunics, breathable hijabs, and secure pins' },
   { id: 'ihr-4', category: 'Ihram-Related Items', label: 'Breathable undercaps and spare hijab pins (for women)', tier: 'useful' },
   { id: 'ihr-5', category: 'Ihram-Related Items', label: 'Pre-Ihram and post-Ihram clothing changes', tier: 'essential' },
+  { id: 'ihr-6', category: 'Ihram-Related Items', label: 'All-in-one Ihram starter kit (towels, adjustable belt, tasbih counter & balm)', tier: 'useful', note: 'Convenient complete package for first-time pilgrims', amazonUrl: 'https://link.amazon/B00DYewrQ', amazonLabel: 'Complete Ihram Kit' },
 
   // Footwear
   { id: 'foo-1', category: 'Footwear', label: 'Well-cushioned walking shoes or sneakers (already broken-in)', tier: 'essential', note: 'Pilgrims routinely walk 10,000 to 25,000 steps daily' },
   { id: 'foo-2', category: 'Footwear', label: 'Sturdy, comfortable sandals or slip-ons for mosque transit', tier: 'essential', note: 'Easy to remove and put on outside prayer halls' },
-  { id: 'foo-3', category: 'Footwear', label: 'Padded or anti-slip socks for marble courtyard floors', tier: 'useful', note: 'Provides comfort on smooth or cool marble interior surfaces' },
-  { id: 'foo-4', category: 'Footwear', label: 'Breathable drawstring shoe bag for carrying footwear into Haram', tier: 'useful' },
+  { id: 'foo-3', category: 'Footwear', label: 'Halal leather Tawaf shoes / padded slippers for marble floors', tier: 'useful', note: 'Soft genuine leather slip-ons protect feet and provide grip on cool marble floors', amazonUrl: 'https://link.amazon/B05Oo5Uez', amazonLabel: 'Halal Leather Tawaf Shoes' },
+  { id: 'foo-4', category: 'Footwear', label: 'Breathable drawstring shoe bag for carrying footwear into Haram', tier: 'useful', note: 'Keep your shoes safely with you during prayer to prevent loss' },
 
   // Toiletries
   { id: 'toi-1', category: 'Toiletries', label: 'Travel-size toothbrush and toothpaste', tier: 'essential' },
@@ -90,12 +200,13 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
   { id: 'toi-6', category: 'Toiletries', label: 'Compact hair trimming scissors or disposable razor (for post-rites tahallul)', tier: 'useful', note: 'Must be packed in checked luggage only, never carry-on' },
 
   // Personal Care Items
-  { id: 'car-1', category: 'Personal Care Items', label: 'Unscented moisturizer or lotion (for dry desert climate)', tier: 'useful', note: 'Dry air frequently causes cracked hands, feet, or skin' },
+  { id: 'car-1', category: 'Personal Care Items', label: 'Unscented moisturizer, lotion, and lip balm (for dry desert climate)', tier: 'useful', note: 'Fragrance-free formula for Ihram state and dry weather relief' },
   { id: 'car-2', category: 'Personal Care Items', label: 'Lip balm to prevent chapped lips', tier: 'useful' },
   { id: 'car-3', category: 'Personal Care Items', label: 'Pocket tissue packets (multiple small packs)', tier: 'essential' },
   { id: 'car-4', category: 'Personal Care Items', label: 'Wet wipes / gentle wipes (unscented options available)', tier: 'useful' },
   { id: 'car-5', category: 'Personal Care Items', label: 'Travel hand sanitizer (small bottle under 100ml for flight)', tier: 'essential' },
   { id: 'car-6', category: 'Personal Care Items', label: 'Personal hygiene and feminine care supplies', tier: 'essential' },
+  { id: 'car-7', category: 'Personal Care Items', label: 'Portable Wudhu spray bottle / travel ablution bidet', tier: 'useful', note: 'Drip-free sprayer for convenient ablution in transit airports and coaches', amazonUrl: 'https://link.amazon/B0gn0mqvl', amazonLabel: 'Portable Wudhu Bottle' },
 
   // Medications / Health
   { id: 'med-1', category: 'Medications / Health', label: 'Personal daily prescription medications in original labeled pharmacy containers', tier: 'essential', note: 'Keep sufficient supply for the whole trip plus buffer in carry-on' },
@@ -104,21 +215,25 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
   { id: 'med-4', category: 'Medications / Health', label: 'Adhesive bandages (blister plasters / blister pads)', tier: 'useful', note: 'Valuable for blisters from long Tawaf and Sa’i walking' },
   { id: 'med-5', category: 'Medications / Health', label: 'Anti-chafing balm or petroleum jelly', tier: 'useful', note: 'Helps prevent skin friction during long walks' },
   { id: 'med-6', category: 'Medications / Health', label: 'Basic OTC pain relief or throat lozenges (consult healthcare provider)', tier: 'useful' },
+  { id: 'med-7', category: 'Medications / Health', label: 'Halal daily multivitamin for energy & immune support (with Black Seed, Dates & Honey)', tier: 'useful', note: 'Gelatin-free formula helps prevent travel fatigue and strengthens immunity', amazonUrl: 'https://link.amazon/B0iSIUkUq', amazonLabel: 'Noor Vitamins Energy+' },
+  { id: 'med-8', category: 'Medications / Health', label: 'Halal bovine collagen peptides powder for knee & joint resilience', tier: 'useful', note: 'Aids cartilage recovery and joint comfort during 15,000–25,000 daily walking steps', amazonUrl: 'https://link.amazon/B0eFpSe3n', amazonLabel: 'Halal Bovine Collagen Powder' },
 
   // Electronics
   { id: 'ele-1', category: 'Electronics', label: 'Unlocked smartphone with updated maps and travel apps', tier: 'essential' },
-  { id: 'ele-2', category: 'Electronics', label: 'Heavy-duty charging cables and dual USB wall brick', tier: 'essential' },
+  { id: 'ele-2', category: 'Electronics', label: 'Multi-outlet international travel power strip & multi-USB hub', tier: 'essential', note: 'Charge multiple smartphones, battery banks, and devices simultaneously', amazonUrl: 'https://link.amazon/B0drFcXhz', amazonLabel: 'Multi-Outlet Travel Power Strip' },
   { id: 'ele-3', category: 'Electronics', label: 'Type G UK-style 3-pin plug adapter (standard in Saudi Arabia)', tier: 'essential', note: 'Saudi Arabia uses 220V/230V 60Hz Type G sockets' },
-  { id: 'ele-4', category: 'Electronics', label: 'Portable power bank (check airline carry-on capacity limits)', tier: 'useful', note: 'Essential for long days inside the Haram; carry-on only' },
+  { id: 'ele-4', category: 'Electronics', label: 'High-capacity portable power bank (built-in cables & AC wall plug)', tier: 'useful', note: 'Essential for long days inside the Haram; keeps phone charged without carrying extra wires', amazonUrl: 'https://link.amazon/B07QPP7lp', amazonLabel: 'VRURC 20,000mAh Power Bank' },
   { id: 'ele-5', category: 'Electronics', label: 'Earphones or headphones for calls and audio listening', tier: 'useful' },
 
   // Travel Accessories
   { id: 'acc-1', category: 'Travel Accessories', label: 'Lightweight day bag, drawstring sack, or small cross-body bag', tier: 'useful', note: 'Easy to carry water bottle, shoe pouch, and prayer book' },
   { id: 'acc-2', category: 'Travel Accessories', label: 'Durable luggage tags with clear name, international phone & email', tier: 'essential' },
-  { id: 'acc-3', category: 'Travel Accessories', label: 'Packing cubes to organize clothes and separate clean Ihram garments', tier: 'useful' },
+  { id: 'acc-3', category: 'Travel Accessories', label: 'Packing cubes to organize clothes and separate clean Ihram garments', tier: 'useful', note: 'Maximizes luggage capacity and keeps gear organized' },
   { id: 'acc-4', category: 'Travel Accessories', label: 'Reusable empty water bottle / collapsible cup for Zamzam stations', tier: 'useful' },
-  { id: 'acc-5', category: 'Travel Accessories', label: 'Small compact travel umbrella for midday sun protection', tier: 'optional' },
+  { id: 'acc-5', category: 'Travel Accessories', label: 'Small compact travel umbrella for midday sun protection', tier: 'optional', note: 'UPF 50+ UV shielding for outdoor courtyards and open walks', amazonUrl: 'https://link.amazon/B0fhBm3se', amazonLabel: 'Mini UV Travel Umbrella' },
   { id: 'acc-6', category: 'Travel Accessories', label: 'Laundry bag & leak-proof zip-top bags for toiletries', tier: 'useful' },
+  { id: 'acc-7', category: 'Travel Accessories', label: 'Handheld digital luggage weight scale to prevent baggage penalties', tier: 'useful', note: 'Accurately check bag weight before departing for the airport' },
+  { id: 'acc-8', category: 'Travel Accessories', label: 'TSA-approved luggage cable locks with open alert indicator', tier: 'useful', note: 'Secures checked suitcases, backpacks, and hotel lockers during transit', amazonUrl: 'https://link.amazon/B0dDBZxyL', amazonLabel: 'TSA Luggage Cable Locks' },
 
   // Money & Payment
   { id: 'mon-1', category: 'Money & Payment', label: 'Primary international debit/credit card (notify bank of travel)', tier: 'essential' },
@@ -130,7 +245,7 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
   { id: 'com-1', category: 'Comfort Items', label: 'Eyeglasses / contact lenses with spare case and cleaning solution', tier: 'essential' },
   { id: 'com-2', category: 'Comfort Items', label: 'Sunglasses with UV protection for intense outdoor glare', tier: 'useful' },
   { id: 'com-3', category: 'Comfort Items', label: 'Travel neck pillow and eye mask for flights and coach transfers', tier: 'optional' },
-  { id: 'com-4', category: 'Comfort Items', label: 'Compact pocket prayer mat (lightweight travel weave)', tier: 'optional', note: 'Helpful for prayer outdoors or in airport transit lounges' }
+  { id: 'com-4', category: 'Comfort Items', label: 'Compact pocket prayer mat (lightweight travel weave with compass)', tier: 'optional', note: 'Helpful for prayer outdoors, courtyards, or airport transit lounges' }
 ];
 
 export const UmrahPackingChecklistArticlePage: React.FC<UmrahPackingChecklistArticlePageProps> = ({
@@ -442,10 +557,115 @@ export const UmrahPackingChecklistArticlePage: React.FC<UmrahPackingChecklistArt
                           {item.note}
                         </p>
                       )}
+                      {item.amazonUrl && (
+                        <div className="pt-1.5 flex items-center">
+                          <a
+                            href={item.amazonUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 hover:border-amber-400 px-2.5 py-1 rounded-lg transition-all shadow-2xs group/btn"
+                            title={`View ${item.amazonLabel || 'product'} on Amazon`}
+                          >
+                            <ShoppingCart className="w-3 h-3 text-amber-700" />
+                            <span>{item.amazonLabel ? `Get ${item.amazonLabel}` : 'View on Amazon'}</span>
+                            <ExternalLink className="w-2.5 h-2.5 text-amber-700/80 group-hover/btn:translate-x-0.5 transition-transform" />
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </label>
                 );
               })}
+            </div>
+          </section>
+
+          {/* Section: Recommended Umrah Gear & Pilgrimage Supplies (Amazon Essentials) */}
+          <section className="space-y-6 pt-6">
+            <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-[#FFFBEB] via-[#FEF3C7]/40 to-[#FFF7ED] border border-amber-200/80 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Pilgrim Gear Recommendations</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate flex items-center gap-2">
+                    <ShoppingCart className="w-5 h-5 text-amber-600" />
+                    <span>Recommended Umrah Essentials & Gear (Available on Amazon)</span>
+                  </h2>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs text-amber-800 bg-white/80 border border-amber-200 px-3 py-1.5 rounded-xl shrink-0 self-start sm:self-auto font-medium">
+                  <Star className="w-3.5 h-3.5 text-amber-600 fill-amber-500" />
+                  <span>Verified Travel Tested</span>
+                </div>
+              </div>
+
+              <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                To help you prepare with confidence, our editorial team has curated these 10 practical Umrah pilgrimage essentials—from complete men&apos;s Ihram sets and anti-theft security belts to pocket UV umbrellas, authentic step-by-step Dua flashcards, portable Wudhu bottles, halal leather Tawaf slippers, travel power strips, and high-capacity portable power banks—readily accessible via Amazon with fast global delivery.
+              </p>
+
+              {/* 10 Curated Products Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                {RECOMMENDED_AMAZON_PRODUCTS.map((prod, idx) => (
+                  <div
+                    key={prod.id}
+                    className="p-4 sm:p-5 rounded-2xl bg-white border border-amber-200/80 hover:border-amber-400/90 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-3 group"
+                  >
+                    <div className="space-y-2.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[11px] font-bold text-[#0969E8] uppercase tracking-wider bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                          {prod.category}
+                        </span>
+                        <span className="text-[10px] font-bold text-amber-900 bg-amber-100/80 border border-amber-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3 text-amber-700" />
+                          <span>{prod.badge}</span>
+                        </span>
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="text-xs font-bold text-[#64748B]">Item #{idx + 1}</div>
+                        <h3 className="text-sm sm:text-base font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors leading-snug">
+                          {prod.name}
+                        </h3>
+                      </div>
+
+                      <p className="text-xs text-[#475569] leading-relaxed">
+                        {prod.description}
+                      </p>
+
+                      <ul className="space-y-1 pt-1">
+                        {prod.benefits.map((b, bIdx) => (
+                          <li key={bIdx} className="text-[11px] text-[#334155] flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="pt-2 border-t border-gray-100">
+                      <a
+                        href={prod.amazonUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 bg-[#FF9900] hover:bg-[#e68a00] text-[#111111] font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-all shadow-xs hover:shadow cursor-pointer"
+                      >
+                        <ShoppingCart className="w-4 h-4 text-black" />
+                        <span>View on Amazon</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-black/70" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Affiliate Disclosure Notice */}
+              <div className="p-3.5 rounded-xl bg-amber-100/50 border border-amber-200 text-[#78350F] text-[11px] sm:text-xs leading-relaxed flex items-start gap-2.5">
+                <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                <div>
+                  <strong>Affiliate Disclosure:</strong> Travel DuurDesh is reader-supported. When you purchase through the verified Amazon partner links on this page, we may earn an affiliate commission at no extra cost to you. We only recommend genuine travel and pilgrimage items suited for international journeys.
+                </div>
+              </div>
             </div>
           </section>
 
