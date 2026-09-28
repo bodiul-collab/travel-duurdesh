@@ -633,13 +633,26 @@ export const BlogPostDetailPage: React.FC<BlogPostDetailPageProps> = ({
             <h3 className="text-sm font-bold text-[#071B49] uppercase tracking-wider font-syncopate">
               Related Travel DuurDesh Resources
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <button
+                onClick={() => onNavigate('blog/travel-guides/madinah-travel-guide')}
+                className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
+              >
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
+                  <span>Madinah Travel Guide</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
+                </div>
+                <p className="text-[11px] text-[#64748B] mt-1">
+                  Practical guide for visiting the Prophet&apos;s Mosque & holy sites.
+                </p>
+              </button>
+
               <button
                 onClick={() => onNavigate('blog/umrah-travel/first-time-umrah-travel-guide')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
                 <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
-                  <span>First-Time Umrah Travel Guide</span>
+                  <span>First-Time Umrah Guide</span>
                   <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
@@ -656,7 +669,7 @@ export const BlogPostDetailPage: React.FC<BlogPostDetailPageProps> = ({
                   <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
-                  Ihram, Tawaf, Sa'i, and prayer permits.
+                  Ihram, Tawaf, Sa&apos;i, and prayer permits.
                 </p>
               </button>
 

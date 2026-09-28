@@ -751,7 +751,20 @@ export const UmrahFirstTimeArticlePage: React.FC<UmrahFirstTimeArticlePageProps>
             <h3 className="text-sm font-bold text-[#071B49] uppercase tracking-wider font-syncopate">
               Related Travel DuurDesh Resources
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <button
+                onClick={() => onNavigate('blog/travel-guides/madinah-travel-guide')}
+                className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
+              >
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
+                  <span>Madinah Travel Guide</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
+                </div>
+                <p className="text-[11px] text-[#64748B] mt-1">
+                  Practical guide for visiting the Prophet&apos;s Mosque & holy sites.
+                </p>
+              </button>
+
               <button
                 onClick={() => onNavigate('blog/travel-guides/makkah-travel-guide-first-time-visitors')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"

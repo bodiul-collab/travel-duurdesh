@@ -129,8 +129,34 @@ export const UMRAH_PACKING_ARTICLE: BlogPost = {
   tags: ['Umrah Travel', 'Umrah Packing Checklist', 'Pilgrim Travel', 'Makkah', 'Madinah', 'Travel Essentials']
 };
 
+export const MADINAH_ARTICLE: BlogPost = {
+  slug: 'madinah-travel-guide',
+  categorySlug: 'travel-guides',
+  categoryName: 'Travel Guides',
+  title: 'Madinah Travel Guide for First-Time Visitors',
+  metaTitle: 'Madinah Travel Guide for First-Time Visitors | TravelDuurDesh',
+  metaDescription: 'Planning a visit to Madinah? Explore practical travel planning tips, transportation, accommodation considerations, food, local etiquette, and useful advice for first-time visitors.',
+  canonicalUrl: 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide',
+  summary: 'A comprehensive, practical, and respectful travel guide for first-time visitors to Madinah. Discover essential preparation tips, transit from Makkah and airports, accommodation areas, local dining, and respectful etiquette.',
+  author: {
+    name: 'TravelDuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-09-28',
+  lastUpdatedDate: '2026-09-28',
+  readingTime: '15 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Madinah travel destination view for visitors',
+    caption: 'The serene courtyard and minarets surrounding Al-Masjid an-Nabawi in Madinah'
+  },
+  tags: ['Madinah', 'First-Time Visitors', 'Travel Guides', 'Saudi Arabia', 'Al-Masjid an-Nabawi', 'Umrah Travel']
+};
+
 export const BLOG_POSTS: BlogPost[] = [
   UMRAH_FIRST_TIME_ARTICLE,
   UMRAH_PACKING_ARTICLE,
-  MAKKAH_ARTICLE
+  MAKKAH_ARTICLE,
+  MADINAH_ARTICLE
 ];

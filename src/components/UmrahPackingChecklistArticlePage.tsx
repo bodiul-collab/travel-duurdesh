@@ -1402,15 +1402,15 @@ export const UmrahPackingChecklistArticlePage: React.FC<UmrahPackingChecklistArt
 
               <button
                 type="button"
-                onClick={() => onNavigate('destinations/makkah')}
+                onClick={() => onNavigate('blog/travel-guides/madinah-travel-guide')}
                 className="p-4 rounded-xl bg-white hover:bg-[#F8FAFC] border border-[#E2E8F0] text-left transition-colors cursor-pointer group shadow-xs"
               >
                 <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
-                  <span>Makkah City Guide</span>
+                  <span>Madinah Travel Guide</span>
                   <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
-                  Sacred city overview, historic landmarks & transit.
+                  Practical guide for visiting the Prophet&apos;s Mosque & holy sites.
                 </p>
               </button>
             </div>

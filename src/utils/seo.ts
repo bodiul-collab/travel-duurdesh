@@ -469,6 +469,103 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
       }
     ]
   },
+  'blog-madinah': {
+    title: 'Madinah Travel Guide for First-Time Visitors | TravelDuurDesh',
+    description: 'Planning a visit to Madinah? Explore practical travel planning tips, transportation, accommodation considerations, food, local etiquette, and useful advice for first-time visitors.',
+    canonicalUrl: 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide',
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/food-and-travel` },
+          { '@type': 'ListItem', position: 3, name: 'Travel Guides', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'Madinah Travel Guide for First-Time Visitors',
+            item: 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide'
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'Madinah Travel Guide for First-Time Visitors',
+        description: 'Planning a visit to Madinah? Explore practical travel planning tips, transportation, accommodation considerations, food, local etiquette, and useful advice for first-time visitors.',
+        image: 'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'TravelDuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-09-28',
+        dateModified: '2026-09-28',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide'
+        }
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'What should first-time visitors know about Madinah?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Madinah is known for its calm, welcoming atmosphere centered around Al-Masjid an-Nabawi (the Prophet\'s Mosque). First-time visitors should understand that daily life revolves around the five congregational prayer times, the central Markaziyah district is easily walked on foot, and permits for visiting the Rawdah ash-Sharifah should be booked via the official Nusuk platform.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'How can travelers get from Makkah to Madinah?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Travelers commonly travel between Makkah and Madinah using the high-speed Haramain rail network, scheduled intercity bus coaches, private taxis, or authorized group transfers. Checking current departure timetables and booking tickets in advance is recommended.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'What should I consider when choosing a hotel in Madinah?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Prioritize proximity to Al-Masjid an-Nabawi within the Central Area (Markaziyah), considering whether the property is closer to men\'s or women\'s entrance gates, elevator capacity during rush hours, walking distance, accessibility features, and room layouts for families.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'What should I pack for a trip to Madinah?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Pack modest, breathable everyday clothing, well-cushioned walking footwear or slip-on sandals for marble courtyards, lightweight layers for air-conditioned spaces and cool winter mornings, travel documents, Type G plug adapters, a portable power bank, personal medications, and a lightweight shoe bag.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'What are some practical etiquette tips for visitors?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Dress modestly, maintain a tranquil demeanor, follow courtyard signage and directions from security staff, avoid blocking walkways during prayers, respect fellow worshippers, and exercise mindful discretion when taking photographs.'
+            }
+          }
+        ]
+      }
+    ]
+  },
   '404': {
     title: 'Page Not Found (404) | Travel DuurDesh',
     description: 'The requested page could not be found on Travel DuurDesh. Return to our homepage or explore our destination guides, flights, hotels, and Umrah resources.',
