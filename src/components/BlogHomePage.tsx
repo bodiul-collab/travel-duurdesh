@@ -70,7 +70,7 @@ export const BlogHomePage: React.FC<BlogHomePageProps> = ({
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 bg-[#0969E8]/30 border border-[#4DA3FF]/40 text-[#4DA3FF] text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-sm">
               <BookOpen className="w-3.5 h-3.5" />
-              <span>TravelDuurDesh Editorial Travel & Food Journal</span>
+              <span>Travel DuurDesh Editorial Travel & Food Journal</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white font-syncopate leading-tight">

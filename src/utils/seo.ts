@@ -44,16 +44,16 @@ export const WEBSITE_SCHEMA = {
 
 export const SEO_PAGES: Record<string, RouteSEOConfig> = {
   home: {
-    title: 'Travel DuurDesh | Global Travel, Umrah Pilgrims, Flights, Hotels & Halal Food Guides',
-    description: 'Explore global destinations, step-by-step Umrah pilgrimage guidance, compare real-time flight and hotel deals, discover authentic halal food, and use free travel tools with Travel DuurDesh.',
+    title: 'Travel DuurDesh | Travel Guides, Umrah & Trip Planning',
+    description: 'Explore travel guides, Umrah advice, destinations, flight and hotel deals, halal food guides, and free travel tools with Travel DuurDesh.',
     canonicalUrl: `${BASE_URL}/`,
     ogType: 'website',
     ogImage: DEFAULT_OG_IMAGE,
     jsonLd: [WEBSITE_SCHEMA, ORGANIZATION_SCHEMA]
   },
   flights: {
-    title: 'Compare Global Flights & Umrah Airfares | Travel DuurDesh',
-    description: 'Search and compare real-time airfares across 1,000+ airlines, low-cost carriers, and specialized Umrah pilgrimage routes to Jeddah and Madinah with Aviasales integration.',
+    title: 'Compare Flights & Umrah Airfares | Travel DuurDesh',
+    description: 'Compare flights and Umrah airfares to destinations worldwide, including Jeddah and Madinah. Find routes, fares and travel options in one place.',
     canonicalUrl: `${BASE_URL}/flights`,
     ogType: 'website',
     ogImage: DEFAULT_OG_IMAGE,
@@ -77,8 +77,8 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
     ]
   },
   hotels: {
-    title: 'Find the Best Hotels Worldwide & Haram Stays | Travel DuurDesh',
-    description: 'Discover verified accommodations steps from Masjid al-Haram in Makkah, Al-Masjid an-Nabawi in Madinah, and top hotels across Dubai, Istanbul, London, Kuala Lumpur, and Dhaka.',
+    title: 'Hotels Worldwide & Makkah Stays | Travel DuurDesh',
+    description: 'Find hotels worldwide, including Makkah and Madinah stays near the Haramain, plus accommodations in Dubai, Istanbul, London and other popular destinations.',
     canonicalUrl: `${BASE_URL}/hotels`,
     ogType: 'website',
     ogImage: DEFAULT_OG_IMAGE,
@@ -97,13 +97,13 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         '@type': 'WebPage',
         name: 'Worldwide Hotel & Accommodation Directory',
         url: `${BASE_URL}/hotels`,
-        description: 'Vetted hotels, family suites, luxury high-rises, and budget pilgrim stays within walking distance of sacred mosques.'
+        description: 'Selected hotels, family suites, luxury high-rises, and budget pilgrim stays within walking distance of sacred mosques.'
       }
     ]
   },
   umrah: {
-    title: 'Complete Umrah Guide for Pilgrims | Step-by-Step Rites & Travel Logistics | Travel DuurDesh',
-    description: 'Comprehensive, authentic step-by-step guide to performing Umrah in Makkah and visiting Madinah. Includes Ihram rules, Tawaf, Sa’i, Nusuk app permits, Ziyarat, and pilgrim budget planning.',
+    title: 'Complete Umrah Guide for Pilgrims | Travel DuurDesh',
+    description: 'Comprehensive, authentic step-by-step guide to performing Umrah in Makkah and visiting Madinah. Includes Ihram rules, Tawaf, Sa’i, Nusuk app permits, and travel advice.',
     canonicalUrl: `${BASE_URL}/umrah`,
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80',
@@ -120,7 +120,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
       {
         '@context': 'https://schema.org',
         '@type': 'Article',
-        headline: 'Complete Umrah Guide for Pilgrims — Step-by-Step Rites & Travel Planning',
+        headline: 'Complete Umrah Guide for Pilgrims',
         description: 'Comprehensive pilgrim handbook covering spiritual preparation, Ihram, Tawaf, Sa’i, Tahallul, Haramain High-Speed Train, and Madinah visitation.',
         author: { '@type': 'Organization', name: 'Travel DuurDesh Editorial Team' },
         publisher: { '@id': `${BASE_URL}/#organization` },
@@ -347,7 +347,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1600&q=85',
         author: {
           '@type': 'Organization',
-          name: 'TravelDuurDesh Editorial Team',
+          name: 'Travel DuurDesh Editorial Team',
           url: BASE_URL
         },
         publisher: {
@@ -368,7 +368,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
     ]
   },
   'blog-umrah-first-time': {
-    title: 'First-Time Umrah Travel Guide | TravelDuurDesh',
+    title: 'First-Time Umrah Travel Guide | Travel DuurDesh',
     description: 'Planning your first Umrah? Explore practical travel preparation tips, packing advice, transportation considerations, accommodation planning, and useful guidance for your journey.',
     canonicalUrl: `${BASE_URL}/blog/umrah-travel/first-time-umrah-travel-guide`,
     ogType: 'article',
@@ -398,7 +398,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1600&q=85',
         author: {
           '@type': 'Organization',
-          name: 'TravelDuurDesh Editorial Team',
+          name: 'Travel DuurDesh Editorial Team',
           url: BASE_URL
         },
         publisher: {
@@ -419,7 +419,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
     ]
   },
   'blog-what-to-pack-for-umrah': {
-    title: 'What to Pack for Umrah: Complete Packing Checklist | TravelDuurDesh',
+    title: 'What to Pack for Umrah: Complete Packing Checklist | Travel DuurDesh',
     description: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
     canonicalUrl: `${BASE_URL}/blog/umrah-travel/what-to-pack-for-umrah`,
     ogType: 'article',
@@ -449,7 +449,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         image: umrahPackingChecklistImg,
         author: {
           '@type': 'Organization',
-          name: 'TravelDuurDesh Editorial Team',
+          name: 'Travel DuurDesh Editorial Team',
           url: BASE_URL
         },
         publisher: {
@@ -470,9 +470,9 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
     ]
   },
   'blog-madinah': {
-    title: 'Madinah Travel Guide for First-Time Visitors | TravelDuurDesh',
+    title: 'Madinah Travel Guide for First-Time Visitors | Travel DuurDesh',
     description: 'Planning a visit to Madinah? Explore practical travel planning tips, transportation, accommodation considerations, food, local etiquette, and useful advice for first-time visitors.',
-    canonicalUrl: 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide',
+    canonicalUrl: `${BASE_URL}/blog/travel-guides/madinah-travel-guide`,
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=1600&q=85',
     jsonLd: [
@@ -488,7 +488,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
             '@type': 'ListItem',
             position: 4,
             name: 'Madinah Travel Guide for First-Time Visitors',
-            item: 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide'
+            item: `${BASE_URL}/blog/travel-guides/madinah-travel-guide`
           }
         ]
       },
@@ -500,7 +500,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         image: 'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=1600&q=85',
         author: {
           '@type': 'Organization',
-          name: 'TravelDuurDesh Editorial Team',
+          name: 'Travel DuurDesh Editorial Team',
           url: BASE_URL
         },
         publisher: {
@@ -515,7 +515,7 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         dateModified: '2026-09-28',
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide'
+          '@id': `${BASE_URL}/blog/travel-guides/madinah-travel-guide`
         }
       },
       {

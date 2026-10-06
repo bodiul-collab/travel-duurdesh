@@ -182,7 +182,7 @@ export const FlightsSection: React.FC<FlightsSectionProps> = ({
               <span>Official Flight Search Partner</span>
             </div>
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#071B49] tracking-tight font-syncopate uppercase">
-              Global Flights & Airfare Deals
+              Compare Flights Worldwide
             </h2>
             <p className="text-sm sm:text-base text-[#5E6B82] mt-1 max-w-2xl">
               Compare fares across 1,000+ airlines, low-cost carriers, and specialized Umrah pilgrimage routes

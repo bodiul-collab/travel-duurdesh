@@ -172,6 +172,24 @@ export default function App() {
       if (routeKey.startsWith('blog/')) {
         return routeKey;
       }
+      if (routeKey === 'destinations/madinah' || routeKey === 'destinations/medina') {
+        return 'blog/travel-guides/madinah-travel-guide';
+      }
+      if (routeKey.startsWith('destinations')) {
+        return 'destinations';
+      }
+      if (routeKey === 'privacy' || routeKey === 'privacy-policy') {
+        return 'privacy';
+      }
+      if (routeKey === 'about' || routeKey === 'about-us') {
+        return 'about';
+      }
+      if (routeKey === 'contact' || routeKey === 'contact-us') {
+        return 'contact';
+      }
+      if (routeKey === 'terms' || routeKey === 'terms-and-conditions') {
+        return 'terms';
+      }
       if (['home', 'flights', 'hotels', 'umrah', 'food', 'tools', 'destinations', 'contact', 'blog', 'privacy', 'about', 'terms'].includes(routeKey)) {
         return routeKey;
       }
@@ -323,6 +341,9 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (routeKey === 'blog') {
         setActivePage('blog');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (routeKey === 'destinations/madinah' || routeKey === 'destinations/medina') {
+        setActivePage('blog/travel-guides/madinah-travel-guide');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (routeKey.startsWith('destinations')) {
         setActivePage('destinations');
@@ -616,13 +637,6 @@ export default function App() {
         {/* Section 7: Why Choose Travel DuurDesh */}
         <WhyChooseSection />
 
-        {/* Section 8: Call-to-Action Section */}
-        <CallToActionSection
-          onNavigate={handleNavigate}
-          onExploreDestinations={() => handleNavigate('destinations')}
-          onSearchFlightsHotels={() => handleNavigate('flights')}
-        />
-
         {/* Featured Global Deals & Packages */}
         <FeaturedDeals
           deals={FEATURED_DEALS}
@@ -651,6 +665,13 @@ export default function App() {
 
         {/* Verified Pilgrim & Traveler Reviews */}
         <TestimonialsSection testimonials={TESTIMONIALS} />
+
+        {/* Section: Plan Your Next Journey */}
+        <CallToActionSection
+          onNavigate={handleNavigate}
+          onExploreDestinations={() => handleNavigate('destinations')}
+          onSearchFlightsHotels={() => handleNavigate('flights')}
+        />
 
         {/* Newsletter & Updates */}
         <NewsletterCTA />

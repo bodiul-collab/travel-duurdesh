@@ -39,9 +39,9 @@ export const NewsletterCTA: React.FC = () => {
               <span>Insider Travel Club</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight font-syncopate uppercase">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight font-syncopate uppercase">
               Get Travel Inspiration & Exclusive Deals
-            </h2>
+            </h3>
 
             <p className="text-sm sm:text-base text-white/90 leading-relaxed">
               Join our travel community for destination ideas, secret flight price drops, limited-time hotel flash sales, and smarter ways to plan your next trip.

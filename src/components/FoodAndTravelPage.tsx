@@ -213,7 +213,7 @@ export const FoodAndTravelPage: React.FC<FoodAndTravelPageProps> = ({
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight font-syncopate">
-              Explore Global Halal Food & Travel Experiences — Travel DuurDesh
+              Global Halal Food & Culinary Travel Guide
             </h1>
 
             <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
@@ -901,9 +901,9 @@ export const FoodAndTravelPage: React.FC<FoodAndTravelPageProps> = ({
             <span>Taste the World with Confidence</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
             Discover Halal Food & Travel Experiences with Travel DuurDesh
-          </h2>
+          </h3>
 
           <p className="text-sm sm:text-base text-white/80 max-w-2xl mx-auto font-normal">
             Explore Global Cuisine, Street Food, and Pilgrim-Friendly Meals

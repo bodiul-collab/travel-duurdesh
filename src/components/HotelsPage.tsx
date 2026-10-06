@@ -223,7 +223,7 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
 
             {/* Exact Headline as requested */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight font-syncopate">
-              Find the Best Hotels Worldwide with Travel DuurDesh
+              Find Hotels for Your Journey
             </h1>
 
             {/* Intro Paragraph explaining global hotel search, Umrah, budget, luxury */}
@@ -237,7 +237,7 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
                 <Footprints className="w-5 h-5 text-[#FFB800] shrink-0" />
                 <div className="text-xs">
                   <div className="font-bold text-white">Haram Proximity</div>
-                  <div className="text-white/70 text-[11px]">0–500m verified stays</div>
+                  <div className="text-white/70 text-[11px]">0–500m Haram stays</div>
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5">
@@ -251,7 +251,7 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
                 <Utensils className="w-5 h-5 text-[#FF8A2A] shrink-0" />
                 <div className="text-xs">
                   <div className="font-bold text-white">Halal Dining</div>
-                  <div className="text-white/70 text-[11px]">Verified breakfast & cafes</div>
+                  <div className="text-white/70 text-[11px]">Halal breakfast & cafes</div>
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10 flex items-center gap-2.5">
@@ -278,7 +278,7 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
                 <span>Smart Accommodation Search</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight mt-1">
-                How to Find the Best Hotel Deals Worldwide
+                Choose the Right Stay
               </h2>
             </div>
             <div className="inline-flex items-center gap-2 bg-[#F3F8FF] text-[#0969E8] px-4 py-2 rounded-xl text-xs font-bold border border-blue-100">
@@ -614,7 +614,7 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
               <span>Sacred Hospitality & Pilgrim Guidance</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
-              Umrah Pilgrims Hotel Guide
+              Makkah & Madinah Hotels
             </h2>
             <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal">
               Selecting the ideal hotel for your sacred Umrah journey requires balancing proximity to the Holy Courtyards, physical stamina, family requirements, and budget realities. Travel DuurDesh provides transparent, respectful recommendations designed to preserve your spiritual concentration.
@@ -741,7 +741,7 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
             <span>Accommodation Categories</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#071B49] tracking-tight font-syncopate">
-            Hotel Types & Recommendations
+            Hotels Around the World
           </h2>
           <p className="text-sm text-[#5E6B82] leading-relaxed">
             Every travel style requires tailored hospitality features. Discover our detailed evaluation of luxury retreats, value-focused budget stays, spacious family residences, and boutique properties designed specifically for food lovers.
@@ -879,7 +879,7 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
               <span>Smart Booking Intelligence</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#071B49] tracking-tight font-syncopate">
-              Essential Hotel Travel Tips
+              Hotel Booking Tips
             </h2>
             <p className="text-sm text-[#5E6B82] leading-relaxed">
               Avoid overpriced tourist traps, ensure peaceful sleep, and secure the greatest value with our field-tested booking guidelines.
@@ -1029,9 +1029,9 @@ export const HotelsPage: React.FC<HotelsPageProps> = ({
           </div>
 
           {/* Exact CTA Headlines as requested */}
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
             Find Your Perfect Stay with Travel DuurDesh
-          </h2>
+          </h3>
           <p className="text-base sm:text-lg text-white/85 font-medium max-w-2xl mx-auto">
             Explore Hotels for Every Budget and Destination
           </p>

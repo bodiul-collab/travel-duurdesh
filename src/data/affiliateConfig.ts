@@ -1,5 +1,5 @@
 /**
- * Centralized Affiliate Network Configuration for Travel Duurdesh
+ * Centralized Affiliate Network Configuration for Travel DuurDesh
  * Configure real partner IDs, campaign codes, and affiliate endpoints here.
  */
 

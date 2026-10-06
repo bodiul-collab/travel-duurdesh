@@ -72,7 +72,7 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
               <span>Iconic Global & Holy Destinations</span>
             </div>
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#071B49] tracking-tight font-syncopate uppercase">
-              Popular Destinations
+              Popular Travel Destinations
             </h2>
             <p className="text-sm sm:text-base text-[#5E6B82] mt-1 max-w-2xl leading-relaxed">
               Discover eight world-renowned cities curated for spirituality, heritage, vibrant street foods, and iconic landmarks. From the holy sanctuaries of Makkah and Madinah to global cultural hubs.

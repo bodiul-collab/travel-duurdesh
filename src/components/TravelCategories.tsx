@@ -50,7 +50,7 @@ export const TravelCategories: React.FC<TravelCategoriesProps> = ({
             <span>Core Travel Services & Pillars</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#071B49] tracking-tight font-syncopate uppercase">
-            Featured Categories
+            Explore Travel Categories
           </h2>
           <p className="text-sm sm:text-base text-[#5E6B82] mt-3 leading-relaxed">
             From affordable global flights and premier Haram-adjacent hotels to comprehensive step-by-step Umrah pilgrim support, verified halal cuisine trails, and essential travel tools.

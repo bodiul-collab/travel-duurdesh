@@ -53,9 +53,9 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
             <span className="bg-[#0969E8] text-white text-xs font-bold px-3 py-1 rounded-full">
               {article.category}
             </span>
-            <h1 className="text-xl sm:text-2xl font-bold text-white leading-tight font-syncopate uppercase tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight font-syncopate uppercase tracking-tight">
               {article.title}
-            </h1>
+            </h2>
           </div>
         </div>
 
@@ -96,7 +96,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({
           <div className="prose max-w-none text-sm sm:text-base leading-relaxed text-[#5E6B82] space-y-4">
             <p>{article.content}</p>
             <p>
-              When planning an itinerary through Travel Duurdesh partner networks, prioritize booking accommodations that provide full cancellation flexibility up to 48 hours before arrival. This ensures you can adapt to unexpected flight schedule changes or take advantage of last-minute price reductions without penalty.
+              When planning an itinerary through Travel DuurDesh partner networks, prioritize booking accommodations that provide full cancellation flexibility up to 48 hours before arrival. This ensures you can adapt to unexpected flight schedule changes or take advantage of last-minute price reductions without penalty.
             </p>
             <h3 className="text-lg font-bold text-[#071B49] pt-2">
               Key Recommendations from Our Travel Editorial Board:

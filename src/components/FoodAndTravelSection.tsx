@@ -75,7 +75,7 @@ export const FoodAndTravelSection: React.FC<FoodAndTravelSectionProps> = ({ onNa
             <span>Taste the World with Confidence</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#071B49] tracking-tight font-syncopate uppercase">
-            Food & Travel
+            Halal Food & Culinary Travel
           </h2>
           <p className="text-sm sm:text-base text-[#5E6B82] mt-3 leading-relaxed">
             Savor exceptional culinary journeys tailored for conscious travelers. Explore authentic halal dining guides, award-winning street food trails, energy-rich pilgrim nutrition, and global gastronomic wonders.

@@ -164,9 +164,9 @@ export const FeaturedDeals: React.FC<FeaturedDealsProps> = ({
                         </div>
                       </div>
 
-                      <h4 className="text-base font-bold text-[#101C36] leading-snug group-hover:text-[#0969E8] transition-colors line-clamp-1">
+                      <h3 className="text-base font-bold text-[#101C36] leading-snug group-hover:text-[#0969E8] transition-colors line-clamp-1">
                         {deal.title}
-                      </h4>
+                      </h3>
 
                       <p className="text-xs text-[#5E6B82] mt-1 line-clamp-1">
                         {deal.accommodationType}

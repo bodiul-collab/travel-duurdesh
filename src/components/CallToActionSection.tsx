@@ -62,7 +62,7 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
         </div>
 
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-syncopate uppercase">
-          Start Planning Your Journey Today
+          Plan Your Next Journey
         </h2>
 
         <p className="text-lg sm:text-xl font-semibold text-[#93C5FD]">

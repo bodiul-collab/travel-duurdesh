@@ -340,7 +340,7 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
             </div>
 
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight font-syncopate uppercase">
-              Global Flights & Airfares
+              Compare Flights & Airfares Worldwide
             </h1>
 
             <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-2xl">
@@ -379,7 +379,7 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <h2 className="text-lg sm:text-xl font-bold text-[#071B49] font-syncopate uppercase">
-                Featured Routes & Starting Fares
+                Compare Flight Routes
               </h2>
               <p className="text-xs sm:text-sm text-[#5E6B82]">
                 Curated low-fare flights verified across major airlines and partner agencies.
@@ -506,9 +506,9 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
               <Sparkles className="w-3.5 h-3.5 text-[#FFB800]" />
               Spiritual Journey Essentials
             </span>
-            <h3 className="text-xl sm:text-2xl font-bold font-syncopate uppercase">
-              Flying for Umrah: Key Traveler Advice
-            </h3>
+            <h2 className="text-xl sm:text-2xl font-bold font-syncopate uppercase">
+              Umrah Flights to Jeddah & Madinah
+            </h2>
             <p className="text-xs sm:text-sm text-white/80 leading-relaxed">
               When booking your flight to Jeddah (JED) or Madinah (MED), consider whether you plan to start your
               rituals in Makkah first or visit the Prophet’s Mosque in Madinah first.
@@ -517,7 +517,7 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3">
               <div className="bg-white/10 rounded-xl p-3 border border-white/10">
                 <Luggage className="w-4 h-4 text-[#4DA3FF] mb-1.5" />
-                <h4 className="text-xs font-bold text-white mb-0.5">Zamzam Water</h4>
+                <h3 className="text-xs font-bold text-white mb-0.5">Zamzam Water</h3>
                 <p className="text-[11px] text-white/70">
                   Most airlines allow one 5L sealed Zamzam box complimentary outside standard baggage quotas.
                 </p>
@@ -525,7 +525,7 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
 
               <div className="bg-white/10 rounded-xl p-3 border border-white/10">
                 <Plane className="w-4 h-4 text-[#FFB800] mb-1.5" />
-                <h4 className="text-xs font-bold text-white mb-0.5">Miqat Announcement</h4>
+                <h3 className="text-xs font-bold text-white mb-0.5">Miqat Announcement</h3>
                 <p className="text-[11px] text-white/70">
                   Airlines like Saudia, flynas, Emirates, and Qatar announce the Miqat boundary 30 minutes before arrival.
                 </p>
@@ -533,7 +533,7 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
 
               <div className="bg-white/10 rounded-xl p-3 border border-white/10">
                 <ShieldCheck className="w-4 h-4 text-[#21B96F] mb-1.5" />
-                <h4 className="text-xs font-bold text-white mb-0.5">Saudi Tourist eVisa</h4>
+                <h3 className="text-xs font-bold text-white mb-0.5">Saudi Tourist eVisa</h3>
                 <p className="text-[11px] text-white/70">
                   Over 60 nationalities and US/UK/Schengen visa holders can fly for Umrah on a 1-year tourist eVisa.
                 </p>
@@ -545,9 +545,9 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
         {/* Global Airline Partners Section */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base sm:text-lg font-bold text-[#071B49] font-syncopate uppercase">
-              Compared Global Airline Partners
-            </h3>
+            <h2 className="text-base sm:text-lg font-bold text-[#071B49] font-syncopate uppercase">
+              Find Flexible Flight Options
+            </h2>
             <span className="text-xs text-[#0969E8] font-bold">1,200+ Global Carriers</span>
           </div>
 
@@ -559,7 +559,7 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <h4 className="text-sm font-bold text-[#071B49]">{partner.name}</h4>
+                    <h3 className="text-sm font-bold text-[#071B49]">{partner.name}</h3>
                     <span className="text-[10px] font-bold text-[#21B96F] bg-[#21B96F]/10 px-2 py-0.5 rounded-full">
                       {partner.rating}
                     </span>
@@ -586,9 +586,9 @@ export const FlightsPage: React.FC<FlightsPageProps> = ({
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <HelpCircle className="w-5 h-5 text-[#0969E8]" />
-            <h3 className="text-base sm:text-lg font-bold text-[#071B49] font-syncopate uppercase">
-              Frequently Asked Questions About Flight Booking
-            </h3>
+            <h2 className="text-base sm:text-lg font-bold text-[#071B49] font-syncopate uppercase">
+              Travel Tips for Booking Flights
+            </h2>
           </div>
 
           <div className="space-y-2.5">

@@ -75,11 +75,11 @@ export const Hero: React.FC<HeroProps> = ({
               <span>Global Travel • Umrah Pilgrims • Halal Food • Flights & Hotels</span>
             </div>
 
-            {/* Main Headline: Strong headline welcoming users to Travel DuurDesh */}
+            {/* Main Headline: Recommended primary H1 for homepage SEO */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.18] font-syncopate uppercase">
-              Welcome to{' '}
+              Travel Guides, Umrah Advice &{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4DA3FF] via-[#7BB6FF] to-[#21B96F]">
-                Travel DuurDesh
+                Tools for Your Journey
               </span>
             </h1>
 

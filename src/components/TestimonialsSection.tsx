@@ -38,10 +38,10 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               <span>Real Traveler Feedback</span>
             </div>
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#071B49] tracking-tight font-syncopate uppercase">
-              What Travelers Are Saying
+              Traveler Reviews
             </h2>
             <p className="text-sm sm:text-base text-[#5E6B82] mt-1">
-              Read how our community discovers unbeatable vacation value through Travel Duurdesh partner deals.
+              Read how our community discovers unbeatable vacation value through Travel DuurDesh partner deals.
             </p>
           </div>
 

@@ -78,7 +78,7 @@ export const UmrahPilgrimsSection: React.FC<UmrahPilgrimsSectionProps> = ({
             <span>Dedicated Sacred Journey Support</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white uppercase font-syncopate">
-            Umrah Pilgrims Highlight
+            Umrah Travel Guide
           </h2>
           <p className="text-sm sm:text-base text-[#CBD5E1] mt-3 leading-relaxed">
             Travel DuurDesh provides compassionate, reliable guidance for every step of your sacred pilgrimage. From understanding Ihram rituals and Nusuk permits to booking hotels steps from the Holy Harams and staying nourished with authentic halal food.

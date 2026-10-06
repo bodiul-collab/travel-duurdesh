@@ -83,36 +83,38 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
   const [selectedGlobalPlace, setSelectedGlobalPlace] = useState<AviasalesPlace | null>(null);
 
   useEffect(() => {
-    // Check if hash has a specific destination parameter
-    const hash = window.location.hash.toLowerCase();
-    if (hash.includes('bangladesh')) {
-      setActiveDestination('bangladesh');
-    } else if (hash.includes('malaysia')) {
-      setActiveDestination('malaysia');
-    } else if (hash.includes('turkey') || hash.includes('turkiye')) {
-      setActiveDestination('turkey');
-    } else if (hash.includes('usa') || hash.includes('america') || hash.includes('united-states')) {
-      setActiveDestination('usa');
-    } else if (hash.includes('uk') || hash.includes('britain') || hash.includes('united-kingdom')) {
-      setActiveDestination('uk');
-    } else if (hash.includes('dubai')) {
-      setActiveDestination('dubai');
-    } else if (hash.includes('makkah') || hash.includes('mecca')) {
+    // Check if pathname or hash has a specific destination parameter
+    const target = `${window.location.pathname} ${window.location.hash}`.toLowerCase();
+    if (target.includes('madinah') || target.includes('medina')) {
+      onNavigate('blog/travel-guides/madinah-travel-guide');
+    } else if (target.includes('makkah') || target.includes('mecca')) {
       setActiveDestination('makkah');
-    } else if (hash.includes('alula')) {
+    } else if (target.includes('alula')) {
       setActiveDestination('alula');
-    } else if (hash.includes('istanbul')) {
+    } else if (target.includes('dubai')) {
+      setActiveDestination('dubai');
+    } else if (target.includes('istanbul')) {
       setActiveDestination('istanbul');
-    } else if (hash.includes('newyork') || hash.includes('nyc')) {
+    } else if (target.includes('newyork') || target.includes('new-york') || target.includes('nyc')) {
       setActiveDestination('newyork');
-    } else if (hash.includes('london')) {
+    } else if (target.includes('london')) {
       setActiveDestination('london');
-    } else if (hash.includes('kualalumpur') || hash.includes('kl')) {
+    } else if (target.includes('kualalumpur') || target.includes('kuala-lumpur') || target.includes('kl')) {
       setActiveDestination('kualalumpur');
-    } else if (hash.includes('dhaka')) {
+    } else if (target.includes('dhaka')) {
       setActiveDestination('dhaka');
+    } else if (target.includes('bangladesh')) {
+      setActiveDestination('bangladesh');
+    } else if (target.includes('malaysia')) {
+      setActiveDestination('malaysia');
+    } else if (target.includes('turkey') || target.includes('turkiye')) {
+      setActiveDestination('turkey');
+    } else if (target.includes('usa') || target.includes('america') || target.includes('united-states')) {
+      setActiveDestination('usa');
+    } else if (target.includes('uk') || target.includes('britain') || target.includes('united-kingdom')) {
+      setActiveDestination('uk');
     }
-  }, []);
+  }, [onNavigate]);
 
   const handleSelectDestination = (dest: DestinationKey) => {
     setActiveDestination(dest);
@@ -236,7 +238,7 @@ export const DestinationsPage: React.FC<DestinationsPageProps> = ({
                 <span>Travel DuurDesh Complete Guides</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-extrabold text-[#071B49] tracking-tight font-syncopate">
-                Country & City Travel Guides
+                Travel Destination Guides
               </h2>
             </div>
 

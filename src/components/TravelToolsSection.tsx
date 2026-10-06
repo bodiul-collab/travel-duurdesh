@@ -84,7 +84,7 @@ export const TravelToolsSection: React.FC<TravelToolsSectionProps> = ({
             <span>Smart Trip Utilities</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#071B49] tracking-tight font-syncopate uppercase">
-            Travel Tools
+            Free Travel Tools
           </h2>
           <p className="text-sm sm:text-base text-[#5E6B82] mt-3 leading-relaxed">
             Eliminate travel uncertainty before boarding. Our integrated planning utilities provide accurate currency conversions, realistic budget estimations, seasonal climate overviews, and up-to-date visa requirement guides.

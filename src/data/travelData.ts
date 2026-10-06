@@ -540,7 +540,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'London, UK',
     trip: 'Santorini & Mykonos Escape',
     rating: 5,
-    comment: 'Travel Duurdesh made discovering and comparing Greek island deals effortless. The hotel partner link saved us over $280 on our caldera suite with breathtaking sunset views!',
+    comment: 'Travel DuurDesh made discovering and comparing Greek island deals effortless. The hotel partner link saved us over $280 on our caldera suite with breathtaking sunset views!',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
     date: 'Trip completed August 2026'
   },
@@ -560,7 +560,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Sydney, Australia',
     trip: 'Bali Luxury Ubud Villa',
     rating: 5,
-    comment: 'The curated experiences were top notch! The private catamaran tour and sunrise volcano hike recommended on Travel Duurdesh were the absolute highlight of our entire honeymoon.',
+    comment: 'The curated experiences were top notch! The private catamaran tour and sunrise volcano hike recommended on Travel DuurDesh were the absolute highlight of our entire honeymoon.',
     avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80',
     date: 'Trip completed August 2026'
   },

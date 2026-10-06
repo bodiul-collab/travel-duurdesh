@@ -295,7 +295,7 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight font-syncopate">
-              Essential Travel Tools for Every Journey — Travel DuurDesh
+              Free Travel Tools for Your Journey
             </h1>
 
             <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
@@ -1342,9 +1342,9 @@ export const TravelToolsPage: React.FC<TravelToolsPageProps> = ({
             <span>Smart Travel Engineering</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-syncopate">
             Plan Smarter with Travel DuurDesh Tools
-          </h2>
+          </h3>
 
           <p className="text-sm sm:text-base text-white/80 max-w-2xl mx-auto leading-relaxed">
             Use Our Travel Tools to Make Every Journey Easier. Calculate your pilgrimage budget, check visa clearance, convert currency with zero hidden spreads, and pack with absolute confidence.

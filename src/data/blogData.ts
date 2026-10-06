@@ -64,7 +64,7 @@ export const MAKKAH_ARTICLE: BlogPost = {
   canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/makkah-travel-guide-first-time-visitors',
   summary: 'A comprehensive, practical, and respectful travel blueprint for first-time visitors to Makkah. Learn how to plan your journey, navigate transit from Jeddah, select accommodations near Masjid al-Haram, explore local dining, and prepare mentally and physically.',
   author: {
-    name: 'TravelDuurDesh Editorial Team',
+    name: 'Travel DuurDesh Editorial Team',
     role: 'Editorial Team',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
   },
@@ -84,12 +84,12 @@ export const UMRAH_FIRST_TIME_ARTICLE: BlogPost = {
   categorySlug: 'umrah-travel',
   categoryName: 'Umrah Travel',
   title: 'First-Time Umrah Travel Guide: What Every Traveler Should Know',
-  metaTitle: 'First-Time Umrah Travel Guide | TravelDuurDesh',
+  metaTitle: 'First-Time Umrah Travel Guide | Travel DuurDesh',
   metaDescription: 'Planning your first Umrah? Explore practical travel preparation tips, packing advice, transportation considerations, accommodation planning, and useful guidance for your journey.',
   canonicalUrl: 'https://www.travelduurdesh.com/blog/umrah-travel/first-time-umrah-travel-guide',
   summary: 'A practical, respectful travel blueprint for pilgrims planning their first Umrah journey. Learn how to organize documents, choose realistic travel dates, pack essentials, plan transit between Makkah and Madinah, and avoid common travel pitfalls.',
   author: {
-    name: 'TravelDuurDesh Editorial Team',
+    name: 'Travel DuurDesh Editorial Team',
     role: 'Editorial Team',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
   },
@@ -109,12 +109,12 @@ export const UMRAH_PACKING_ARTICLE: BlogPost = {
   categorySlug: 'umrah-travel',
   categoryName: 'Umrah Travel',
   title: 'What to Pack for Umrah: A Practical Packing Checklist',
-  metaTitle: 'What to Pack for Umrah: Complete Packing Checklist | TravelDuurDesh',
+  metaTitle: 'What to Pack for Umrah: Complete Packing Checklist | Travel DuurDesh',
   metaDescription: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
   canonicalUrl: 'https://www.travelduurdesh.com/blog/umrah-travel/what-to-pack-for-umrah',
   summary: 'Planning your Umrah trip? Use this practical packing checklist covering documents, clothing, personal items, electronics, travel essentials, and useful preparation tips.',
   author: {
-    name: 'TravelDuurDesh Editorial Team',
+    name: 'Travel DuurDesh Editorial Team',
     role: 'Editorial Team',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
   },
@@ -134,12 +134,12 @@ export const MADINAH_ARTICLE: BlogPost = {
   categorySlug: 'travel-guides',
   categoryName: 'Travel Guides',
   title: 'Madinah Travel Guide for First-Time Visitors',
-  metaTitle: 'Madinah Travel Guide for First-Time Visitors | TravelDuurDesh',
+  metaTitle: 'Madinah Travel Guide for First-Time Visitors | Travel DuurDesh',
   metaDescription: 'Planning a visit to Madinah? Explore practical travel planning tips, transportation, accommodation considerations, food, local etiquette, and useful advice for first-time visitors.',
-  canonicalUrl: 'https://travelduurdesh.com/blog/travel-guides/madinah-travel-guide',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/madinah-travel-guide',
   summary: 'A comprehensive, practical, and respectful travel guide for first-time visitors to Madinah. Discover essential preparation tips, transit from Makkah and airports, accommodation areas, local dining, and respectful etiquette.',
   author: {
-    name: 'TravelDuurDesh Editorial Team',
+    name: 'Travel DuurDesh Editorial Team',
     role: 'Editorial Team',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
   },

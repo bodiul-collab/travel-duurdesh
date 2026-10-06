@@ -170,12 +170,12 @@ export const UmrahGuidePage: React.FC<UmrahGuidePageProps> = ({
 
             {/* Exact Headline as requested */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight font-syncopate">
-              Complete Umrah Guide for Pilgrims — Travel DuurDesh
+              Complete Umrah Guide for Pilgrims
             </h1>
 
             {/* Respectful, comprehensive Intro paragraph explaining Umrah, benefits, and platform support */}
             <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
-              Umrah is the sacred spiritual journey to the Holy City of Makkah in Islam. Known as the minor pilgrimage, it is an act of profound spiritual purification, renewal, and devotion that can be undertaken at any time of the year. Whether you are stepping onto the marble piazzas of Masjid al-Haram for the very first time or returning to refresh your heart and renew your covenant with Allah, this comprehensive guide provides clear, authentic religious steps paired with modern, stress-free travel logistics. Travel DuurDesh stands beside every pilgrim with verified flight routes, vetted hotels within walking distance of the Holy Harams, reliable halal dining guides, and transparent budget calculators—ensuring your pilgrimage is spiritually fulfilling, physically safe, and seamlessly organized from start to finish.
+              Umrah is the sacred spiritual journey to the Holy City of Makkah in Islam. Known as the minor pilgrimage, it is an act of profound spiritual purification, renewal, and devotion that can be undertaken at any time of the year. Whether you are stepping onto the marble piazzas of Masjid al-Haram for the very first time or returning to refresh your heart and renew your covenant with Allah, this comprehensive guide provides clear, authentic religious steps paired with modern, stress-free travel logistics. Travel DuurDesh stands beside every pilgrim with dependable flight routes, selected hotels within walking distance of the Holy Harams, reliable halal dining guides, and transparent budget calculators—ensuring your pilgrimage is spiritually fulfilling, physically safe, and seamlessly organized from start to finish.
             </p>
 
             {/* Quick Informational Badges */}
@@ -1100,12 +1100,12 @@ export const UmrahGuidePage: React.FC<UmrahGuidePageProps> = ({
             <span>Embark on Your Spiritual Journey</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight font-syncopate">
+          <h3 className="text-2xl sm:text-4xl font-extrabold tracking-tight font-syncopate">
             Start Planning Your Umrah Journey with Travel DuurDesh
-          </h2>
+          </h3>
 
           <p className="text-sm sm:text-base text-white/85 max-w-2xl mx-auto leading-relaxed">
-            Find Flights, Hotels, Guides, and Travel Tools for Pilgrims. Let Travel DuurDesh assist you with verified accommodations, seamless flight searches, and authentic religious guidance.
+            Find Flights, Hotels, Guides, and Travel Tools for Pilgrims. Let Travel DuurDesh assist you with comfortable accommodations, seamless flight searches, and authentic religious guidance.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
