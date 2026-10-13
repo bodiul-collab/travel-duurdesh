@@ -21,6 +21,9 @@ export const ORGANIZATION_SCHEMA = {
   url: BASE_URL,
   logo: `${BASE_URL}/favicon.svg`,
   email: 'contact@travelduurdesh.com',
+  sameAs: [
+    'https://youtube.com/@travelduurdesh?si=VDUMHptczah8ZU9w'
+  ],
   description: 'Global travel companion, dedicated Umrah pilgrimage guides, flight and hotel comparison, authentic halal culinary directory, and interactive trip utilities.'
 };
 

@@ -11,7 +11,8 @@ import {
   Send,
   CheckCircle2,
   AlertCircle,
-  Sparkles
+  Sparkles,
+  Youtube
 } from 'lucide-react';
 import { AFFILIATE_CONFIG } from '../data/affiliateConfig';
 import { LanguageConfig } from '../types';
@@ -163,6 +164,21 @@ export const Footer: React.FC<FooterProps> = ({
               <p className="text-xs text-white/70 leading-relaxed max-w-sm">
                 Travel DuurDesh is your comprehensive global travel companion and dedicated Umrah pilgrimage resource. We empower mindful travelers with verified step-by-step spiritual rites, authentic halal culinary guides, smart interactive planning tools, and transparent flight and hotel price comparisons worldwide.
               </p>
+            </div>
+
+            {/* Official Social Channel */}
+            <div className="pt-0.5">
+              <a
+                href="https://youtube.com/@travelduurdesh?si=VDUMHptczah8ZU9w"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-white/80 hover:text-white transition-all group"
+                aria-label="Travel DuurDesh YouTube Channel"
+              >
+                <Youtube className="w-4 h-4 text-red-500 group-hover:scale-110 transition-transform" />
+                <span className="font-medium">Subscribe on YouTube</span>
+                <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-white transition-colors" />
+              </a>
             </div>
 
             {/* Language Switcher in Footer */}
@@ -327,6 +343,18 @@ export const Footer: React.FC<FooterProps> = ({
               <li className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#4DA3FF] shrink-0 mt-0.5" />
                 <span>Travel DuurDesh Global Support Network</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Youtube className="w-3.5 h-3.5 text-red-500 shrink-0 mt-0.5" />
+                <a
+                  href="https://youtube.com/@travelduurdesh?si=VDUMHptczah8ZU9w"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-1 group"
+                >
+                  <span className="group-hover:underline">YouTube Channel</span>
+                  <ArrowUpRight className="w-3 h-3 text-white/50 group-hover:text-white" />
+                </a>
               </li>
               <li className="pt-1">
                 <button
