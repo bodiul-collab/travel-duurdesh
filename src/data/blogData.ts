@@ -179,10 +179,37 @@ export const ALULA_ARTICLE: BlogPost = {
   tags: ['AlUla', 'Hegra', 'Saudi Arabia', 'Travel Guides', 'Heritage', 'Desert Travel', 'Elephant Rock']
 };
 
+export const DUBAI_ARTICLE: BlogPost = {
+  slug: 'dubai-travel-guide',
+  categorySlug: 'travel-guides',
+  categoryName: 'Travel Guides',
+  title: 'Dubai Travel Guide: Best Places to Visit and How to Plan Your Trip',
+  metaTitle: 'Dubai Travel Guide: Best Places to Visit and How to Plan Your Trip | Travel DuurDesh',
+  metaDescription: 'Plan your Dubai trip with this practical travel guide covering famous attractions, historic neighborhoods, local culture, transportation, budgeting, and itinerary tips.',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/dubai-travel-guide',
+  summary: 'Plan your Dubai trip with this practical travel guide covering famous attractions, historic neighborhoods, local culture, transportation, budgeting, and itinerary tips.',
+  author: {
+    name: 'Travel DuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-10-14',
+  lastUpdatedDate: '2026-10-14',
+  readingTime: '17 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Burj Khalifa soaring above Downtown Dubai skyline and the Dubai Fountain lake',
+    caption: 'Downtown Dubai skyline anchored by the iconic Burj Khalifa, lake promenades, and contemporary architecture'
+  },
+  tags: ['Dubai', 'UAE', 'Travel Guides', 'Burj Khalifa', 'Dubai Marina', 'Old Dubai', 'Desert Safari']
+};
+
 export const BLOG_POSTS: BlogPost[] = [
   UMRAH_FIRST_TIME_ARTICLE,
   UMRAH_PACKING_ARTICLE,
   MAKKAH_ARTICLE,
   MADINAH_ARTICLE,
-  ALULA_ARTICLE
+  ALULA_ARTICLE,
+  DUBAI_ARTICLE
 ];
+

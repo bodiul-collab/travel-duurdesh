@@ -22,6 +22,7 @@ export const ORGANIZATION_SCHEMA = {
   logo: `${BASE_URL}/favicon.svg`,
   email: 'contact@travelduurdesh.com',
   sameAs: [
+    'https://www.facebook.com/profile.php?id=61595005486315',
     'https://youtube.com/@travelduurdesh?si=VDUMHptczah8ZU9w'
   ],
   description: 'Global travel companion, dedicated Umrah pilgrimage guides, flight and hotel comparison, authentic halal culinary directory, and interactive trip utilities.'
@@ -616,6 +617,57 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
         mainEntityOfPage: {
           '@type': 'WebPage',
           '@id': `${BASE_URL}/blog/travel-guides/alula-travel-guide`
+        }
+      }
+    ]
+  },
+  'blog-dubai': {
+    title: 'Dubai Travel Guide: Best Places to Visit and How to Plan Your Trip | Travel DuurDesh',
+    description: 'Plan your Dubai trip with this practical travel guide covering famous attractions, historic neighborhoods, local culture, transportation, budgeting, and itinerary tips.',
+    canonicalUrl: `${BASE_URL}/blog/travel-guides/dubai-travel-guide`,
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/food-and-travel` },
+          { '@type': 'ListItem', position: 3, name: 'Travel Guides', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'Dubai Travel Guide: Best Places to Visit and How to Plan Your Trip',
+            item: `${BASE_URL}/blog/travel-guides/dubai-travel-guide`
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'Dubai Travel Guide: Best Places to Visit and How to Plan Your Trip',
+        description: 'Plan your Dubai trip with this practical travel guide covering famous attractions, historic neighborhoods, local culture, transportation, budgeting, and itinerary tips.',
+        image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-10-14',
+        dateModified: '2026-10-14',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${BASE_URL}/blog/travel-guides/dubai-travel-guide`
         }
       }
     ]

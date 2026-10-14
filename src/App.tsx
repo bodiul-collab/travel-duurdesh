@@ -33,7 +33,8 @@ import { UmrahFirstTimeArticlePage } from './components/UmrahFirstTimeArticlePag
 import { UmrahPackingChecklistArticlePage } from './components/UmrahPackingChecklistArticlePage';
 import { MadinahTravelGuideArticlePage } from './components/MadinahTravelGuideArticlePage';
 import { AlUlaTravelGuideArticlePage } from './components/AlUlaTravelGuideArticlePage';
-import { ALULA_ARTICLE, BLOG_POSTS, MADINAH_ARTICLE, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE, UMRAH_PACKING_ARTICLE } from './data/blogData';
+import { DubaiTravelGuideArticlePage } from './components/DubaiTravelGuideArticlePage';
+import { ALULA_ARTICLE, BLOG_POSTS, DUBAI_ARTICLE, MADINAH_ARTICLE, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE, UMRAH_PACKING_ARTICLE } from './data/blogData';
 import { applySEO, SEO_PAGES } from './utils/seo';
 import { AffiliateRedirectModal } from './components/AffiliateRedirectModal';
 import { QuickViewModal } from './components/QuickViewModal';
@@ -318,6 +319,8 @@ export default function App() {
         applySEO(SEO_PAGES['blog-madinah']);
       } else if (activePage.includes('alula-travel-guide')) {
         applySEO(SEO_PAGES['blog-alula']);
+      } else if (activePage.includes('dubai-travel-guide')) {
+        applySEO(SEO_PAGES['blog-dubai']);
       } else if (activePage.includes('makkah-travel-guide-first-time-visitors')) {
         applySEO(SEO_PAGES['blog-makkah']);
       } else {
@@ -518,6 +521,11 @@ export default function App() {
         ) : activePage.includes('alula-travel-guide') ? (
           <AlUlaTravelGuideArticlePage
             post={ALULA_ARTICLE}
+            onNavigate={handleNavigate}
+          />
+        ) : activePage.includes('dubai-travel-guide') ? (
+          <DubaiTravelGuideArticlePage
+            post={DUBAI_ARTICLE}
             onNavigate={handleNavigate}
           />
         ) : activePage.startsWith('blog/') ? (

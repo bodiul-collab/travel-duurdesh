@@ -12,7 +12,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Sparkles,
-  Youtube
+  Youtube,
+  Facebook
 } from 'lucide-react';
 import { AFFILIATE_CONFIG } from '../data/affiliateConfig';
 import { LanguageConfig } from '../types';
@@ -166,8 +167,19 @@ export const Footer: React.FC<FooterProps> = ({
               </p>
             </div>
 
-            {/* Official Social Channel */}
-            <div className="pt-0.5">
+            {/* Official Social Channels */}
+            <div className="pt-0.5 flex flex-wrap items-center gap-2">
+              <a
+                href="https://www.facebook.com/profile.php?id=61595005486315"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-white/80 hover:text-white transition-all group"
+                aria-label="Travel DuurDesh Facebook Page"
+              >
+                <Facebook className="w-4 h-4 text-[#1877F2] group-hover:scale-110 transition-transform" />
+                <span className="font-medium">Follow on Facebook</span>
+                <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-white transition-colors" />
+              </a>
               <a
                 href="https://youtube.com/@travelduurdesh?si=VDUMHptczah8ZU9w"
                 target="_blank"
@@ -343,6 +355,18 @@ export const Footer: React.FC<FooterProps> = ({
               <li className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#4DA3FF] shrink-0 mt-0.5" />
                 <span>Travel DuurDesh Global Support Network</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Facebook className="w-3.5 h-3.5 text-[#1877F2] shrink-0 mt-0.5" />
+                <a
+                  href="https://www.facebook.com/profile.php?id=61595005486315"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-1 group"
+                >
+                  <span className="group-hover:underline">Facebook Page</span>
+                  <ArrowUpRight className="w-3 h-3 text-white/50 group-hover:text-white" />
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <Youtube className="w-3.5 h-3.5 text-red-500 shrink-0 mt-0.5" />

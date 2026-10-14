@@ -90,7 +90,8 @@ const BLOG: SitemapUrl[] = [
   { loc: `${DOMAIN}/blog/umrah-travel/first-time-umrah-travel-guide`, lastmod: TODAY, changefreq: 'weekly', priority: '0.90' },
   { loc: `${DOMAIN}/blog/umrah-travel/what-to-pack-for-umrah`, lastmod: TODAY, changefreq: 'weekly', priority: '0.90' },
   { loc: `${DOMAIN}/blog/travel-guides/madinah-travel-guide`, lastmod: TODAY, changefreq: 'weekly', priority: '0.90' },
-  { loc: `${DOMAIN}/blog/travel-guides/alula-travel-guide`, lastmod: TODAY, changefreq: 'weekly', priority: '0.90' }
+  { loc: `${DOMAIN}/blog/travel-guides/alula-travel-guide`, lastmod: TODAY, changefreq: 'weekly', priority: '0.90' },
+  { loc: `${DOMAIN}/blog/travel-guides/dubai-travel-guide`, lastmod: TODAY, changefreq: 'weekly', priority: '0.90' }
 ];
 
 function buildUrlsetXml(urls: SitemapUrl[]): string {
