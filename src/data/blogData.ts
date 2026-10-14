@@ -204,12 +204,39 @@ export const DUBAI_ARTICLE: BlogPost = {
   tags: ['Dubai', 'UAE', 'Travel Guides', 'Burj Khalifa', 'Dubai Marina', 'Old Dubai', 'Desert Safari']
 };
 
+export const KUALA_LUMPUR_ARTICLE: BlogPost = {
+  slug: 'kuala-lumpur-travel-guide',
+  categorySlug: 'travel-guides',
+  categoryName: 'Travel Guides',
+  title: 'Kuala Lumpur Travel Guide: Best Places to Visit and How to Plan Your Trip',
+  metaTitle: 'Kuala Lumpur Travel Guide: Best Places to Visit and How to Plan Your Trip | Travel DuurDesh',
+  metaDescription: 'Plan your Kuala Lumpur trip with this practical travel guide covering famous landmarks, cultural neighborhoods, Malaysian food, transportation, budgeting, and itinerary tips.',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/kuala-lumpur-travel-guide',
+  summary: 'Plan your Kuala Lumpur trip with this practical travel guide covering famous landmarks, cultural neighborhoods, Malaysian food, transportation, budgeting, and itinerary tips.',
+  author: {
+    name: 'Travel DuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-10-14',
+  lastUpdatedDate: '2026-10-14',
+  readingTime: '18 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Petronas Twin Towers illuminated against dusk skyline with tropical park greenery in Kuala Lumpur',
+    caption: 'The iconic Petronas Twin Towers soaring above Kuala Lumpur City Centre and illuminated evening skylines'
+  },
+  tags: ['Kuala Lumpur', 'Malaysia', 'Travel Guides', 'Petronas Towers', 'Batu Caves', 'Halal Food', 'Bukit Bintang']
+};
+
 export const BLOG_POSTS: BlogPost[] = [
   UMRAH_FIRST_TIME_ARTICLE,
   UMRAH_PACKING_ARTICLE,
   MAKKAH_ARTICLE,
   MADINAH_ARTICLE,
   ALULA_ARTICLE,
-  DUBAI_ARTICLE
+  DUBAI_ARTICLE,
+  KUALA_LUMPUR_ARTICLE
 ];
+
 
