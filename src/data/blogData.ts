@@ -154,9 +154,35 @@ export const MADINAH_ARTICLE: BlogPost = {
   tags: ['Madinah', 'First-Time Visitors', 'Travel Guides', 'Saudi Arabia', 'Al-Masjid an-Nabawi', 'Umrah Travel']
 };
 
+export const ALULA_ARTICLE: BlogPost = {
+  slug: 'alula-travel-guide',
+  categorySlug: 'travel-guides',
+  categoryName: 'Travel Guides',
+  title: 'AlUla Travel Guide: What Travelers Should Know',
+  metaTitle: 'AlUla Travel Guide: What Travelers Should Know | Travel DuurDesh',
+  metaDescription: 'Plan your AlUla trip with this practical travel guide covering ancient heritage, dramatic desert landscapes, trip planning, local culture, and responsible travel in Saudi Arabia.',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/alula-travel-guide',
+  summary: 'Plan your AlUla trip with this practical travel guide covering ancient heritage, dramatic desert landscapes, trip planning, local culture, and responsible travel in Saudi Arabia.',
+  author: {
+    name: 'Travel DuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-10-14',
+  lastUpdatedDate: '2026-10-14',
+  readingTime: '16 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Dramatic sandstone desert landscape and ancient rock-cut tombs in AlUla, Saudi Arabia',
+    caption: 'Monumental sandstone massifs and ancient Nabataean rock-carved tombs in the desert landscape of AlUla'
+  },
+  tags: ['AlUla', 'Hegra', 'Saudi Arabia', 'Travel Guides', 'Heritage', 'Desert Travel', 'Elephant Rock']
+};
+
 export const BLOG_POSTS: BlogPost[] = [
   UMRAH_FIRST_TIME_ARTICLE,
   UMRAH_PACKING_ARTICLE,
   MAKKAH_ARTICLE,
-  MADINAH_ARTICLE
+  MADINAH_ARTICLE,
+  ALULA_ARTICLE
 ];

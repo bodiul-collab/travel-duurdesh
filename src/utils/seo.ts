@@ -569,6 +569,57 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
       }
     ]
   },
+  'blog-alula': {
+    title: 'AlUla Travel Guide: What Travelers Should Know | Travel DuurDesh',
+    description: 'Plan your AlUla trip with this practical travel guide covering ancient heritage, dramatic desert landscapes, trip planning, local culture, and responsible travel in Saudi Arabia.',
+    canonicalUrl: `${BASE_URL}/blog/travel-guides/alula-travel-guide`,
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/food-and-travel` },
+          { '@type': 'ListItem', position: 3, name: 'Travel Guides', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'AlUla Travel Guide: What Travelers Should Know',
+            item: `${BASE_URL}/blog/travel-guides/alula-travel-guide`
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'AlUla Travel Guide: What Travelers Should Know',
+        description: 'Plan your AlUla trip with this practical travel guide covering ancient heritage, dramatic desert landscapes, trip planning, local culture, and responsible travel in Saudi Arabia.',
+        image: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-10-14',
+        dateModified: '2026-10-14',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${BASE_URL}/blog/travel-guides/alula-travel-guide`
+        }
+      }
+    ]
+  },
   '404': {
     title: 'Page Not Found (404) | Travel DuurDesh',
     description: 'The requested page could not be found on Travel DuurDesh. Return to our homepage or explore our destination guides, flights, hotels, and Umrah resources.',
