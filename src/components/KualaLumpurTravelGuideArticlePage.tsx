@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import {
-  Calendar,
   Clock,
   Tag,
   Share2,
   CheckCircle2,
-  AlertCircle,
   HelpCircle,
   MapPin,
   Compass,
@@ -13,7 +11,6 @@ import {
   Building2,
   Info,
   ShieldCheck,
-  Luggage,
   ChevronRight,
   Car,
   Footprints,
@@ -23,18 +20,14 @@ import {
   ChevronDown,
   Camera,
   Sun,
-  Eye,
-  FileText,
   Landmark,
   Coins,
   UtensilsCrossed,
   Train,
   ShieldAlert,
-  Layers,
   HeartHandshake,
   Trees,
-  ShoppingBag,
-  Ticket
+  ShoppingBag
 } from 'lucide-react';
 import { Breadcrumbs } from './Breadcrumbs';
 import { BlogPost, KUALA_LUMPUR_ARTICLE } from '../data/blogData';
@@ -144,140 +137,143 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
     <article className="min-h-screen bg-[#F8FAFC]">
       {/* 1. Breadcrumbs */}
       <div className="bg-white border-b border-[#E7EEF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <Breadcrumbs
             items={[
               { label: 'Home', onClick: () => onNavigate('home') },
-              { label: 'Travel & Food Blog', onClick: () => onNavigate('blog') },
+              { label: 'Travel & Food', onClick: () => onNavigate('food-and-travel') },
               { label: 'Travel Guides', onClick: () => onNavigate('blog') },
-              { label: 'Kuala Lumpur Travel Guide' }
+              { label: 'Kuala Lumpur Travel Guide: Best Places to Visit and How to Plan Your Trip' }
             ]}
           />
         </div>
       </div>
 
-      {/* 2. Article Header & Hero Banner */}
-      <header className="relative bg-gradient-to-br from-[#064E3B] via-[#065F46] to-[#022C22] text-white py-14 sm:py-20 overflow-hidden shadow-sm">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#6EE7B7_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 bg-[#10B981]/30 border border-[#6EE7B7]/40 text-[#6EE7B7] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">
-              <Tag className="w-3.5 h-3.5" />
-              {post.categoryName}
-            </span>
-            <span className="inline-flex items-center gap-1 bg-white/10 text-white/80 text-xs px-3 py-1 rounded-full backdrop-blur-sm">
-              <Clock className="w-3.5 h-3.5 text-[#6EE7B7]" />
-              {post.readingTime}
-            </span>
-            <span className="inline-flex items-center gap-1 bg-white/10 text-white/80 text-xs px-3 py-1 rounded-full backdrop-blur-sm">
-              <Calendar className="w-3.5 h-3.5 text-[#6EE7B7]" />
-              Updated October 2026
+      {/* 2. Article Header & Meta */}
+      <header className="bg-white border-b border-[#E2E8F0] pt-8 pb-10 sm:py-14">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <button
+              onClick={() => onNavigate('blog')}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0969E8] bg-[#EAF2FB] hover:bg-[#d8e8f8] px-3 py-1 rounded-full transition-colors cursor-pointer"
+            >
+              <Tag className="w-3 h-3" />
+              <span>{post.categoryName}</span>
+            </button>
+            <span className="text-xs text-[#64748B] flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5" />
+              <span>{post.readingTime}</span>
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight font-syncopate mb-6">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[40px] font-extrabold text-[#071B49] tracking-tight leading-tight font-syncopate">
             {post.title}
           </h1>
 
-          <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal max-w-3xl mb-8">
+          <p className="text-base sm:text-lg text-[#475569] leading-relaxed font-normal">
             {post.summary}
           </p>
 
-          {/* Author bar & Share button */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/15">
+          {/* Author, Date, Share Strip */}
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#F1F5F9] text-xs text-[#64748B]">
             <div className="flex items-center gap-3">
               <img
-                src={post.author.avatar}
+                src={post.author.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
                 alt={post.author.name}
-                className="w-10 h-10 rounded-full border-2 border-white/30 object-cover"
+                referrerPolicy="no-referrer"
+                className="w-10 h-10 rounded-full object-cover ring-2 ring-blue-100"
               />
               <div>
-                <div className="text-sm font-semibold text-white">{post.author.name}</div>
-                <div className="text-xs text-white/70">Verified Travel DuurDesh Editorial Guide</div>
+                <span className="font-bold text-[#071B49] block">{post.author.name}</span>
+                <span className="text-[11px] text-gray-500">{post.author.role} &bull; Published Oct 2026</span>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs text-white transition-all cursor-pointer"
-                title="Copy canonical article link"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#071B49] rounded-lg font-medium transition-colors cursor-pointer text-xs"
+                title="Share article URL"
               >
-                <Share2 className="w-3.5 h-3.5 text-[#6EE7B7]" />
-                <span>{copiedLink ? 'Link Copied!' : 'Share Guide'}</span>
+                <Share2 className="w-3.5 h-3.5" />
+                <span>{copiedLink ? 'Link Copied!' : 'Share Article'}</span>
               </button>
             </div>
           </div>
-
         </div>
       </header>
 
-      {/* 3. Hero Image Container */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-12 relative z-10">
-        <div className="rounded-2xl overflow-hidden shadow-xl bg-white border border-[#E2E8F0]">
-          <img
-            src={post.heroImage.url}
-            alt={post.heroImage.alt}
-            className="w-full h-64 sm:h-96 object-cover"
-          />
-          <div className="p-3 bg-[#F8FAFC] border-t border-[#E2E8F0] text-center text-xs text-[#64748B]">
-            {post.heroImage.caption}
+      {/* 3. Hero Cover Image */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <figure className="space-y-2">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 border border-gray-200 aspect-video shadow-md">
+            <img
+              src={post.heroImage.url}
+              alt={post.heroImage.alt}
+              loading="eager"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover object-center"
+            />
           </div>
-        </div>
+          {post.heroImage.caption && (
+            <figcaption className="text-center text-xs text-[#64748B] italic pt-1">
+              {post.heroImage.caption}
+            </figcaption>
+          )}
+        </figure>
       </div>
 
-      {/* 4. Article Core Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-        <div className="space-y-12">
+      {/* 4. Article Core Content Container */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-[#E2E8F0] shadow-xs space-y-12">
 
           {/* Key Highlights Callout */}
-          <div className="bg-gradient-to-br from-[#ECFDF5] to-[#D1FAE5] border border-[#A7F3D0] rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
-            <div className="flex items-center gap-2.5 text-[#065F46] font-bold text-sm uppercase tracking-wider">
-              <Sparkles className="w-4 h-4 text-[#059669]" />
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-4">
+            <div className="flex items-center gap-2 text-[#0969E8] font-bold text-xs uppercase tracking-wider">
+              <Sparkles className="w-4 h-4 shrink-0" />
               <span>Kuala Lumpur Travel Guide at a Glance</span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs text-[#064E3B] pt-2">
-              <div className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-[#A7F3D0]/60">
-                <Building2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs pt-1">
+              <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-[#E2E8F0] shadow-xs">
+                <Building2 className="w-4 h-4 text-[#0969E8] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold block text-[#064E3B]">Skyline Architecture</span>
-                  Petronas Twin Towers, Menara KL & Merdeka 118
+                  <span className="font-bold block text-[#071B49]">Skyline Architecture</span>
+                  <span className="text-[#64748B]">Petronas Twin Towers, Menara KL & Merdeka 118</span>
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-[#A7F3D0]/60">
-                <UtensilsCrossed className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-[#E2E8F0] shadow-xs">
+                <UtensilsCrossed className="w-4 h-4 text-[#0969E8] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold block text-[#064E3B]">Halal Street Gastronomy</span>
-                  Jalan Alor, Mamak stalls & authentic Nasi Lemak
+                  <span className="font-bold block text-[#071B49]">Halal Gastronomy</span>
+                  <span className="text-[#64748B]">Jalan Alor, Mamak stalls & authentic Nasi Lemak</span>
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-[#A7F3D0]/60">
-                <Train className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-[#E2E8F0] shadow-xs">
+                <Train className="w-4 h-4 text-[#0969E8] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold block text-[#064E3B]">Effortless Transit</span>
-                  28-min KLIA Ekspres & clean RapidKL LRT/MRT network
+                  <span className="font-bold block text-[#071B49]">Effortless Transit</span>
+                  <span className="text-[#64748B]">28-min KLIA Ekspres & RapidKL LRT/MRT network</span>
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-[#A7F3D0]/60">
-                <Landmark className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-[#E2E8F0] shadow-xs">
+                <Landmark className="w-4 h-4 text-[#0969E8] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold block text-[#064E3B]">Spiritual & Cultural Heritage</span>
-                  Batu Caves, National Mosque & Thean Hou Temple
+                  <span className="font-bold block text-[#071B49]">Heritage & Shrines</span>
+                  <span className="text-[#64748B]">Batu Caves, National Mosque & Thean Hou Temple</span>
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-[#A7F3D0]/60">
-                <Coins className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-[#E2E8F0] shadow-xs">
+                <Coins className="w-4 h-4 text-[#0969E8] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold block text-[#064E3B]">Outstanding Value</span>
-                  Affordable 5-star hospitality & low daily travel costs
+                  <span className="font-bold block text-[#071B49]">Exceptional Value</span>
+                  <span className="text-[#64748B]">Affordable luxury hotels & low daily travel costs</span>
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-[#A7F3D0]/60">
-                <Compass className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-[#E2E8F0] shadow-xs">
+                <Compass className="w-4 h-4 text-[#0969E8] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold block text-[#064E3B]">Strategic Hub</span>
-                  Quick access to Penang, Langkawi, Melaka & Borneo
+                  <span className="font-bold block text-[#071B49]">Strategic Gateway</span>
+                  <span className="text-[#64748B]">Direct access to Penang, Langkawi, Melaka & Borneo</span>
                 </div>
               </div>
             </div>
@@ -285,37 +281,41 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
 
           {/* Section: Introduction: Discover Kuala Lumpur */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">1</span>
-              <span>Introduction: Discover Kuala Lumpur</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              Introduction: Discover Kuala Lumpur
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4 font-normal">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Kuala Lumpur, affectionately known as KL, is the pulsating federal capital of Malaysia and one of Southeast Asia’s most captivating, forward-thinking urban centers. Nestled at the confluence of the Gombak and Klang rivers—from which the city originally derived its name, meaning “muddy confluence”—Kuala Lumpur has evolved from a nineteenth-century tin-mining outpost into a glittering metropolis celebrated for its harmonious blend of soaring contemporary engineering, lush equatorial greenery, and rich cultural traditions.
               </p>
               <p>
                 What distinguishes Kuala Lumpur on the global stage is its remarkable multicultural fabric. Within a single day, travelers can stand in awe before the world’s tallest twin skyscrapers, ascend the 272 vibrant limestone stairs of Batu Caves flanked by Hindu shrines, visit the serene moorish courtyards of the National Mosque, stroll past century-old shophouses in Chinatown’s Petaling Street, and savor fresh roti canai at a lively late-night 24-hour mamak open-air stall.
               </p>
-              <p>
-                Setting realistic expectations is key to a smooth journey: Kuala Lumpur experiences a warm, tropical climate year-round with humid afternoons and brief, refreshing thunderstorms. Pacing your sightseeing between air-conditioned landmarks, covered elevated walkways, and outdoor cultural districts will ensure an enjoyable, energized adventure. Whether you are visiting as a family, solo explorer, cultural pilgrim, or food enthusiast, this comprehensive guide provides the verified, practical knowledge needed to navigate the Malaysian capital with confidence.
-              </p>
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2">
+                <div className="flex items-center gap-2 text-[#0969E8] font-bold text-xs uppercase tracking-wider">
+                  <Info className="w-4 h-4 shrink-0" />
+                  <span>Setting Realistic Travel Expectations</span>
+                </div>
+                <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                  Setting realistic expectations is key to a smooth journey: Kuala Lumpur experiences a warm, tropical climate year-round with humid afternoons and brief, refreshing thunderstorms. Pacing your sightseeing between air-conditioned landmarks, covered elevated walkways, and outdoor cultural districts will ensure an enjoyable, energized adventure. Whether you are visiting as a family, solo explorer, cultural pilgrim, or food enthusiast, this comprehensive guide provides the verified, practical knowledge needed to navigate the Malaysian capital with confidence.
+                </p>
+              </div>
             </div>
           </section>
 
-          {/* Section 2: Why Visit Kuala Lumpur? */}
+          {/* Section 1: Why Visit Kuala Lumpur? */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">2</span>
-              <span>Why Visit Kuala Lumpur?</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              1. Why Visit Kuala Lumpur?
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Travelers from around the globe choose Kuala Lumpur for a distinctive array of reasons that set it apart from other regional megacities:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Building2 className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Building2 className="w-4 h-4 text-[#0969E8]" />
                     <h4>Futuristic Skyline & World Records</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -324,8 +324,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <HeartHandshake className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <HeartHandshake className="w-4 h-4 text-[#0969E8]" />
                     <h4>Cultural Diversity & Community Harmony</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -334,8 +334,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <UtensilsCrossed className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <UtensilsCrossed className="w-4 h-4 text-[#0969E8]" />
                     <h4>A Global Culinary Capital</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -344,8 +344,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Trees className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Trees className="w-4 h-4 text-[#0969E8]" />
                     <h4>Tropical Green Spaces in the City</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -354,8 +354,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Coins className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Coins className="w-4 h-4 text-[#0969E8]" />
                     <h4>Unrivaled Travel Value</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -364,8 +364,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Compass className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Compass className="w-4 h-4 text-[#0969E8]" />
                     <h4>Ideal Gateway to Malaysia & Southeast Asia</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -376,13 +376,12 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 3: Best Places to Visit in Kuala Lumpur */}
+          {/* Section 2: Best Places to Visit in Kuala Lumpur */}
           <section className="space-y-6">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">3</span>
-              <span>Best Places to Visit in Kuala Lumpur</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              2. Best Places to Visit in Kuala Lumpur
             </h2>
-            <p className="text-sm sm:text-base text-[#334155] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
               Kuala Lumpur’s top attractions showcase the city’s multifaceted character, combining ancient limestone formations and historic colonial quarters with cutting-edge architectural engineering:
             </p>
 
@@ -391,10 +390,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-[#059669]" />
+                    <Building2 className="w-5 h-5 text-[#0969E8]" />
                     Petronas Twin Towers & KLCC
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Iconic Landmark
                   </span>
                 </div>
@@ -402,7 +401,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                   Soaring 451.9 meters into the sky, the 88-story Petronas Twin Towers, designed by master architect César Pelli, draw inspiration from traditional geometric Islamic motifs. Visitors can walk along the double-decker Skybridge on the 41st and 42nd floors connecting the towers before ascending to the 86th-floor observation deck for breathtaking 360-degree vistas across the Klang Valley. At the base of the towers lies Suria KLCC, one of Southeast Asia’s premier shopping complexes featuring high-end international boutiques, science discovery centers, and direct access to shaded outdoor fountains.
                 </p>
                 <div className="p-3 bg-[#F8FAFC] rounded-xl text-xs text-[#64748B] flex items-center gap-2 border border-[#E2E8F0]">
-                  <Info className="w-4 h-4 text-[#059669] shrink-0" />
+                  <Info className="w-4 h-4 text-[#0969E8] shrink-0" />
                   <span>
                     <strong>Traveler Tip:</strong> Observation deck tickets are strictly limited per timeslot. We strongly recommend booking entry vouchers several weeks in advance, especially during peak holiday periods.
                   </span>
@@ -413,10 +412,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Trees className="w-5 h-5 text-[#059669]" />
+                    <Trees className="w-5 h-5 text-[#0969E8]" />
                     KLCC Park
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Urban Oasis
                   </span>
                 </div>
@@ -424,7 +423,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                   Spanning 50 meticulously landscaped acres directly beneath the Petronas Towers, KLCC Park was masterminded by Brazilian landscape architect Roberto Burle Marx. The park features nearly 2,000 indigenous tropical trees and palms, a 1.3-kilometer cushioned jogging track, children’s wading pools, and Lake Symphony. In the evening, the lake comes alive with choreographed musical water fountain light shows that draw both locals and international travelers for open-air relaxation.
                 </p>
                 <div className="p-3 bg-[#F8FAFC] rounded-xl text-xs text-[#64748B] flex items-center gap-2 border border-[#E2E8F0]">
-                  <Camera className="w-4 h-4 text-[#059669] shrink-0" />
+                  <Camera className="w-4 h-4 text-[#0969E8] shrink-0" />
                   <span>
                     <strong>Photography Spot:</strong> The pedestrian bridge across Lake Symphony offers an unobstructed angle to photograph the illuminated towers reflecting in the water after sunset.
                   </span>
@@ -435,10 +434,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Landmark className="w-5 h-5 text-[#059669]" />
+                    <Landmark className="w-5 h-5 text-[#0969E8]" />
                     Batu Caves & Murugan Statue
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Ancient Sacred Site
                   </span>
                 </div>
@@ -446,7 +445,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                   Located approximately 13 kilometers north of the city center, Batu Caves is a dramatic 400-million-year-old limestone hill housing a complex of cavernous Hindu temples. Welcoming visitors at the entrance is the world’s tallest statue of Lord Murugan—standing an astonishing 42.7 meters high and clad in gold paint. To reach Cathedral Cave, travelers ascend 272 steep, vividly painted rainbow steps while observing playful macaques. Inside, natural daylight filters through massive limestone apertures onto ancient shrines.
                 </p>
                 <div className="p-3 bg-[#F8FAFC] rounded-xl text-xs text-[#64748B] flex items-center gap-2 border border-[#E2E8F0]">
-                  <ShieldCheck className="w-4 h-4 text-[#059669] shrink-0" />
+                  <ShieldCheck className="w-4 h-4 text-[#0969E8] shrink-0" />
                   <span>
                     <strong>Visitor Etiquette:</strong> Batu Caves is an active Hindu place of worship. Modest dress covering shoulders and knees is strictly enforced at the stair base. Avoid carrying exposed food or plastic bags that may attract curious monkeys.
                   </span>
@@ -457,10 +456,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Landmark className="w-5 h-5 text-[#059669]" />
+                    <Landmark className="w-5 h-5 text-[#0969E8]" />
                     Merdeka Square & the Historic Colonial Core
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Historical Heritage
                   </span>
                 </div>
@@ -468,7 +467,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                   Merdeka Square (Independence Square) is the birthplace of modern Malaysia, where the Union Jack was lowered and the Malayan flag raised for the first time at midnight on August 31, 1957. The square is framed by one of the world’s tallest flagpoles (95 meters) and the majestic Sultan Abdul Samad Building, renowned for its ornate Moorish copper domes, arched colonnades, and 41-meter clock tower. Nearby stands the historic Masjid Jamek Sultan Abdul Samad, built in 1909 right where the Gombak and Klang rivers meet.
                 </p>
                 <div className="p-3 bg-[#F8FAFC] rounded-xl text-xs text-[#64748B] flex items-center gap-2 border border-[#E2E8F0]">
-                  <Footprints className="w-4 h-4 text-[#059669] shrink-0" />
+                  <Footprints className="w-4 h-4 text-[#0969E8] shrink-0" />
                   <span>
                     <strong>River of Life:</strong> Visit the riverbank at dusk when mist fountains and blue ambient lighting illuminate the historic river confluence, creating a peaceful evening walking path.
                   </span>
@@ -479,10 +478,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <ShoppingBag className="w-5 h-5 text-[#059669]" />
+                    <ShoppingBag className="w-5 h-5 text-[#0969E8]" />
                     Chinatown & Petaling Street
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Bustling Markets
                   </span>
                 </div>
@@ -495,10 +494,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-[#059669]" />
+                    <Sparkles className="w-5 h-5 text-[#0969E8]" />
                     Little India (Brickfields)
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Sensory Quarters
                   </span>
                 </div>
@@ -511,10 +510,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <ShoppingBag className="w-5 h-5 text-[#059669]" />
+                    <ShoppingBag className="w-5 h-5 text-[#0969E8]" />
                     Bukit Bintang & The Golden Triangle
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Shopping & Entertainment
                   </span>
                 </div>
@@ -527,10 +526,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Landmark className="w-5 h-5 text-[#059669]" />
+                    <Landmark className="w-5 h-5 text-[#0969E8]" />
                     Thean Hou Temple
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Hilltop Architecture
                   </span>
                 </div>
@@ -543,10 +542,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Trees className="w-5 h-5 text-[#059669]" />
+                    <Trees className="w-5 h-5 text-[#0969E8]" />
                     Perdana Botanical Garden (Lake Gardens)
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Botanical Sanctuary
                   </span>
                 </div>
@@ -559,10 +558,10 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#071B49] flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-[#059669]" />
+                    <Building2 className="w-5 h-5 text-[#0969E8]" />
                     Menara Kuala Lumpur (KL Tower)
                   </h3>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAF2FB] text-[#0969E8] border border-[#D0E2FF]">
                     Panoramic Viewpoint
                   </span>
                 </div>
@@ -574,13 +573,12 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 4: Neighborhoods and Where to Stay */}
+          {/* Section 3: Neighborhoods and Where to Stay */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">4</span>
-              <span>Neighborhoods and Where to Stay</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              3. Neighborhoods and Where to Stay
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Selecting the right base depends on your travel style, pace, and priorities. Kuala Lumpur offers distinctly characterized districts, each providing unique connectivity and ambiance:
               </p>
@@ -589,14 +587,14 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
                   <div className="flex items-center justify-between">
                     <h4 className="font-bold text-[#071B49] text-base">KLCC (Kuala Lumpur City Centre)</h4>
-                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46]">
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#EAF2FB] text-[#0969E8]">
                       First-Time Visitors & Luxury
                     </span>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
                     <strong>Character:</strong> Upscale, modern, and walkable. Direct pedestrian access to the Petronas Towers, Suria KLCC mall, and KLCC Park. Home to five-star international hotels with skyline infinity pools.
                   </p>
-                  <p className="text-xs text-[#065F46] font-medium">
+                  <p className="text-xs text-[#0969E8] font-medium">
                     <strong>Best for:</strong> Families, honeymooners, and first-time visitors seeking central luxury and peaceful green surroundings.
                   </p>
                 </div>
@@ -604,14 +602,14 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
                   <div className="flex items-center justify-between">
                     <h4 className="font-bold text-[#071B49] text-base">Bukit Bintang</h4>
-                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46]">
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#EAF2FB] text-[#0969E8]">
                       Shopping & Nightlife
                     </span>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
                     <strong>Character:</strong> High energy, central, and vibrant 24/7. Stepping outside places you directly among mega shopping malls, street dining on Jalan Alor, and rapid transit Monorail and MRT stations.
                   </p>
-                  <p className="text-xs text-[#065F46] font-medium">
+                  <p className="text-xs text-[#0969E8] font-medium">
                     <strong>Best for:</strong> Avid shoppers, food enthusiasts, and travelers who thrive in lively urban environments.
                   </p>
                 </div>
@@ -619,14 +617,14 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
                   <div className="flex items-center justify-between">
                     <h4 className="font-bold text-[#071B49] text-base">Chinatown & Historic Core</h4>
-                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46]">
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#EAF2FB] text-[#0969E8]">
                       Heritage & Budget
                     </span>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
                     <strong>Character:</strong> Rich historical atmosphere, heritage shophouse boutique hotels, independent artisan coffee shops, and night markets. Superb connectivity via Pasar Seni transit interchange.
                   </p>
-                  <p className="text-xs text-[#065F46] font-medium">
+                  <p className="text-xs text-[#0969E8] font-medium">
                     <strong>Best for:</strong> Solo travelers, budget explorers, photographers, and culture lovers.
                   </p>
                 </div>
@@ -634,14 +632,14 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
                   <div className="flex items-center justify-between">
                     <h4 className="font-bold text-[#071B49] text-base">KL Sentral & Brickfields</h4>
-                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46]">
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#EAF2FB] text-[#0969E8]">
                       Maximum Transit Ease
                     </span>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
                     <strong>Character:</strong> The central transport nexus of Peninsular Malaysia. Direct access to the KLIA Ekspres airport train, interstate ETS railway, LRT, MRT, and Monorail lines, flanked by major business hotels.
                   </p>
-                  <p className="text-xs text-[#065F46] font-medium">
+                  <p className="text-xs text-[#0969E8] font-medium">
                     <strong>Best for:</strong> Short stopovers, business travelers, and those planning frequent day trips outside the city.
                   </p>
                 </div>
@@ -649,20 +647,19 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 5: What and Where to Eat: Malaysian Halal & Street Food Guide */}
+          {/* Section 4: What and Where to Eat: Malaysian Halal & Street Food Guide */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">5</span>
-              <span>What and Where to Eat: Malaysian Halal & Street Food Guide</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              4. What and Where to Eat: Malaysian Halal & Street Food Guide
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Malaysian food is a celebration of flavor born from generations of cultural cross-pollination among Malay, Chinese, Indian, and indigenous communities. Spices like lemongrass, galangal, pandan, turmeric, and star anise marry rich coconut milk and smoky wok char. With Malaysia’s world-renowned Department of Islamic Development (JAKIM) setting gold standards for halal certification, Muslim travelers will find thousands of verified halal eateries across every neighborhood.
               </p>
 
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-4">
                 <h3 className="text-base font-bold text-[#071B49] flex items-center gap-2">
-                  <UtensilsCrossed className="w-5 h-5 text-[#059669]" />
+                  <UtensilsCrossed className="w-5 h-5 text-[#0969E8]" />
                   Must-Try Signature Dishes
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
@@ -712,7 +709,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
 
               <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
                 <h3 className="text-base font-bold text-[#071B49] flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-[#059669]" />
+                  <MapPin className="w-5 h-5 text-[#0969E8]" />
                   Where to Experience KL’s Food Scene
                 </h3>
                 <div className="space-y-3 text-xs sm:text-sm text-[#475569]">
@@ -733,21 +730,20 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 6: Getting Around Kuala Lumpur */}
+          {/* Section 5: Getting Around Kuala Lumpur */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">6</span>
-              <span>Getting Around Kuala Lumpur</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              5. Getting Around Kuala Lumpur
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Kuala Lumpur features one of Southeast Asia’s most modern and integrated multi-modal transit systems. Visitors can move across the capital effortlessly by rail, road, and covered pedestrian skyways:
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Train className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Train className="w-4 h-4 text-[#0969E8]" />
                     <h4>RapidKL Rail Network (LRT, MRT, Monorail)</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -756,8 +752,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Plane className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Plane className="w-4 h-4 text-[#0969E8]" />
                     <h4>KLIA Ekspres Airport Train</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -766,8 +762,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Car className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Car className="w-4 h-4 text-[#0969E8]" />
                     <h4>Grab Ride-Hailing</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -776,8 +772,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Footprints className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Footprints className="w-4 h-4 text-[#0969E8]" />
                     <h4>Covered Pedestrian Skywalks</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -788,7 +784,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
 
               <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] text-xs text-[#475569] space-y-1.5">
                 <div className="font-bold text-[#071B49] flex items-center gap-2">
-                  <Coins className="w-4 h-4 text-[#059669]" />
+                  <Coins className="w-4 h-4 text-[#0969E8]" />
                   Cashless Transit Payment: Touch \'n Go & MyCity Pass
                 </div>
                 <p>
@@ -798,21 +794,20 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 7: Best Time to Visit & Weather */}
+          {/* Section 6: Best Time to Visit & Weather */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">7</span>
-              <span>Best Time to Visit & Weather</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              6. Best Time to Visit & Weather
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Kuala Lumpur sits roughly 3 degrees north of the equator, experiencing a consistent tropical rainforest climate. Daytime temperatures consistently hover between 28°C and 33°C (82°F to 91°F), dipping pleasantly to 23°C to 25°C at night. Humidity remains high throughout the year.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Sun className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Sun className="w-4 h-4 text-[#0969E8]" />
                     <span>Dryer Windows (May–Aug & Dec–Feb)</span>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -821,8 +816,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <AlertCircle className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Info className="w-4 h-4 text-[#0969E8]" />
                     <span>Monsoon Seasons (Mar–Apr & Oct–Nov)</span>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -831,8 +826,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Sparkles className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Sparkles className="w-4 h-4 text-[#0969E8]" />
                     <span>Festive Seasons</span>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -843,13 +838,12 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 8: Suggested Itineraries */}
+          {/* Section 7: Suggested Itineraries */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">8</span>
-              <span>Suggested Itineraries</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              7. Suggested Itineraries
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 To help structure your days smoothly, our editorial team has assembled three flexible itineraries tailored to different trip lengths:
               </p>
@@ -859,17 +853,17 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-3">
                   <div className="flex items-center justify-between">
                     <h3 className="font-bold text-[#071B49] text-base">2-Day Essential Highlights</h3>
-                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46]">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#EAF2FB] text-[#0969E8]">
                       Quick Stopover
                     </span>
                   </div>
                   <ul className="text-xs text-[#475569] space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Day 1:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Day 1:</span>
                       <span>Morning visit to the Petronas Twin Towers Skybridge; afternoon walk through KLCC Park; evening exploration of Bukit Bintang and dinner on the street food strip of Jalan Alor.</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Day 2:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Day 2:</span>
                       <span>Early morning climb up the 272 steps at Batu Caves; midday visit to Merdeka Square and the Sultan Abdul Samad Building; afternoon souvenir and tea hunting in Chinatown’s Petaling Street and Kwai Chai Hong murals.</span>
                     </li>
                   </ul>
@@ -879,21 +873,21 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-3">
                   <div className="flex items-center justify-between">
                     <h3 className="font-bold text-[#071B49] text-base">3-Day Culture, Food & Skyline</h3>
-                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46]">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#EAF2FB] text-[#0969E8]">
                       Recommended Standard
                     </span>
                   </div>
                   <ul className="text-xs text-[#475569] space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Day 1:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Day 1:</span>
                       <span>Downtown modern wonders: Petronas Towers, Suria KLCC shopping, KLCC Park lake symphony, and sunset cocktails or mocktails at Menara KL Tower Sky Deck.</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Day 2:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Day 2:</span>
                       <span>Heritage & religious architecture: Batu Caves in the morning, Islamic Arts Museum Malaysia, National Mosque (Masjid Negara), and Merdeka Square River of Life at dusk.</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Day 3:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Day 3:</span>
                       <span>Multi-ethnic neighborhoods: Morning peaceful visit to hilltop Thean Hou Temple; lunch in Brickfields (Little India) banana leaf rice; afternoon exploring Chinatown cafes and Central Market artisan crafts.</span>
                     </li>
                   </ul>
@@ -903,21 +897,21 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 <div className="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-3">
                   <div className="flex items-center justify-between">
                     <h3 className="font-bold text-[#071B49] text-base">5-Day Kuala Lumpur & Day Trips</h3>
-                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46]">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#EAF2FB] text-[#0969E8]">
                       Comprehensive Experience
                     </span>
                   </div>
                   <ul className="text-xs text-[#475569] space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Days 1–3:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Days 1–3:</span>
                       <span>Follow the complete 3-Day Culture, Food & Skyline itinerary covering all major inner-city districts.</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Day 4:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Day 4:</span>
                       <span>Day trip to historical Melaka (Malacca), a UNESCO World Heritage city 2 hours south of KL. Explore Dutch Square (Stadthuys), St. Paul’s Hill, A Famosa fortress, and Jonker Street night market.</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="font-bold text-[#065F46] shrink-0">Day 5:</span>
+                      <span className="font-bold text-[#0969E8] shrink-0">Day 5:</span>
                       <span>Morning excursion to Putrajaya, Malaysia’s federal administrative center, to view the stunning pink-domed Putra Mosque and cruise Putrajaya Lake; afternoon leisure shopping and spa relaxation before airport departure.</span>
                     </li>
                   </ul>
@@ -926,20 +920,19 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 9: Practical Budgeting & Travel Costs */}
+          {/* Section 8: Practical Budgeting & Travel Costs */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">9</span>
-              <span>Practical Budgeting & Travel Costs</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              8. Practical Budgeting & Travel Costs
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 The local currency is the <strong>Malaysian Ringgit (MYR)</strong>, often written as RM. Credit and contactless debit cards (Visa and Mastercard) are universally accepted across shopping centers, hotels, supermarkets, and established restaurants. Small cash is only required for street hawkers, wet markets, and reloading transit cards.
               </p>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-xs text-left border border-[#E2E8F0] rounded-xl overflow-hidden">
-                  <thead className="bg-[#065F46] text-white uppercase text-[10px] tracking-wider">
+                  <thead className="bg-[#071B49] text-white uppercase text-[10px] tracking-wider">
                     <tr>
                       <th className="p-3">Traveler Tier</th>
                       <th className="p-3">Daily Cost (MYR)</th>
@@ -950,19 +943,19 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                   <tbody className="divide-y divide-[#E2E8F0] bg-white">
                     <tr>
                       <td className="p-3 font-bold text-[#071B49]">Budget Traveler</td>
-                      <td className="p-3 font-semibold text-[#065F46]">RM 120 – RM 190</td>
+                      <td className="p-3 font-semibold text-[#0969E8]">RM 120 – RM 190</td>
                       <td className="p-3">$28 – $45 USD</td>
                       <td className="p-3 text-[#64748B]">Boutique hostel or guesthouse, public transit (LRT/MRT), street hawker meals, free temples & public parks</td>
                     </tr>
                     <tr>
                       <td className="p-3 font-bold text-[#071B49]">Mid-Range Traveler</td>
-                      <td className="p-3 font-semibold text-[#065F46]">RM 280 – RM 520</td>
+                      <td className="p-3 font-semibold text-[#0969E8]">RM 280 – RM 520</td>
                       <td className="p-3">$65 – $120 USD</td>
                       <td className="p-3 text-[#64748B]">4-star hotel in Bukit Bintang/KLCC, mix of Grab rides and metro, sit-down air-conditioned dining, paid observation deck tickets</td>
                     </tr>
                     <tr>
                       <td className="p-3 font-bold text-[#071B49]">Luxury Traveler</td>
-                      <td className="p-3 font-semibold text-[#065F46]">RM 850 – RM 1,800+</td>
+                      <td className="p-3 font-semibold text-[#0969E8]">RM 850 – RM 1,800+</td>
                       <td className="p-3">$195 – $420+ USD</td>
                       <td className="p-3 text-[#64748B]">5-star luxury suites (Grand Hyatt, Mandarin Oriental, Banyan Tree), private chauffeured cars, fine-dining restaurants, luxury spa treatments</td>
                     </tr>
@@ -971,7 +964,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               </div>
 
               <div className="p-3 bg-[#F8FAFC] rounded-xl text-xs text-[#64748B] flex items-center gap-2 border border-[#E2E8F0]">
-                <Coins className="w-4 h-4 text-[#059669] shrink-0" />
+                <Coins className="w-4 h-4 text-[#0969E8] shrink-0" />
                 <span>
                   <strong>Tipping Policy:</strong> Tipping is not customary in Malaysia. Most restaurants and hotels automatically add a 10% service charge and 6% Sales & Service Tax (SST) to your bill. Leaving small change for exceptional service at cafes or luggage assistance is appreciated but entirely optional.
                 </span>
@@ -979,21 +972,20 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 10: Local Etiquette, Safety & Respectful Travel */}
+          {/* Section 9: Local Etiquette, Safety & Respectful Travel */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">10</span>
-              <span>Local Etiquette, Safety & Respectful Travel</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              9. Local Etiquette, Safety & Respectful Travel
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Malaysia is a warm, gracious, and welcoming nation where diverse cultures thrive through mutual respect. Following a few simple etiquette practices ensures you will be treated with genuine hospitality wherever you go:
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <ShieldCheck className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <ShieldCheck className="w-4 h-4 text-[#0969E8]" />
                     <h4>Dress Respectfully at Sacred Sites</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -1002,8 +994,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <HeartHandshake className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <HeartHandshake className="w-4 h-4 text-[#0969E8]" />
                     <h4>Traditional Hand Gestures & Manners</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -1012,8 +1004,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <ShieldAlert className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <ShieldAlert className="w-4 h-4 text-[#0969E8]" />
                     <h4>Street Awareness & Bag Protection</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -1022,8 +1014,8 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 </div>
 
                 <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
-                  <div className="flex items-center gap-2 text-[#065F46] font-bold text-sm">
-                    <Sun className="w-4 h-4 text-[#059669]" />
+                  <div className="flex items-center gap-2 text-[#071B49] font-bold text-sm">
+                    <Sun className="w-4 h-4 text-[#0969E8]" />
                     <h4>Hydration & Tropical Well-being</h4>
                   </div>
                   <p className="text-xs text-[#64748B] leading-relaxed">
@@ -1034,47 +1026,46 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 11: Interactive Trip Planning Checklist */}
+          {/* Section 10: Interactive Trip Planning Checklist */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">11</span>
-              <span>Interactive Trip Planning Checklist</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              10. Interactive Trip Planning Checklist
             </h2>
-            <p className="text-sm sm:text-base text-[#334155] leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#64748B]">
               Use this interactive checklist to prepare your trip to Kuala Lumpur. Tap any item to check it off as you complete your planning:
             </p>
 
-            <div className="space-y-6 pt-2">
+            <div className="space-y-4 pt-2">
               {checklistSections.map((sec, sIdx) => (
-                <div key={sIdx} className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs space-y-3">
-                  <h3 className="text-sm font-bold text-[#065F46] uppercase tracking-wider flex items-center gap-2">
-                    <CheckSquare className="w-4 h-4 text-[#059669]" />
+                <div key={sIdx} className="border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 bg-[#F8FAFC] space-y-3">
+                  <h3 className="text-sm font-bold text-[#071B49] uppercase tracking-wider flex items-center gap-2">
+                    <CheckSquare className="w-4 h-4 text-[#0969E8]" />
                     {sec.title}
                   </h3>
                   <div className="space-y-2.5">
                     {sec.items.map((item) => {
                       const isChecked = !!checkedItems[item.id];
                       return (
-                        <button
+                        <div
                           key={item.id}
                           onClick={() => toggleCheck(item.id)}
                           className={`w-full text-left p-3 rounded-xl border transition-all flex items-start gap-3 cursor-pointer ${
                             isChecked
-                              ? 'bg-[#ECFDF5] border-[#A7F3D0] text-[#065F46]'
-                              : 'bg-[#F8FAFC] hover:bg-[#F1F5F9] border-[#E2E8F0] text-[#334155]'
+                              ? 'bg-[#EAF2FB] border-[#D0E2FF] text-[#071B49]'
+                              : 'bg-white hover:bg-slate-50 border-[#E2E8F0] text-[#334155]'
                           }`}
                         >
                           <div className="shrink-0 mt-0.5">
                             {isChecked ? (
-                              <CheckCircle2 className="w-4 h-4 text-[#059669]" />
+                              <CheckCircle2 className="w-4 h-4 text-[#0969E8]" />
                             ) : (
-                              <Square className="w-4 h-4 text-[#94A3B8]" />
+                              <Square className="w-4 h-4 text-gray-400" />
                             )}
                           </div>
-                          <span className={`text-xs leading-relaxed ${isChecked ? 'line-through text-[#047857]' : ''}`}>
+                          <span className={`text-xs sm:text-sm leading-relaxed ${isChecked ? 'line-through text-gray-400' : ''}`}>
                             {item.text}
                           </span>
-                        </button>
+                        </div>
                       );
                     })}
                   </div>
@@ -1083,13 +1074,12 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 12: Frequently Asked Questions (FAQ) */}
+          {/* Section 11: Frequently Asked Questions (FAQ) */}
           <section className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">12</span>
-              <span>Frequently Asked Questions</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              11. Frequently Asked Questions
             </h2>
-            <p className="text-sm sm:text-base text-[#334155] leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#64748B]">
               Find answers to the most common practical questions asked by travelers planning their trip to Kuala Lumpur:
             </p>
 
@@ -1099,24 +1089,24 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 return (
                   <div
                     key={idx}
-                    className="rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden shadow-xs transition-colors"
+                    className="border border-[#E2E8F0] rounded-2xl overflow-hidden bg-white transition-all"
                   >
                     <button
                       onClick={() => toggleFaq(idx)}
-                      className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F8FAFC] transition-colors"
+                      className="w-full flex items-center justify-between p-4 sm:p-5 text-left font-bold text-sm sm:text-base text-[#071B49] hover:bg-slate-50 transition-colors cursor-pointer"
                     >
-                      <span className="font-bold text-sm sm:text-base text-[#071B49] flex items-center gap-2.5">
-                        <HelpCircle className="w-4 h-4 text-[#059669] shrink-0" />
-                        {faq.question}
+                      <span className="flex items-center gap-2">
+                        <HelpCircle className="w-4 h-4 text-[#0969E8] shrink-0" />
+                        <span>{faq.question}</span>
                       </span>
                       <ChevronDown
-                        className={`w-4 h-4 text-[#64748B] transition-transform duration-200 shrink-0 ${
-                          isOpen ? 'rotate-180 text-[#059669]' : ''
+                        className={`w-4 h-4 text-gray-500 transition-transform duration-200 shrink-0 ${
+                          isOpen ? 'rotate-180 text-[#0969E8]' : ''
                         }`}
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 text-xs sm:text-sm text-[#475569] leading-relaxed border-t border-[#E2E8F0] pt-4 bg-[#F8FAFC]/50">
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#475569] leading-relaxed border-t border-slate-100 bg-[#F8FAFC]">
                         {faq.answer}
                       </div>
                     )}
@@ -1126,13 +1116,12 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Section 13: Conclusion & Related Travel Guides */}
-          <section className="space-y-4 pt-6">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071B49] font-syncopate flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-[#065F46] text-white flex items-center justify-center text-sm font-bold">13</span>
-              <span>Conclusion & Next Steps</span>
+          {/* Conclusion */}
+          <section className="space-y-4 pt-4 border-t border-[#F1F5F9]">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#071B49] tracking-tight font-syncopate">
+              Conclusion
             </h2>
-            <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+            <div className="text-sm sm:text-base text-[#475569] leading-relaxed space-y-4">
               <p>
                 Kuala Lumpur is a city that defies simple categorization. It is an ultra-modern skyline of steel and glass, an ancient natural limestone sanctuary, a historic colonial river settlement, and a culinary wonder all at once. By understanding its neighborhoods, traveling respectfully across its sacred sanctuaries, and pacing your days between modern attractions and open-air street markets, your journey through the Malaysian capital will be deeply rewarding and memorable.
               </p>
@@ -1142,20 +1131,19 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             </div>
           </section>
 
-          {/* Related Travel Guides Cards */}
-          <div className="space-y-3 pt-2">
-            <h3 className="text-sm font-bold text-[#071B49] uppercase tracking-wider flex items-center gap-2">
-              <Compass className="w-4 h-4 text-[#059669]" />
-              Explore More Travel DuurDesh Guides
+          {/* Related Travel & Pilgrim Guides */}
+          <div className="pt-6 border-t border-[#F1F5F9] space-y-4">
+            <h3 className="text-sm font-bold text-[#071B49] uppercase tracking-wider">
+              Explore More Travel Guides &amp; Resources
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               <button
                 onClick={() => onNavigate('blog/travel-guides/dubai-travel-guide')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
-                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#059669] transition-colors flex items-center justify-between">
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
                   <span>Dubai Travel Guide</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#059669]" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
                   Burj Khalifa, historic souks, desert safaris & itineraries.
@@ -1166,9 +1154,9 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 onClick={() => onNavigate('blog/travel-guides/alula-travel-guide')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
-                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#059669] transition-colors flex items-center justify-between">
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
                   <span>AlUla Travel Guide</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#059669]" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
                   Ancient Nabataean Hegra, rock art & desert canyons.
@@ -1179,9 +1167,9 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 onClick={() => onNavigate('blog/travel-guides/madinah-travel-guide')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
-                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#059669] transition-colors flex items-center justify-between">
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
                   <span>Madinah Travel Guide</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#059669]" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
                   Prophet\'s Mosque, Rawdah permits, transit & respectful etiquette.
@@ -1192,9 +1180,9 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 onClick={() => onNavigate('blog/travel-guides/makkah-travel-guide-first-time-visitors')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
-                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#059669] transition-colors flex items-center justify-between">
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
                   <span>Makkah First-Timer Guide</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#059669]" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
                   Masjid al-Haram, Tawaf navigation, lodging & rituals.
@@ -1205,9 +1193,9 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 onClick={() => onNavigate('blog/umrah-travel/what-to-pack-for-umrah')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
-                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#059669] transition-colors flex items-center justify-between">
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
                   <span>Umrah Packing Checklist</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#059669]" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
                   Comprehensive luggage, Ihram gear & pilgrimage essentials.
@@ -1218,9 +1206,9 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                 onClick={() => onNavigate('destinations/kualalumpur')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
-                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#059669] transition-colors flex items-center justify-between">
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
                   <span>KL Destination Hub</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#059669]" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
                   City highlights, flight searches & travel weather data.
@@ -1230,7 +1218,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
           </div>
 
           {/* Final Call to Action */}
-          <div className="bg-gradient-to-br from-[#064E3B] via-[#065F46] to-[#022C22] text-white rounded-2xl p-6 sm:p-8 space-y-4">
+          <div className="bg-gradient-to-br from-[#071B49] via-[#0B2564] to-[#040E29] text-white rounded-2xl p-6 sm:p-8 space-y-4">
             <div className="max-w-xl space-y-2">
               <h3 className="text-lg sm:text-xl font-bold font-syncopate">
                 Plan Your Journey to Kuala Lumpur with Confidence
@@ -1242,7 +1230,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
             <div className="flex flex-wrap gap-3 pt-2">
               <button
                 onClick={() => onNavigate('flights')}
-                className="inline-flex items-center gap-1.5 bg-[#10B981] hover:bg-[#059669] text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 bg-[#0969E8] hover:bg-[#0759c5] text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all cursor-pointer shadow-xs"
               >
                 <Plane className="w-4 h-4" />
                 <span>Compare Flights</span>
