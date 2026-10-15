@@ -723,6 +723,108 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
       }
     ]
   },
+  'blog-london': {
+    title: 'London Travel Guide: Best Places to Visit and How to Plan Your Trip | Travel DuurDesh',
+    description: 'Plan your London trip with this practical travel guide covering iconic landmarks, museums, neighborhoods, public transportation, food, budgeting, and itinerary tips.',
+    canonicalUrl: `${BASE_URL}/blog/travel-guides/london-travel-guide`,
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/food-and-travel` },
+          { '@type': 'ListItem', position: 3, name: 'Travel Guides', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'London Travel Guide: Best Places to Visit and How to Plan Your Trip',
+            item: `${BASE_URL}/blog/travel-guides/london-travel-guide`
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'London Travel Guide: Best Places to Visit and How to Plan Your Trip',
+        description: 'Plan your London trip with this practical travel guide covering iconic landmarks, museums, neighborhoods, public transportation, food, budgeting, and itinerary tips.',
+        image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-10-15',
+        dateModified: '2026-10-15',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${BASE_URL}/blog/travel-guides/london-travel-guide`
+        }
+      }
+    ]
+  },
+  'blog-istanbul': {
+    title: 'Istanbul Travel Guide: Best Places to Visit, Things to Do, and Travel Tips | Travel DuurDesh',
+    description: 'Plan your trip to Istanbul with this comprehensive travel guide covering historic landmarks, Bosphorus ferries, neighborhoods, halal food, and travel tips.',
+    canonicalUrl: `${BASE_URL}/blog/travel-guides/istanbul-travel-guide`,
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/food-and-travel` },
+          { '@type': 'ListItem', position: 3, name: 'Travel Guides', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'Istanbul Travel Guide: Best Places to Visit, Things to Do, and Travel Tips',
+            item: `${BASE_URL}/blog/travel-guides/istanbul-travel-guide`
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'Istanbul Travel Guide: Best Places to Visit, Things to Do, and Travel Tips',
+        description: 'Plan your trip to Istanbul with this comprehensive travel guide covering historic landmarks, Bosphorus ferries, neighborhoods, halal food, and travel tips.',
+        image: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-10-15',
+        dateModified: '2026-10-15',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${BASE_URL}/blog/travel-guides/istanbul-travel-guide`
+        }
+      }
+    ]
+  },
   '404': {
     title: 'Page Not Found (404) | Travel DuurDesh',
     description: 'The requested page could not be found on Travel DuurDesh. Return to our homepage or explore our destination guides, flights, hotels, and Umrah resources.',

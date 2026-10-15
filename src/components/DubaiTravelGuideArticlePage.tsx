@@ -879,6 +879,19 @@ export const DubaiTravelGuideArticlePage: React.FC<DubaiTravelGuideArticlePagePr
               </button>
 
               <button
+                onClick={() => onNavigate('blog/travel-guides/london-travel-guide')}
+                className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
+              >
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
+                  <span>London Travel Guide</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
+                </div>
+                <p className="text-[11px] text-[#64748B] mt-1">
+                  Landmarks, museums, neighborhoods &amp; transit.
+                </p>
+              </button>
+
+              <button
                 onClick={() => onNavigate('destinations/dubai')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >

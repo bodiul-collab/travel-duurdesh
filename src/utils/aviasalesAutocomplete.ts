@@ -124,22 +124,27 @@ export async function fetchAviasalesPlaces(
  */
 export function mapPlaceToAirportOption(place: AviasalesPlace): AirportOption {
   const cityName = place.city_name || place.name;
+  const airportName =
+    place.type === 'city' && place.main_airport_name
+      ? place.main_airport_name
+      : place.name;
+
   let region: AirportOption['region'] = 'Europe';
   const cc = (place.country_code || '').toUpperCase();
 
-  if (['US', 'CA', 'MX', 'BR', 'AR', 'CO', 'CL', 'PE'].includes(cc)) {
+  if (['US', 'CA', 'MX', 'BR', 'AR', 'CO', 'CL', 'PE', 'PA', 'CR', 'PR'].includes(cc)) {
     region = 'Americas';
   } else if (cc === 'SA') {
     region = 'Saudi Arabia';
-  } else if (['AE', 'QA', 'OM', 'BH', 'KW', 'JO', 'TR', 'EG', 'LB'].includes(cc)) {
+  } else if (['AE', 'QA', 'OM', 'BH', 'KW', 'JO', 'TR', 'EG', 'LB', 'IQ', 'IR', 'IL'].includes(cc)) {
     region = 'Middle East';
-  } else if (['BD', 'PK', 'IN', 'LK', 'NP'].includes(cc)) {
+  } else if (['BD', 'PK', 'IN', 'LK', 'NP', 'MV'].includes(cc)) {
     region = 'South Asia';
   } else if (
-    ['MY', 'SG', 'TH', 'ID', 'JP', 'KR', 'CN', 'VN', 'PH', 'AU', 'NZ', 'TW', 'HK'].includes(cc)
+    ['MY', 'SG', 'TH', 'ID', 'JP', 'KR', 'CN', 'VN', 'PH', 'AU', 'NZ', 'TW', 'HK', 'MO'].includes(cc)
   ) {
     region = 'Asia-Pacific';
-  } else if (['EG', 'MA', 'ZA', 'KE', 'NG', 'ET', 'TN', 'GH'].includes(cc)) {
+  } else if (['EG', 'MA', 'ZA', 'KE', 'NG', 'ET', 'TN', 'GH', 'DZ'].includes(cc)) {
     region = 'Africa';
   }
 
@@ -147,14 +152,15 @@ export function mapPlaceToAirportOption(place: AviasalesPlace): AirportOption {
     code: place.code.toUpperCase(),
     city: cityName,
     country: place.country_name,
-    name: place.name,
+    countryCode: cc,
+    name: airportName,
     region,
-    isPopular: (place.weight ?? 0) > 40000,
+    isPopular: (place.weight ?? 0) > 30000,
     aliases: [
       cityName.toLowerCase(),
       place.code.toLowerCase(),
       place.country_name.toLowerCase(),
-      place.name.toLowerCase()
+      airportName.toLowerCase()
     ]
   };
 }

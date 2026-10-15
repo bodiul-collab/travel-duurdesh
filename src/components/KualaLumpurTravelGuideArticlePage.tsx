@@ -1203,6 +1203,19 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
               </button>
 
               <button
+                onClick={() => onNavigate('blog/travel-guides/london-travel-guide')}
+                className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
+              >
+                <div className="text-xs font-bold text-[#071B49] group-hover:text-[#0969E8] transition-colors flex items-center justify-between">
+                  <span>London Travel Guide</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
+                </div>
+                <p className="text-[11px] text-[#64748B] mt-1">
+                  Landmarks, museums, royal heritage &amp; public transit.
+                </p>
+              </button>
+
+              <button
                 onClick={() => onNavigate('destinations/kualalumpur')}
                 className="p-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-left transition-colors cursor-pointer group"
               >
@@ -1211,7 +1224,7 @@ export const KualaLumpurTravelGuideArticlePage: React.FC<KualaLumpurTravelGuideA
                   <ChevronRight className="w-3.5 h-3.5 text-[#0969E8]" />
                 </div>
                 <p className="text-[11px] text-[#64748B] mt-1">
-                  City highlights, flight searches & travel weather data.
+                  City highlights, flight searches &amp; travel weather data.
                 </p>
               </button>
             </div>

@@ -35,7 +35,9 @@ import { MadinahTravelGuideArticlePage } from './components/MadinahTravelGuideAr
 import { AlUlaTravelGuideArticlePage } from './components/AlUlaTravelGuideArticlePage';
 import { DubaiTravelGuideArticlePage } from './components/DubaiTravelGuideArticlePage';
 import { KualaLumpurTravelGuideArticlePage } from './components/KualaLumpurTravelGuideArticlePage';
-import { ALULA_ARTICLE, BLOG_POSTS, DUBAI_ARTICLE, KUALA_LUMPUR_ARTICLE, MADINAH_ARTICLE, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE, UMRAH_PACKING_ARTICLE } from './data/blogData';
+import { LondonTravelGuideArticlePage } from './components/LondonTravelGuideArticlePage';
+import { IstanbulTravelGuideArticlePage } from './components/IstanbulTravelGuideArticlePage';
+import { ALULA_ARTICLE, BLOG_POSTS, DUBAI_ARTICLE, ISTANBUL_ARTICLE, KUALA_LUMPUR_ARTICLE, LONDON_ARTICLE, MADINAH_ARTICLE, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE, UMRAH_PACKING_ARTICLE } from './data/blogData';
 import { applySEO, SEO_PAGES } from './utils/seo';
 import { AffiliateRedirectModal } from './components/AffiliateRedirectModal';
 import { QuickViewModal } from './components/QuickViewModal';
@@ -324,6 +326,10 @@ export default function App() {
         applySEO(SEO_PAGES['blog-dubai']);
       } else if (activePage.includes('kuala-lumpur-travel-guide')) {
         applySEO(SEO_PAGES['blog-kuala-lumpur']);
+      } else if (activePage.includes('london-travel-guide')) {
+        applySEO(SEO_PAGES['blog-london']);
+      } else if (activePage.includes('istanbul-travel-guide')) {
+        applySEO(SEO_PAGES['blog-istanbul']);
       } else if (activePage.includes('makkah-travel-guide-first-time-visitors')) {
         applySEO(SEO_PAGES['blog-makkah']);
       } else {
@@ -403,6 +409,18 @@ export default function App() {
 
     if (pageId.startsWith('blog/')) {
       setActivePage(pageId);
+      window.location.hash = `#${pageId}`;
+      try {
+        if (window.location.pathname !== `/${pageId}`) {
+          window.history.pushState(null, '', `/${pageId}`);
+        }
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (pageId.startsWith('destinations')) {
+      setActivePage('destinations');
       window.location.hash = `#${pageId}`;
       try {
         if (window.location.pathname !== `/${pageId}`) {
@@ -534,6 +552,16 @@ export default function App() {
         ) : activePage.includes('kuala-lumpur-travel-guide') ? (
           <KualaLumpurTravelGuideArticlePage
             post={KUALA_LUMPUR_ARTICLE}
+            onNavigate={handleNavigate}
+          />
+        ) : activePage.includes('london-travel-guide') ? (
+          <LondonTravelGuideArticlePage
+            post={LONDON_ARTICLE}
+            onNavigate={handleNavigate}
+          />
+        ) : activePage.includes('istanbul-travel-guide') ? (
+          <IstanbulTravelGuideArticlePage
+            post={ISTANBUL_ARTICLE}
             onNavigate={handleNavigate}
           />
         ) : activePage.startsWith('blog/') ? (

@@ -229,6 +229,56 @@ export const KUALA_LUMPUR_ARTICLE: BlogPost = {
   tags: ['Kuala Lumpur', 'Malaysia', 'Travel Guides', 'Petronas Towers', 'Batu Caves', 'Halal Food', 'Bukit Bintang']
 };
 
+export const LONDON_ARTICLE: BlogPost = {
+  slug: 'london-travel-guide',
+  categorySlug: 'travel-guides',
+  categoryName: 'Travel Guides',
+  title: 'London Travel Guide: Best Places to Visit and How to Plan Your Trip',
+  metaTitle: 'London Travel Guide: Best Places to Visit and How to Plan Your Trip | Travel DuurDesh',
+  metaDescription: 'Plan your London trip with this practical travel guide covering iconic landmarks, museums, neighborhoods, public transportation, food, budgeting, and itinerary tips.',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/london-travel-guide',
+  summary: 'Plan your London trip with this practical travel guide covering iconic landmarks, museums, neighborhoods, public transportation, food, budgeting, and itinerary tips.',
+  author: {
+    name: 'Travel DuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-10-15',
+  lastUpdatedDate: '2026-10-15',
+  readingTime: '19 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Big Ben, Elizabeth Tower, and Westminster Bridge over the River Thames in London',
+    caption: 'The historic Westminster waterfront with Elizabeth Tower and Big Ben overlooking the River Thames'
+  },
+  tags: ['London', 'United Kingdom', 'Travel Guides', 'Big Ben', 'Westminster', 'British Museum', 'Tower Bridge', 'Hyde Park']
+};
+
+export const ISTANBUL_ARTICLE: BlogPost = {
+  slug: 'istanbul-travel-guide',
+  categorySlug: 'travel-guides',
+  categoryName: 'Travel Guides',
+  title: 'Istanbul Travel Guide: Best Places to Visit, Things to Do, and Travel Tips',
+  metaTitle: 'Istanbul Travel Guide: Best Places to Visit, Things to Do, and Travel Tips | Travel DuurDesh',
+  metaDescription: 'Plan your trip to Istanbul with this comprehensive travel guide covering historic landmarks, Bosphorus ferries, neighborhoods, halal food, and travel tips.',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/istanbul-travel-guide',
+  summary: 'Plan your trip to Istanbul with this comprehensive travel guide covering historic landmarks, Bosphorus ferries, neighborhoods, halal food, and travel tips.',
+  author: {
+    name: 'Travel DuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-10-15',
+  lastUpdatedDate: '2026-10-15',
+  readingTime: '21 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Panoramic view of Istanbul with Hagia Sophia and Sultanahmet minarets overlooking the Bosphorus strait',
+    caption: 'Historic Sultanahmet skyline and the glittering waters of the Bosphorus at sunset'
+  },
+  tags: ['Istanbul', 'Türkiye', 'Travel Guides', 'Hagia Sophia', 'Blue Mosque', 'Bosphorus', 'Grand Bazaar', 'Halal Travel']
+};
+
 export const BLOG_POSTS: BlogPost[] = [
   UMRAH_FIRST_TIME_ARTICLE,
   UMRAH_PACKING_ARTICLE,
@@ -236,7 +286,9 @@ export const BLOG_POSTS: BlogPost[] = [
   MADINAH_ARTICLE,
   ALULA_ARTICLE,
   DUBAI_ARTICLE,
-  KUALA_LUMPUR_ARTICLE
+  KUALA_LUMPUR_ARTICLE,
+  LONDON_ARTICLE,
+  ISTANBUL_ARTICLE
 ];
 
 
