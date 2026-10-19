@@ -279,6 +279,31 @@ export const ISTANBUL_ARTICLE: BlogPost = {
   tags: ['Istanbul', 'Türkiye', 'Travel Guides', 'Hagia Sophia', 'Blue Mosque', 'Bosphorus', 'Grand Bazaar', 'Halal Travel']
 };
 
+export const SINGAPORE_ARTICLE: BlogPost = {
+  slug: 'singapore-travel-guide',
+  categorySlug: 'travel-guides',
+  categoryName: 'Travel Guides',
+  title: 'Singapore Travel Guide: Best Places to Visit, Things to Do, and Travel Tips',
+  metaTitle: 'Singapore Travel Guide: Best Places to Visit, Things to Do, and Travel Tips | Travel DuurDesh',
+  metaDescription: 'Plan your Singapore trip with this practical travel guide covering iconic landmarks, Gardens by the Bay, cultural neighborhoods, halal dining, MRT transit, and itinerary tips.',
+  canonicalUrl: 'https://www.travelduurdesh.com/blog/travel-guides/singapore-travel-guide',
+  summary: 'Plan your Singapore trip with this practical travel guide covering iconic landmarks, Gardens by the Bay, cultural neighborhoods, halal dining, MRT transit, and itinerary tips.',
+  author: {
+    name: 'Travel DuurDesh Editorial Team',
+    role: 'Editorial Team',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
+  },
+  publishedDate: '2026-10-18',
+  lastUpdatedDate: '2026-10-18',
+  readingTime: '20 min read',
+  heroImage: {
+    url: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Marina Bay Sands skyline and waterfront illuminated at dusk in Singapore',
+    caption: 'The iconic Marina Bay waterfront skyline anchored by Marina Bay Sands and illuminated city promenades'
+  },
+  tags: ['Singapore', 'Travel Guides', 'Marina Bay', 'Gardens by the Bay', 'Sentosa', 'Chinatown', 'Kampong Glam', 'Halal Food', 'MRT Transit']
+};
+
 export const BLOG_POSTS: BlogPost[] = [
   UMRAH_FIRST_TIME_ARTICLE,
   UMRAH_PACKING_ARTICLE,
@@ -288,7 +313,8 @@ export const BLOG_POSTS: BlogPost[] = [
   DUBAI_ARTICLE,
   KUALA_LUMPUR_ARTICLE,
   LONDON_ARTICLE,
-  ISTANBUL_ARTICLE
+  ISTANBUL_ARTICLE,
+  SINGAPORE_ARTICLE
 ];
 
 

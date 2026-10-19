@@ -825,6 +825,57 @@ export const SEO_PAGES: Record<string, RouteSEOConfig> = {
       }
     ]
   },
+  'blog-singapore': {
+    title: 'Singapore Travel Guide: Best Places to Visit, Things to Do, and Travel Tips | Travel DuurDesh',
+    description: 'Plan your Singapore trip with this practical travel guide covering iconic landmarks, Gardens by the Bay, cultural neighborhoods, halal dining, MRT transit, and itinerary tips.',
+    canonicalUrl: `${BASE_URL}/blog/travel-guides/singapore-travel-guide`,
+    ogType: 'article',
+    ogImage: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1600&q=85',
+    jsonLd: [
+      ORGANIZATION_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Travel & Food', item: `${BASE_URL}/food-and-travel` },
+          { '@type': 'ListItem', position: 3, name: 'Travel Guides', item: `${BASE_URL}/blog` },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: 'Singapore Travel Guide: Best Places to Visit, Things to Do, and Travel Tips',
+            item: `${BASE_URL}/blog/travel-guides/singapore-travel-guide`
+          }
+        ]
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'Singapore Travel Guide: Best Places to Visit, Things to Do, and Travel Tips',
+        description: 'Plan your Singapore trip with this practical travel guide covering iconic landmarks, Gardens by the Bay, cultural neighborhoods, halal dining, MRT transit, and itinerary tips.',
+        image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1600&q=85',
+        author: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh Editorial Team',
+          url: BASE_URL
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Travel DuurDesh',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${BASE_URL}/favicon.svg`
+          }
+        },
+        datePublished: '2026-10-18',
+        dateModified: '2026-10-18',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${BASE_URL}/blog/travel-guides/singapore-travel-guide`
+        }
+      }
+    ]
+  },
   '404': {
     title: 'Page Not Found (404) | Travel DuurDesh',
     description: 'The requested page could not be found on Travel DuurDesh. Return to our homepage or explore our destination guides, flights, hotels, and Umrah resources.',

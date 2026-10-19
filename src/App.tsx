@@ -37,7 +37,8 @@ import { DubaiTravelGuideArticlePage } from './components/DubaiTravelGuideArticl
 import { KualaLumpurTravelGuideArticlePage } from './components/KualaLumpurTravelGuideArticlePage';
 import { LondonTravelGuideArticlePage } from './components/LondonTravelGuideArticlePage';
 import { IstanbulTravelGuideArticlePage } from './components/IstanbulTravelGuideArticlePage';
-import { ALULA_ARTICLE, BLOG_POSTS, DUBAI_ARTICLE, ISTANBUL_ARTICLE, KUALA_LUMPUR_ARTICLE, LONDON_ARTICLE, MADINAH_ARTICLE, MAKKAH_ARTICLE, UMRAH_FIRST_TIME_ARTICLE, UMRAH_PACKING_ARTICLE } from './data/blogData';
+import { SingaporeTravelGuideArticlePage } from './components/SingaporeTravelGuideArticlePage';
+import { ALULA_ARTICLE, BLOG_POSTS, DUBAI_ARTICLE, ISTANBUL_ARTICLE, KUALA_LUMPUR_ARTICLE, LONDON_ARTICLE, MADINAH_ARTICLE, MAKKAH_ARTICLE, SINGAPORE_ARTICLE, UMRAH_FIRST_TIME_ARTICLE, UMRAH_PACKING_ARTICLE } from './data/blogData';
 import { applySEO, SEO_PAGES } from './utils/seo';
 import { AffiliateRedirectModal } from './components/AffiliateRedirectModal';
 import { QuickViewModal } from './components/QuickViewModal';
@@ -330,6 +331,8 @@ export default function App() {
         applySEO(SEO_PAGES['blog-london']);
       } else if (activePage.includes('istanbul-travel-guide')) {
         applySEO(SEO_PAGES['blog-istanbul']);
+      } else if (activePage.includes('singapore-travel-guide')) {
+        applySEO(SEO_PAGES['blog-singapore']);
       } else if (activePage.includes('makkah-travel-guide-first-time-visitors')) {
         applySEO(SEO_PAGES['blog-makkah']);
       } else {
@@ -562,6 +565,11 @@ export default function App() {
         ) : activePage.includes('istanbul-travel-guide') ? (
           <IstanbulTravelGuideArticlePage
             post={ISTANBUL_ARTICLE}
+            onNavigate={handleNavigate}
+          />
+        ) : activePage.includes('singapore-travel-guide') ? (
+          <SingaporeTravelGuideArticlePage
+            post={SINGAPORE_ARTICLE}
             onNavigate={handleNavigate}
           />
         ) : activePage.startsWith('blog/') ? (
